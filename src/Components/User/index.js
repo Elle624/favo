@@ -11,7 +11,6 @@ const User = ({ info }) => {
     upcomingJobs,
   } = info;
   return (
-    
     <section className="user-wrapper" id={id}>
       <div
         className="profile-picture"
@@ -24,11 +23,11 @@ const User = ({ info }) => {
       ></div>
       <h3 className="username">{name}</h3>
       <div className="rating-wrapper">
-        <img className="star-image" src={starImage}/>
-        <img className="star-image" src={starImage}/>
-        <img className="star-image" src={starImage}/>
-        <img className="star-image" src={starImage}/>
-        <img className="star-image" src={starImage}/>
+        <img className="star-image" src={starImage} />
+        <img className="star-image" src={starImage} />
+        <img className="star-image" src={starImage} />
+        <img className="star-image" src={starImage} />
+        <img className="star-image" src={starImage} />
       </div>
       <div className="section-titles">
         <p>Total Hours Volunteered</p>
@@ -41,17 +40,19 @@ const User = ({ info }) => {
         <p>My Upcoming Jobs</p>
         <hr className="section-line" />
       </div>
-      {upcomingJobs.map((job) => {
-        return (
-          <section key={job.id} className="upcoming-job-card">
-            <div className="event-info-wrapper">
-              <h3>{job.positionName}</h3>
-              <h4>{job.date}</h4>
-            </div>
-            <h4>{job.eventName}</h4>
-          </section>
-        );
-      })}
+      <div className="upcoming-job-cards-wrapper">
+        {upcomingJobs.map((job) => {
+          return (
+            <section key={job.id} className="upcoming-job-card">
+              <div className="event-info-wrapper">
+                <h3>{job.positionName}</h3>
+                <h4>{job.date}</h4>
+              </div>
+              <h4>{job.eventName}</h4>
+            </section>
+          );
+        })}
+      </div>
     </section>
   );
 };

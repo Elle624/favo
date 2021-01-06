@@ -1,12 +1,12 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import './postingCard.scss';
+import React from "react";
+import { Link } from "react-router-dom";
+import "./postingCard.scss";
 
 const PostingCard = ({ posting }) => {
-  const { id, date, name, organization, openJobs } = posting; 
+  const { id, date, name, organization, openJobs } = posting;
 
   return (
-    <Link to={`/postings/:${id}`}>
+    <Link className="posting-card" to={`/postings/${id}`}>
       <section key={id} className="posting-wrapper">
         <div className="vertical">
           <div className="posting-data">
@@ -30,8 +30,7 @@ const PostingCard = ({ posting }) => {
         </div>
       </section>
     </Link>
-  )
-
-}
+  );
+};
 
 export default PostingCard;

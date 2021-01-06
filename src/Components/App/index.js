@@ -3,8 +3,8 @@ import { Route } from "react-router-dom";
 import "./App.scss";
 import { apiCalls } from "../../apiCalls";
 import User from "../User";
-import Postings from '../Postings';
-import PostingView from '../PostingView';
+import Postings from "../Postings";
+import PostingView from "../PostingView";
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -15,7 +15,7 @@ const App = () => {
     Promise.all([apiCalls.getUser(), apiCalls.getPostings()])
       .then((data) => {
         setUser(data[0]);
-        setPostings(data[1])
+        setPostings(data[1]);
       })
       .catch((err) => setError(err.message));
   };
@@ -26,9 +26,9 @@ const App = () => {
     <main className="App">
       {error && <p>{error}</p>}
       {!user && <p>LOADIN'...</p>}
-      <Route exact path='/' render={() => user && <User info={user} />} />
-      <Route exact path='/' render={() => <Postings postings={postings}/>} />
-      <Route path='/postings/:id' component = {PostingView} />
+      {user && <User info={user} />}
+      <Route exact path="/" render={() => <Postings postings={postings} />} />
+      <Route path="/postings/:id" component={PostingView} />
     </main>
   );
 };
