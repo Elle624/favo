@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { apiCalls } from "../../apiCalls";
-import "./PostingView.scss";
+import "./postingView.scss";
 
 const PostingView = ({ match }) => {
   const [chosenPosting, setChosenPosting] = useState(null);

@@ -5,7 +5,6 @@ const User = ({ info }) => {
   const {
     id,
     name,
-    rating,
     profilePicture,
     volunteeredHours,
     upcomingJobs,
@@ -23,11 +22,11 @@ const User = ({ info }) => {
       ></div>
       <h3 className="username">{name}</h3>
       <div className="rating-wrapper">
-        <img className="star-image" src={starImage} />
-        <img className="star-image" src={starImage} />
-        <img className="star-image" src={starImage} />
-        <img className="star-image" src={starImage} />
-        <img className="star-image" src={starImage} />
+        <img className="star-image" src={starImage} alt="star-icon"/>
+        <img className="star-image" src={starImage} alt="star-icon"/>
+        <img className="star-image" src={starImage} alt="star-icon"/>
+        <img className="star-image" src={starImage} alt="star-icon"/>
+        <img className="star-image" src={starImage} alt="star-icon"/>
       </div>
       <div className="section-titles">
         <p>Total Hours Volunteered</p>
