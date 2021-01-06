@@ -1,6 +1,3 @@
-# Pull Request Template:
-
-
 #### What's this PR do?
 
 
