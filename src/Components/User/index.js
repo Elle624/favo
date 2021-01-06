@@ -1,5 +1,5 @@
 import React from "react";
-
+import "./User.scss";
 const User = ({ info }) => {
   const {
     id,
@@ -10,28 +10,37 @@ const User = ({ info }) => {
     upcomingJobs,
   } = info;
   return (
-    <section id={id}>
-      <div className="profile-picture">
-        <img src={profilePicture} />
-      </div>
+    <section className="user-wrapper" id={id}>
+      <div
+        className="profile-picture"
+        style={{
+          backgroundImage: `url(${profilePicture})`,
+          backgroundPosition: "center",
+          backgroundSize: "cover",
+          backgroundRepeat: "no-reapeat",
+        }}
+      ></div>
       <h3 className="username">{name}</h3>
       <div className="rating-wrapper">{rating}</div>
       <div className="section-titles">
         <p>Total Hours Volunteered</p>
-        <span className="section-line"></span>
+        <hr className="section-line" />
       </div>
       <div className="hours-bar">
-        <p>{volunteeredHours}</p>
+        <p>{volunteeredHours} Hours</p>
       </div>
       <div className="section-titles">
         <p>My Upcoming Jobs</p>
-        <span className="section-line"></span>
+        <hr className="section-line" />
       </div>
       {upcomingJobs.map((job) => {
         return (
           <section key={job.id} className="upcoming-job-card">
-            <h3>{job.eventName}</h3>
-            <h4>{job.positionName}</h4>
+            <div className="event-info-wrapper">
+              <h3>{job.positionName}</h3>
+              <h4>{job.date}</h4>
+            </div>
+            <h4>{job.eventName}</h4>
           </section>
         );
       })}

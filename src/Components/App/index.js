@@ -17,7 +17,7 @@ const App = () => {
   useEffect(() => getUserInfo(), []);
 
   return (
-    <main>
+    <main className="App">
       {error && <p>{error}</p>}
       {!user && <p>LOADIN'...</p>}
       {user && <User info={user} />}
