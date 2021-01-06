@@ -10,7 +10,7 @@ const User = ({ info }) => {
     upcomingJobs,
   } = info;
   return (
-    <section>
+    <section id={id}>
       <div className="profile-picture">
         <img src={profilePicture} />
       </div>
@@ -18,10 +18,23 @@ const User = ({ info }) => {
       <div className="rating-wrapper">{rating}</div>
       <div className="section-titles">
         <p>Total Hours Volunteered</p>
+        <span className="section-line"></span>
+      </div>
+      <div className="hours-bar">
+        <p>{volunteeredHours}</p>
       </div>
       <div className="section-titles">
         <p>My Upcoming Jobs</p>
+        <span className="section-line"></span>
       </div>
+      {upcomingJobs.map((job) => {
+        return (
+          <section key={job.id} className="upcoming-job-card">
+            <h3>{job.eventName}</h3>
+            <h4>{job.positionName}</h4>
+          </section>
+        );
+      })}
     </section>
   );
 };

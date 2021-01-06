@@ -5,7 +5,7 @@ import { apiCalls } from "../../apiCalls";
 import User from "../User";
 
 const App = () => {
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState(null);
   const [error, setError] = useState("");
   const getUserInfo = () => {
     apiCalls
@@ -14,12 +14,13 @@ const App = () => {
       .catch((err) => setError(err.message));
   };
 
-  useEffect(() => getUserInfo());
+  useEffect(() => getUserInfo(), []);
 
   return (
     <main>
-      <User info={user} />
-      <p>{user.name}</p>
+      {error && <p>{error}</p>}
+      {!user && <p>LOADIN'...</p>}
+      {user && <User info={user} />}
     </main>
   );
 };
