@@ -6,7 +6,7 @@ const Postings = ({ postings }) => {
   const postingCards = postings.map(posting => (
     <PostingCard posting={posting}/>
   ))
-return <section>{postingCards}</section>
+return <section className="postings-container">{postingCards}</section>
 }
 
 export default Postings
