@@ -11,6 +11,7 @@ const User = ({ info }) => {
     upcomingJobs,
   } = info;
   return (
+    
     <section className="user-wrapper" id={id}>
       <div
         className="profile-picture"
