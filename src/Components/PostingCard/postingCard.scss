@@ -1,0 +1,65 @@
+@import "../../styles/variables";
+
+.posting-wrapper {
+  height: 12em;
+  width: 18em;
+  border: 1px solid $main-orange;
+  margin-right: 0.5em;
+  margin-bottom: 0.5em;
+  display: flex;
+  flex-direction: row;
+  justify-content: stretch;
+  &:hover {
+    box-shadow: 1px 1px 3px 0px #ffbf69;
+  }
+}
+
+.posting-card {
+  transition: all 0.3s ease-in-out;
+  text-decoration: none;
+  color: inherit;
+  &:hover {
+    cursor: point;
+    transform: scale(1.03);
+  }
+}
+
+.vertical {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0.4em;
+  width: 8.2em;
+  padding: 0.6em;
+}
+
+.left {
+  text-align: left;
+}
+
+.right {
+  text-align: right;
+}
+
+p {
+  margin: 0;
+}
+
+.posting-data {
+  display: flex;
+  flex-direction: column;
+  margin: 0.4em;
+  height: 5.6em;
+  width: 100%;
+}
+
+.posting-title {
+  font-size: 0.7em;
+  font-style: italic;
+}
+
+.posting-detail {
+  font-size: 0.8em;
+  font-weight: 700;
+}

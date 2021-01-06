@@ -30,7 +30,16 @@ const updateData = (path, action, id) => {
 };
 
 export const apiCalls = {
+
   getUser: () => {
     return getData("http://localhost:3001/users/1");
   },
+
+  getPostings: () => {
+    return getData("http://localhost:3001/events");
+  },
+
+  getSinglePosting: (id) => {
+    return getData(`http://localhost:3001/events/${id}`);
+  }
 };

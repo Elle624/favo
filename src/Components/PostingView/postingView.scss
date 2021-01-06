@@ -1,0 +1,57 @@
+@import "../../styles/variables";
+
+.postings-container {
+  display: flex;
+  flex-direction: column;
+  padding: 2em;
+  height: 85vh;
+}
+
+.posting-info-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.posting-left-info-wrapper {
+  width: 70%;
+  margin: 1em;
+}
+
+.posting-right-info-wrapper {
+  width: 30%;
+  margin: 1em;
+}
+
+.section-titles {
+  width: 100%;
+  margin: 1em 0;
+}
+
+.posting-position-cards-wrapper {
+  height: 20em;
+  overflow: scroll;
+}
+
+.section-line {
+  margin: 0;
+}
+
+.posting-info-title {
+  font-size: 13px;
+}
+
+.posting-organization-wrapper,
+.posting-location-wrapper {
+  margin: 1em 0;
+}
+
+.posting-positions-card {
+  border: 2px solid $main-orange;
+  margin: 1em 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5em 2em;
+}
