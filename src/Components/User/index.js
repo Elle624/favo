@@ -1,5 +1,6 @@
 import React from "react";
 import "./User.scss";
+import starImage from "../../Assets/star.png";
 const User = ({ info }) => {
   const {
     id,
@@ -21,7 +22,13 @@ const User = ({ info }) => {
         }}
       ></div>
       <h3 className="username">{name}</h3>
-      <div className="rating-wrapper">{rating}</div>
+      <div className="rating-wrapper">
+        <img className="star-image" src={starImage}/>
+        <img className="star-image" src={starImage}/>
+        <img className="star-image" src={starImage}/>
+        <img className="star-image" src={starImage}/>
+        <img className="star-image" src={starImage}/>
+      </div>
       <div className="section-titles">
         <p>Total Hours Volunteered</p>
         <hr className="section-line" />
