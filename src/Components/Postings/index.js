@@ -1,5 +1,5 @@
 import React from 'react';
-import './postings.scss';
+import './Postings.scss';
 import PostingCard from '../PostingCard';
 
 const Postings = ({ postings }) => {

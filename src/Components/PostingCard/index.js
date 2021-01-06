@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./postingCard.scss";
+import "./PostingCard.scss";
 
 const PostingCard = ({ posting }) => {
   const { id, date, name, organization, openJobs } = posting;
