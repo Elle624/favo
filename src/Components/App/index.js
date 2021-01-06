@@ -4,7 +4,6 @@ import "./App.scss";
 import { apiCalls } from "../../apiCalls";
 import User from "../User";
 import Postings from '../Postings';
-import PostingCard from "../PostingCard";
 
 const App = () => {
   const [user, setUser] = useState(null);
