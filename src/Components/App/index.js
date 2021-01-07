@@ -11,6 +11,7 @@ const App = () => {
   const [postings, setPostings] = useState([]);
   const [error, setError] = useState("");
   const [searchedPostings, setSearchedPostings] = useState([]);
+  const [sortedPostings, setSortedPostings] = useState([]);
 
   const getInfo = () => {
     Promise.all([apiCalls.getUser(), apiCalls.getPostings()])
@@ -31,6 +32,18 @@ const App = () => {
     setSearchedPostings(filteredPostings);
   };
 
+  const sortPostingsByDate = () => {
+    let sortedAllPostings = [];
+    if(!sortedPostings.length) {
+      sortedAllPostings = postings.sort((a, b) => {
+        return (a.date > b.date) ? -1 : 1;
+     })
+    } else {
+      sortedPostings.reverse()
+    } 
+    setSortedPostings(sortedAllPostings);
+  };
+
   useEffect(() => getInfo(), []);
 
   return (
@@ -43,8 +56,12 @@ const App = () => {
         path="/"
         render={() => (
           <Postings
-            postings={searchedPostings.length ? searchedPostings : postings}
+            postings={
+              searchedPostings.length ? searchedPostings 
+              : sortedPostings.length ? sortedPostings
+              : postings}
             searchByKeyWord={searchPostings}
+            sortPostingsByDate={sortPostingsByDate}
           />
         )}
       />
