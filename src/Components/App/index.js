@@ -10,6 +10,7 @@ const App = () => {
   const [user, setUser] = useState(null);
   const [postings, setPostings] = useState([]);
   const [error, setError] = useState("");
+  const [searchedPostings, setSearchedPostings] = useState([]);
 
   const getInfo = () => {
     Promise.all([apiCalls.getUser(), apiCalls.getPostings()])
@@ -19,6 +20,12 @@ const App = () => {
       })
       .catch((err) => setError(err.message));
   };
+
+  const searchPostings = (keyWord) => {
+    const lowerCaseKeyword = keyWord.toLowerCase();
+    const filteredPostings = postings.filter(posting => posting.name.toLowerCase().includes(lowerCaseKeyword) || posting.organization.toLowerCase().includes(keyWord));
+    setSearchedPostings(filteredPostings);
+  }
 
   useEffect(() => getInfo(), []);
 
