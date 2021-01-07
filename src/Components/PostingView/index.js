@@ -2,35 +2,52 @@ import React, { useState, useEffect } from "react";
 import { apiCalls } from "../../apiCalls";
 import "./PostingView.scss";
 
-const PostingView = ({ eventId, getUserInfo }) => {
+const PostingView = ({ match }) => {
+  const eventId = match.params.id;
   const [chosenPosting, setChosenPosting] = useState(null);
-  const [chosenJob, setChosenJob] = useState({});
+  const [chosenJob, setChosenJob] = useState(null);
+  const [hasSignedUp, setHasSignedUp] = useState(false);
+  const [userInfo, setUserInfo] = useState(null);
 
-  const getSinglePostingInfo = () => {
-    apiCalls.getSinglePosting(eventId).then((data) => setChosenPosting(data));
+  const getDetails = () => {
+    Promise.all([apiCalls.getUser(), apiCalls.getSinglePosting(eventId)]).then(
+      (data) => {
+        let signedUpEvent;
+        setUserInfo(data[0]);
+        setChosenPosting(data[1]);
+        if (userInfo) {
+          signedUpEvent = userInfo.upcomingJobs.find(
+            (job) => job.eventName === data[1].name
+          );
+        }
+        if (signedUpEvent) {
+          setHasSignedUp(true);
+        }
+      }
+    );
   };
 
   const substractOpenPosition = () => {
-    apiCalls.patchEventPosting(eventId, {jobId: chosenJob.id}).then(() => {
-      getSinglePostingInfo();
-      postPositionToUser()
+    apiCalls.patchEventPosting(eventId, { jobId: chosenJob.id }).then(() => {
+      postPositionToUser();
+      setHasSignedUp(true);
+      getDetails();
     });
-  }
+  };
 
   const postPositionToUser = () => {
     const newUpcomingJob = {
       id: `1-${chosenJob.id}`,
       eventName: chosenPosting.name,
       positionName: chosenJob.name,
-      date: chosenPosting.date
-    }
+      date: chosenPosting.date,
+    };
     apiCalls.postJobPosting(newUpcomingJob).then(() => {
-      getSinglePostingInfo();
-      getUserInfo()
+      getDetails();
     });
-  }
+  };
 
-  useEffect(() => getSinglePostingInfo(eventId), []);
+  useEffect(() => getDetails(eventId), userInfo);
 
   if (chosenPosting) {
     const {
@@ -72,14 +89,24 @@ const PostingView = ({ eventId, getUserInfo }) => {
             </div>
             <div className="posting-position-cards-wrapper">
               {openJobs.map((job) => (
-                <section onClick={() => setChosenJob(job)} key={job.id} className="posting-positions-card">
+                <section
+                  onClick={() => setChosenJob(job)}
+                  key={job.id}
+                  className="posting-positions-card"
+                >
                   <h3>{job.name}</h3>
                   <p>Open Spots: {job.numberOfSpots}</p>
                 </section>
               ))}
             </div>
             <div className="submit-button-wrapper">
-              <button onClick={substractOpenPosition} className="submit-button">SUBMIT</button>
+              <button
+                onClick={substractOpenPosition}
+                disabled={hasSignedUp ? true : false}
+                className="submit-button"
+              >
+                SUBMIT
+              </button>
             </div>
           </div>
           <div className="posting-right-info-wrapper">

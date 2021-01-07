@@ -23,9 +23,13 @@ const App = () => {
 
   const searchPostings = (keyWord) => {
     const lowerCaseKeyword = keyWord.toLowerCase();
-    const filteredPostings = postings.filter(posting => posting.name.toLowerCase().includes(lowerCaseKeyword) || posting.organization.toLowerCase().includes(keyWord));
+    const filteredPostings = postings.filter(
+      (posting) =>
+        posting.name.toLowerCase().includes(lowerCaseKeyword) ||
+        posting.organization.toLowerCase().includes(keyWord)
+    );
     setSearchedPostings(filteredPostings);
-  }
+  };
 
   useEffect(() => getInfo(), []);
 
@@ -34,8 +38,17 @@ const App = () => {
       {error && <p>{error}</p>}
       {!user && <p>LOADIN'...</p>}
       {user && <User info={user} />}
-      <Route exact path="/" render={() => <Postings postings={searchedPostings.length ? searchedPostings : postings} searchByKeyWord={searchPostings}/>} />
-      <Route path="/postings/:id" render ={({ match }) => <PostingView eventId={match.params.id} getUserInfo={ getInfo }/>} />
+      <Route
+        exact
+        path="/"
+        render={() => (
+          <Postings
+            postings={searchedPostings.length ? searchedPostings : postings}
+            searchByKeyWord={searchPostings}
+          />
+        )}
+      />
+      <Route path="/postings/:id" component={PostingView} />
     </main>
   );
 };
