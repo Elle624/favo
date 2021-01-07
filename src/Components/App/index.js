@@ -10,7 +10,7 @@ const App = () => {
   const [user, setUser] = useState(null);
   const [postings, setPostings] = useState([]);
   const [error, setError] = useState("");
-  const [searchedPostings, setSearchedPostings] = useState([]);
+  const [queriedPostings, setQueriedPostings] = useState([]);
 
   const getInfo = () => {
     Promise.all([apiCalls.getUser(), apiCalls.getPostings()])
@@ -23,13 +23,18 @@ const App = () => {
 
   const searchPostings = (keyWord) => {
     const lowerCaseKeyword = keyWord.toLowerCase();
-    const filteredPostings = postings.filter(
+    const queriedPostings = postings.filter(
       (posting) =>
         posting.name.toLowerCase().includes(lowerCaseKeyword) ||
         posting.organization.toLowerCase().includes(keyWord)
     );
-    setSearchedPostings(filteredPostings);
+    setQueriedPostings(queriedPostings);
   };
+
+  const filterPostings = (category) => {
+    const filteredPostings = postings.filter(posting => posting.category === category);
+    setQueriedPostings(filteredPostings);
+  }
 
   useEffect(() => getInfo(), []);
 
@@ -38,16 +43,17 @@ const App = () => {
       {error && <p>{error}</p>}
       {!user && <p>LOADIN'...</p>}
       {user && <User info={user} />}
-      <Route
+      {postings.length && <Route
         exact
         path="/"
         render={() => (
           <Postings
-            postings={searchedPostings.length ? searchedPostings : postings}
+            postings={queriedPostings.length ? queriedPostings : postings}
             searchByKeyWord={searchPostings}
+            filterByCategory={filterPostings}
           />
         )}
-      />
+      />}
       <Route 
         path="/postings/:id" 
         render={({ match }) => <PostingView match={match} getUserInfo={getInfo}/>} 
