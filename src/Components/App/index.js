@@ -10,7 +10,7 @@ const App = () => {
   const [user, setUser] = useState(null);
   const [postings, setPostings] = useState([]);
   const [error, setError] = useState("");
-  const [searchedPostings, setSearchedPostings] = useState([]);
+  const [queriedPostings, setQueriedPostings] = useState([]);
   const [sortedPostings, setSortedPostings] = useState([]);
 
   const getInfo = () => {
@@ -24,12 +24,12 @@ const App = () => {
 
   const searchPostings = (keyWord) => {
     const lowerCaseKeyword = keyWord.toLowerCase();
-    const filteredPostings = postings.filter(
+    const queriedPostings = postings.filter(
       (posting) =>
         posting.name.toLowerCase().includes(lowerCaseKeyword) ||
         posting.organization.toLowerCase().includes(keyWord)
     );
-    setSearchedPostings(filteredPostings);
+    setQueriedPostings(queriedPostings);
   };
 
   const sortPostingsByDate = () => {
@@ -44,6 +44,11 @@ const App = () => {
     setSortedPostings(sortedAllPostings);
   };
 
+  const filterPostings = (category) => {
+    const filteredPostings = postings.filter(posting => posting.category === category);
+    setQueriedPostings(filteredPostings);
+  }
+
   useEffect(() => getInfo(), []);
 
   return (
@@ -51,21 +56,25 @@ const App = () => {
       {error && <p>{error}</p>}
       {!user && <p>LOADIN'...</p>}
       {user && <User info={user} />}
-      <Route
+      {postings.length && <Route
         exact
         path="/"
         render={() => (
           <Postings
             postings={
-              searchedPostings.length ? searchedPostings 
+              queriedPostings.length ? queriedPostings 
               : sortedPostings.length ? sortedPostings
               : postings}
             searchByKeyWord={searchPostings}
             sortPostingsByDate={sortPostingsByDate}
+            filterByCategory={filterPostings}
           />
         )}
+      />}
+      <Route 
+        path="/postings/:id" 
+        render={({ match }) => <PostingView match={match} getUserInfo={getInfo}/>} 
       />
-      <Route path="/postings/:id" component={PostingView} />
     </main>
   );
 };

@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { apiCalls } from "../../apiCalls";
 import "./PostingView.scss";
+import backButton from "../../Assets/back-button.png";
+import { Link } from "react-router-dom";
 
-const PostingView = ({ match }) => {
+const PostingView = ({ match, getUserInfo }) => {
   const eventId = match.params.id;
   const [chosenPosting, setChosenPosting] = useState(null);
   const [chosenJob, setChosenJob] = useState(null);
@@ -12,14 +14,11 @@ const PostingView = ({ match }) => {
   const getDetails = () => {
     Promise.all([apiCalls.getUser(), apiCalls.getSinglePosting(eventId)]).then(
       (data) => {
-        let signedUpEvent;
         setUserInfo(data[0]);
         setChosenPosting(data[1]);
-        if (userInfo) {
-          signedUpEvent = userInfo.upcomingJobs.find(
+        const signedUpEvent = data[0].upcomingJobs.find(
             (job) => job.eventName === data[1].name
           );
-        }
         if (signedUpEvent) {
           setHasSignedUp(true);
         }
@@ -29,9 +28,8 @@ const PostingView = ({ match }) => {
 
   const substractOpenPosition = () => {
     apiCalls.patchEventPosting(eventId, { jobId: chosenJob.id }).then(() => {
-      postPositionToUser();
+      postPositionToUser(); 
       setHasSignedUp(true);
-      getDetails();
     });
   };
 
@@ -43,11 +41,11 @@ const PostingView = ({ match }) => {
       date: chosenPosting.date,
     };
     apiCalls.postJobPosting(newUpcomingJob).then(() => {
-      getDetails();
+      getUserInfo();
     });
   };
 
-  useEffect(() => getDetails(eventId), userInfo);
+  useEffect(() => getDetails(), [userInfo]);
 
   if (chosenPosting) {
     const {
@@ -71,6 +69,11 @@ const PostingView = ({ match }) => {
         <div className="postings-title-wrapper">
           <h1 className="postings-title">Event Details</h1>
         </div>
+        <div className="back-button-wrap">
+          <Link to="/">
+            <img src={backButton} className="back-button-img" />
+          </Link>
+        </div>
         <div className="posting-info-wrapper">
           <div className="posting-left-info-wrapper">
             <h3 className="event-title">{name}</h3>
@@ -89,14 +92,14 @@ const PostingView = ({ match }) => {
             </div>
             <div className="posting-position-cards-wrapper">
               {openJobs.map((job) => (
-                <section
+                <button
                   onClick={() => setChosenJob(job)}
                   key={job.id}
                   className="posting-positions-card"
                 >
                   <h3>{job.name}</h3>
                   <p>Open Spots: {job.numberOfSpots}</p>
-                </section>
+                </button>
               ))}
             </div>
             <div className="submit-button-wrapper">
