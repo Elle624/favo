@@ -3,7 +3,7 @@ import './Postings.scss';
 import PostingCard from '../PostingCard';
 import Navigation from "../Navigation";
 
-const Postings = ({ postings, searchByKeyWord }) => {
+const Postings = ({ postings, searchByKeyWord, sortPostingsByDate }) => {
   const postingCards = postings.map(posting => (
     <PostingCard posting={posting}/>
   ))
@@ -13,7 +13,7 @@ return (
       <h1 className="postings-title">Open Volunteer Positions</h1>
     </div>
     <div>
-      <Navigation searchByKeyWord={searchByKeyWord} />
+      <Navigation searchByKeyWord={searchByKeyWord} sortByDate={sortPostingsByDate} />
     </div>
     <section className="postings-wrapper">
       {postingCards}
