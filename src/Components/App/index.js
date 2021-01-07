@@ -34,7 +34,7 @@ const App = () => {
       {error && <p>{error}</p>}
       {!user && <p>LOADIN'...</p>}
       {user && <User info={user} />}
-      <Route exact path="/" render={() => <Postings postings={postings} searchByKeyWord={searchPostings}/>} />
+      <Route exact path="/" render={() => <Postings postings={searchedPostings.length ? searchedPostings : postings} searchByKeyWord={searchPostings}/>} />
       <Route path="/postings/:id" render ={({ match }) => <PostingView eventId={match.params.id} getUserInfo={ getInfo }/>} />
     </main>
   );
