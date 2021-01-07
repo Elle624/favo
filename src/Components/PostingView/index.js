@@ -2,28 +2,36 @@ import React, { useState, useEffect } from "react";
 import { apiCalls } from "../../apiCalls";
 import "./PostingView.scss";
 
-const PostingView = ({ eventId, getUserInfo, userUpcomingJobs }) => {
+const PostingView = ({ match }) => {
+  const eventId = match.params.id;
   const [chosenPosting, setChosenPosting] = useState(null);
   const [chosenJob, setChosenJob] = useState(null);
   const [hasSignedUp, setHasSignedUp] = useState(false);
+  const [userInfo, setUserInfo] = useState(null);
 
-  const getSinglePostingInfo = () => {
-    apiCalls.getSinglePosting(eventId).then((data) => {
-      setChosenPosting(data);
-      const signedupevent = userUpcomingJobs.find(
-        (job) => job.eventName === data.name
-      );
-      if (signedupevent) {
-        setHasSignedUp(true);
+  const getDetails = () => {
+    Promise.all([apiCalls.getUser(), apiCalls.getSinglePosting(eventId)]).then(
+      (data) => {
+        let signedUpEvent;
+        setUserInfo(data[0]);
+        setChosenPosting(data[1]);
+        if (userInfo) {
+          signedUpEvent = userInfo.upcomingJobs.find(
+            (job) => job.eventName === data[1].name
+          );
+        }
+        if (signedUpEvent) {
+          setHasSignedUp(true);
+        }
       }
-    });
+    );
   };
 
   const substractOpenPosition = () => {
     apiCalls.patchEventPosting(eventId, { jobId: chosenJob.id }).then(() => {
-      getSinglePostingInfo();
       postPositionToUser();
       setHasSignedUp(true);
+      getDetails();
     });
   };
 
@@ -35,12 +43,11 @@ const PostingView = ({ eventId, getUserInfo, userUpcomingJobs }) => {
       date: chosenPosting.date,
     };
     apiCalls.postJobPosting(newUpcomingJob).then(() => {
-      getSinglePostingInfo();
-      getUserInfo();
+      getDetails();
     });
   };
 
-  useEffect(() => getSinglePostingInfo(eventId), []);
+  useEffect(() => getDetails(eventId), userInfo);
 
   if (chosenPosting) {
     const {
