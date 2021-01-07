@@ -3,7 +3,7 @@ import './Postings.scss';
 import PostingCard from '../PostingCard';
 import Navigation from "../Navigation";
 
-const Postings = ({ postings, searchByKeyWord }) => {
+const Postings = ({ postings, searchByKeyWord, filterByCategory }) => {
   const [categories, setCategories] = useState([]);
 
   const getCategories = () => {
@@ -11,13 +11,13 @@ const Postings = ({ postings, searchByKeyWord }) => {
       if (!totalCategories.includes(posting.category)) {
         totalCategories.push(posting.category)
       }
-      return totalCategories;
+      return totalCategories.sort();
     }, []);
     setCategories(categories);
   } 
 
   const postingCards = postings.map(posting => (
-    <PostingCard posting={posting} />
+    <PostingCard posting={posting} key={posting.id} />
   ))
 
   useEffect(() => getCategories(), [])
@@ -28,7 +28,11 @@ const Postings = ({ postings, searchByKeyWord }) => {
         <h1 className="postings-title">Open Volunteer Positions</h1>
       </div>
       <div>
-        <Navigation searchByKeyWord={searchByKeyWord} categories={categories}/>
+        <Navigation 
+          searchByKeyWord={searchByKeyWord} 
+          categories={categories}
+          filterByCategory={filterByCategory}
+        />
       </div>
       <section className="postings-wrapper">
         {postingCards}
