@@ -7,14 +7,14 @@ const Navigation = ({ postings }) => {
   const searchPostings = (e) => {
     e.preventDefault();
     const lowerCaseKeyword = keyWord.toLowerCase();
-    const filteredPostings = postings.filter(posting => posting.name.toLowerCase().includes(keyWord) || posting.organization.toLowerCase().includes(keyWord));
+    const filteredPostings = postings.filter(posting => posting.name.toLowerCase().includes(lowerCaseKeyword) || posting.organization.toLowerCase().includes(keyWord));
     setSearchedPostings(filteredPostings);
     setKeyWord('');
   }
-  
+
   return(
     <section>
-      <input type="text" value={keyWord} placeholder="keyword" onChange={(e) => setKeyWord(e.target.value)}></input>
+      <input type="text" value={keyWord} placeholder="i.e Boulder..." onChange={(e) => setKeyWord(e.target.value)}></input>
       <input type="submit" value="search" onClick={searchPostings}></input>
     </section>
   )
