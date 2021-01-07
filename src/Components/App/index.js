@@ -28,7 +28,16 @@ const App = () => {
       {!user && <p>LOADIN'...</p>}
       {user && <User info={user} />}
       <Route exact path="/" render={() => <Postings postings={postings} />} />
-      <Route path="/postings/:id" render ={({ match }) => <PostingView eventId={match.params.id} getUserInfo={ getInfo }/>} />
+      <Route
+        path="/postings/:id"
+        render={({ match }) => (
+          <PostingView
+            eventId={match.params.id}
+            getUserInfo={getInfo}
+            userUpcomingJobs={user.upcomingJobs}
+          />
+        )}
+      />
     </main>
   );
 };

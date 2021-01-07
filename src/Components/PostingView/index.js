@@ -2,33 +2,43 @@ import React, { useState, useEffect } from "react";
 import { apiCalls } from "../../apiCalls";
 import "./PostingView.scss";
 
-const PostingView = ({ eventId, getUserInfo }) => {
+const PostingView = ({ eventId, getUserInfo, userUpcomingJobs }) => {
   const [chosenPosting, setChosenPosting] = useState(null);
-  const [chosenJob, setChosenJob] = useState({});
+  const [chosenJob, setChosenJob] = useState(null);
+  const [hasSignedUp, setHasSignedUp] = useState(false);
 
   const getSinglePostingInfo = () => {
-    apiCalls.getSinglePosting(eventId).then((data) => setChosenPosting(data));
+    apiCalls.getSinglePosting(eventId).then((data) => {
+      setChosenPosting(data);
+      const signedupevent = userUpcomingJobs.find(
+        (job) => job.eventName === data.name
+      );
+      if (signedupevent) {
+        setHasSignedUp(true);
+      }
+    });
   };
 
   const substractOpenPosition = () => {
-    apiCalls.patchEventPosting(eventId, {jobId: chosenJob.id}).then(() => {
+    apiCalls.patchEventPosting(eventId, { jobId: chosenJob.id }).then(() => {
       getSinglePostingInfo();
-      postPositionToUser()
+      postPositionToUser();
+      setHasSignedUp(true);
     });
-  }
+  };
 
   const postPositionToUser = () => {
     const newUpcomingJob = {
       id: `1-${chosenJob.id}`,
       eventName: chosenPosting.name,
       positionName: chosenJob.name,
-      date: chosenPosting.date
-    }
+      date: chosenPosting.date,
+    };
     apiCalls.postJobPosting(newUpcomingJob).then(() => {
       getSinglePostingInfo();
-      getUserInfo()
+      getUserInfo();
     });
-  }
+  };
 
   useEffect(() => getSinglePostingInfo(eventId), []);
 
@@ -72,14 +82,24 @@ const PostingView = ({ eventId, getUserInfo }) => {
             </div>
             <div className="posting-position-cards-wrapper">
               {openJobs.map((job) => (
-                <section onClick={() => setChosenJob(job)} key={job.id} className="posting-positions-card">
+                <section
+                  onClick={() => setChosenJob(job)}
+                  key={job.id}
+                  className="posting-positions-card"
+                >
                   <h3>{job.name}</h3>
                   <p>Open Spots: {job.numberOfSpots}</p>
                 </section>
               ))}
             </div>
             <div className="submit-button-wrapper">
-              <button onClick={substractOpenPosition} className="submit-button">SUBMIT</button>
+              <button
+                onClick={substractOpenPosition}
+                disabled={hasSignedUp ? true : false}
+                className="submit-button"
+              >
+                SUBMIT
+              </button>
             </div>
           </div>
           <div className="posting-right-info-wrapper">
