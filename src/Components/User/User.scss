@@ -6,28 +6,41 @@
   justify-content: space-around;
   align-items: center;
   background-color: $main-white;
-  width: 20em;
-  margin: 2em;
-  padding: 1em;
+  width: 17em;
+  margin: 2em 0 0em 2em;
+  padding: 2em;
   position: fixed;
+  clear: both;
+  height: 85vh;
 }
 
 .profile-picture {
   border: 5px solid $main-orange;
   border-radius: 50%;
-  height: 10em;
-  width: 10em;
+  height: 8em;
+  width: 8em;
+  margin-top: 2em;
+}
+
+.rating-wrapper {
+  margin: 0.5em;
 }
 
 .star-image {
   margin: 0.25em;
-  height: 1.5em;
-  width: 1.5em;
+  height: 1.8em;
+  width: 1.8em;
 }
 
 .section-titles {
   width: 100%;
   margin: 2em;
+}
+
+
+.sidebar-titles {
+  font-size: 13px;
+  font-weight: 700;
 }
 
 .hours-bar {
@@ -39,7 +52,7 @@
   background-color: $main-blue;
   height: 2em;
   width: 50%;
-  margin: 0.5em auto;
+  margin: 1em auto;
 }
 
 .upcoming-job-card {
@@ -57,9 +70,21 @@
   }
 }
 
+.job-event-name {
+  font-size: 0.7em;
+  font-weight: 300;
+  font-style: italic;
+  margin: 0;
+}
+
+.job-event-main-detail {
+  font-size: 1em;
+}
+
 .upcoming-job-cards-wrapper {
+  margin-top: 1em;
   overflow: scroll;
-  height: 10em;
+  height: 15em;
   width: 20em;
 }
 

@@ -5,6 +5,7 @@
   flex-direction: column;
   padding: 2em;
   height: 85vh;
+  margin-left: 24em;
 }
 
 .posting-info-wrapper {
@@ -17,6 +18,15 @@
   width: 70%;
   margin: 1em;
   position: relative;
+}
+
+.event-title {
+  font-size: 2em;
+  margin: 1em 0;
+}
+
+.event-description {
+  margin: 2em 0;
 }
 
 .posting-right-info-wrapper {
@@ -50,7 +60,7 @@
 
 .posting-positions-card {
   border: 2px solid $main-orange;
-  margin: 1em 0;
+  margin: 1em 1em 1em 0em;
   display: flex;
   flex-direction: row;
   justify-content: space-between;

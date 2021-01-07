@@ -56,14 +56,14 @@ const PostingView = ({ eventId, getUserInfo }) => {
         </div>
         <div className="posting-info-wrapper">
           <div className="posting-left-info-wrapper">
-            <h3>{name}</h3>
+            <h3 className="event-title">{name}</h3>
             <div className="section-titles">
               <strong>
                 <p className="posting-info-title">Description</p>
               </strong>
               <hr className="section-line" />
             </div>
-            <p>{description}</p>
+            <p className="event-description">{description}</p>
             <div className="section-titles">
               <strong>
                 <p className="posting-info-title">Open Positions</p>
@@ -83,7 +83,7 @@ const PostingView = ({ eventId, getUserInfo }) => {
             </div>
           </div>
           <div className="posting-right-info-wrapper">
-            <h3>{reformedDate}</h3>
+            <h3 className="event-title">{reformedDate}</h3>
             <div className="posting-organization-wrapper">
               <strong>
                 <p className="posting-info-title">Organization</p>
