@@ -4,7 +4,7 @@ import sortGlyphicon from "../../Assets/sort-button.png";
 
 
 
-const Navigation = ({ searchByKeyWord, categories, filterByCategory }) => {
+const Navigation = ({ searchByKeyWord, categories, filterByCategory, sortByDate}) => {
   const [keyWord, setKeyWord] = useState('');
 
   const searchPostings = (e) => {
@@ -25,7 +25,7 @@ const Navigation = ({ searchByKeyWord, categories, filterByCategory }) => {
 
       <div class="btn-group sort-button-group pull-right"> 
         <button 
-          onClick={(sortPostings)}
+          onClick={sortPostings}
           className ="button-sort"
           value="sort"
           type="submit">Sort<span aria-hidden="true" class="glyphicon"><img src={sortGlyphicon}/></span>
