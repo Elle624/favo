@@ -10,14 +10,14 @@ const getData = (path) => {
   });
 };
 
-const updateData = (path, action, id) => {
+const updateData = (path, action, data) => {
   return fetch(path, {
     method: action,
     headers: {
       "Content-Type": "application/json",
       Accept: "application/json",
     },
-    body: JSON.stringify({ id: id }),
+    body: JSON.stringify(data),
   }).then((response) => {
     if (response.ok) {
       return response;
@@ -41,5 +41,13 @@ export const apiCalls = {
 
   getSinglePosting: (id) => {
     return getData(`http://localhost:3001/events/${id}`);
+  },
+
+  postJobPosting: (data) => {
+    return updateData(`http://localhost:3001/users/1`, "POST", data);
+  },
+
+  patchEventPosting: (eventId, data) => {
+    return updateData(`http://localhost:3001/events/${eventId}`, "PATCH", data);
   }
 };
