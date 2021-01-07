@@ -5,7 +5,7 @@
   flex-direction: column;
   padding: 2em;
   height: 85vh;
-  margin-left: 24em;
+  margin-left: 1em;
 }
 
 .posting-info-wrapper {
@@ -17,12 +17,18 @@
 .posting-left-info-wrapper {
   width: 70%;
   margin: 1em;
+  margin-left: 0;
   position: relative;
 }
 
 .event-title {
   font-size: 2em;
   margin: 1em 0;
+}
+
+.back-button-img {
+  height: 50px;
+  width: 50px;
 }
 
 .event-description {
@@ -59,6 +65,8 @@
 }
 
 .posting-positions-card {
+  width: 70%;
+  background-color: $main-white;
   border: 2px solid $main-orange;
   margin: 1em 1em 1em 0em;
   display: flex;
@@ -70,6 +78,12 @@
     box-shadow: 1px 1px 3px 0px #ffbf69;
     cursor: point;
     transform: scale(1.03);
+  }
+  &:focus {
+    box-shadow: 1px 1px 3px 0px #ffbf69;
+    cursor: point;
+    transform: scale(1.03);
+    outline: none;
   }
 }
 
