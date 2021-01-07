@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { apiCalls } from "../../apiCalls";
 import "./PostingView.scss";
+import backButton from "../../Assets/back-button.png";
+import { Link } from "react-router-dom";
 
 const PostingView = ({ match }) => {
   const eventId = match.params.id;
@@ -71,6 +73,11 @@ const PostingView = ({ match }) => {
         <div className="postings-title-wrapper">
           <h1 className="postings-title">Event Details</h1>
         </div>
+        <div className="back-button-wrap">
+          <Link to="/">
+            <img src={backButton} className="back-button-img" />
+          </Link>
+        </div>
         <div className="posting-info-wrapper">
           <div className="posting-left-info-wrapper">
             <h3 className="event-title">{name}</h3>
@@ -89,14 +96,14 @@ const PostingView = ({ match }) => {
             </div>
             <div className="posting-position-cards-wrapper">
               {openJobs.map((job) => (
-                <section
+                <button
                   onClick={() => setChosenJob(job)}
                   key={job.id}
                   className="posting-positions-card"
                 >
                   <h3>{job.name}</h3>
                   <p>Open Spots: {job.numberOfSpots}</p>
-                </section>
+                </button>
               ))}
             </div>
             <div className="submit-button-wrapper">
