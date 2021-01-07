@@ -29,14 +29,14 @@ const User = ({ info }) => {
         <img className="star-image" src={starImage} alt="star-icon"/>
       </div>
       <div className="section-titles">
-        <p>Total Hours Volunteered</p>
+        <p className="sidebar-titles">Total Hours Volunteered</p>
         <hr className="section-line" />
       </div>
       <div className="hours-bar">
         <p>{volunteeredHours} Hours</p>
       </div>
       <div className="section-titles">
-        <p>My Upcoming Jobs</p>
+        <p className="sidebar-titles">My Upcoming Jobs</p>
         <hr className="section-line" />
       </div>
       <div className="upcoming-job-cards-wrapper">
@@ -44,10 +44,10 @@ const User = ({ info }) => {
           return (
             <section key={job.id} className="upcoming-job-card">
               <div className="event-info-wrapper">
-                <h3>{job.positionName}</h3>
-                <h4>{job.date}</h4>
+                <h3 className="job-event-main-detail">{job.positionName}</h3>
+                <h3 className="job-event-main-detail">{job.date}</h3>
               </div>
-              <h4>{job.eventName}</h4>
+              <h4 className="job-event-name">{job.eventName}</h4>
             </section>
           );
         })}
