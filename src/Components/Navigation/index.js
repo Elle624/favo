@@ -1,21 +1,18 @@
 import React, { useState } from "react";
 
-const Navigation = ({ postings }) => {
+const Navigation = ({ searchByKeyWord }) => {
   const [keyWord, setKeyWord] = useState('');
-  const [searchedPostings, setSearchedPostings] = useState([]);
 
   const searchPostings = (e) => {
     e.preventDefault();
-    const lowerCaseKeyword = keyWord.toLowerCase();
-    const filteredPostings = postings.filter(posting => posting.name.toLowerCase().includes(lowerCaseKeyword) || posting.organization.toLowerCase().includes(keyWord));
-    setSearchedPostings(filteredPostings);
+    searchByKeyWord(keyWord)
     setKeyWord('');
   }
-
+  
   return(
     <section>
       <input type="text" value={keyWord} placeholder="i.e Boulder..." onChange={(e) => setKeyWord(e.target.value)}></input>
-      <input type="submit" value="search" onClick={searchPostings}></input>
+      <input type="submit" value="search" onClick={(searchPostings)}></input>
     </section>
   )
 
