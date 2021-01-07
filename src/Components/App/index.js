@@ -48,7 +48,10 @@ const App = () => {
           />
         )}
       />
-      <Route path="/postings/:id" component={PostingView} />
+      <Route 
+        path="/postings/:id" 
+        render={({ match }) => <PostingView match={match} getUserInfo={getInfo}/>} 
+      />
     </main>
   );
 };
