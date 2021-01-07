@@ -19,7 +19,6 @@ const Navigation = ({ searchByKeyWord,  sortByDate}) => {
     <section>
       <input type="text" value={keyWord} placeholder="i.e Boulder..." onChange={(e) => setKeyWord(e.target.value)}></input>
       <input type="submit" value="search" onClick={(searchPostings)}></input>
-      
       <div class="btn-group sort-button-group pull-right"> 
         <button 
           onClick={(sortPostings)}
@@ -28,7 +27,6 @@ const Navigation = ({ searchByKeyWord,  sortByDate}) => {
           type="submit">Sort<span aria-hidden="true" class="glyphicon"><img src={sortGlyphicon}/></span>
         </button> 
       </div>
-
     </section>
   )
 
