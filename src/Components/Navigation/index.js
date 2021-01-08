@@ -19,11 +19,10 @@ const Navigation = ({ searchByKeyWord, categories, filterByCategory, sortByDate}
   }
   
   return(
-    <section>
-      <input type="text" value={keyWord} placeholder="i.e Boulder..." onChange={(e) => setKeyWord(e.target.value)}></input>
-      <input type="submit" value="search" onClick={(searchPostings)}></input>
-
-      <div class="btn-group sort-button-group pull-right"> 
+    <section className="navigation-bar">
+      <input class="input-button-sort" type="text" value={keyWord} placeholder="i.e Boulder..." onChange={(e) => setKeyWord(e.target.value)}></input>
+      <input class="button-search" type="submit" value="search" onClick={(searchPostings)}></input>
+      <div class="container-button-sort"> 
         <button 
           onClick={sortPostings}
           className ="button-sort"
@@ -31,11 +30,12 @@ const Navigation = ({ searchByKeyWord, categories, filterByCategory, sortByDate}
           type="submit">Sort<span aria-hidden="true" class="glyphicon"><img src={sortGlyphicon}/></span>
         </button> 
       </div>
-      <article>
-        <select name="category" onChange={(e) => filterByCategory(e.target.value)}>
-          <option defaultValue>-- select category --</option>
+      <article className="container-button-filter">
+        <select className="filter-box" name="category" onChange={(e) => filterByCategory(e.target.value)}>
+          <option className="filter-item" defaultValue>-- select category --</option>
           {categories.map(category => (
             <option 
+              className="filter-item"
               value={category} 
               key={`1-${category}`}
             >{category}</option>
