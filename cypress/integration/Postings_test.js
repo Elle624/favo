@@ -29,4 +29,16 @@ describe("Testing Postings component", () => {
       .and("contain", 3)
       .and("contain", "2021/02/01");
   });
+
+  it("Posting card CSS", () => {
+    cy.get(".posting-wrapper").should(
+      "have.css",
+      "border",
+      "1.11111px solid rgb(255, 191, 105)"
+    );
+
+    cy.get(".posting-wrapper").should("have.css", "display", "flex");
+
+    cy.get(".posting-wrapper").should("have.css", "flex-direction", "row");
+  });
 });
