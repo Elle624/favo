@@ -4,14 +4,18 @@
   display: flex;
   flex-direction: column;
   padding: 2em;
-  height: 85vh;
+  height: auto;
+  min-height: 800px;
   margin: 2em 2em 2em 2em;
+  clear: both;
+  height: auto;
 }
 
 .posting-info-wrapper {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  height: auto;
 }
 
 .posting-left-info-wrapper {
@@ -21,6 +25,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  height: 80%;
 }
 
 .event-title {
@@ -48,7 +53,9 @@
 }
 
 .posting-position-cards-wrapper {
-  height: 100%;
+  height: auto;
+  min-height: 5em;
+  min-width: 5em;
   overflow: scroll;
   padding: 1em;
 }
@@ -97,6 +104,7 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  margin-top: 1em;
 }
 
 .submit-button {
@@ -110,3 +118,23 @@
     background-color: #298077;
   }
 }
+
+@media only screen and (max-width: 1080px) {
+  .posting-positions-card {
+    flex-wrap: wrap;
+    justify-content: center;
+    font-size: 0.65em;
+  }
+
+  .postings-title {
+    font-size: 1.2em;
+  }
+
+  .event-title {
+    font-size: 1.5em;
+  }
+
+  .event-description {
+    font-size: 0.7em;
+  }
+} 

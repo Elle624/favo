@@ -99,8 +99,8 @@ const PostingView = ({ match, getUserInfo }) => {
                   key={job.id}
                   className="posting-positions-card"
                 >
-                  <h3>{job.name}</h3>
-                  <p>Open Spots: {job.numberOfSpots}</p>
+                  <h3 className="event-job-name">{job.name}</h3>
+                  <p className="event-job-title">Open Spots: {job.numberOfSpots}</p>
                 </button>
               ))}
             </div>
