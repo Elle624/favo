@@ -1,10 +1,8 @@
 
 describe('Testing homepage', () => {
   beforeEach(() => {
+    
     cy.visit('http://localhost:3000/')
-  })
-
-  it("Landing on the homepage you can see user sidebar with all user basic information", () => {
 
     cy.intercept({
       method: 'GET',
@@ -28,6 +26,9 @@ describe('Testing homepage', () => {
               ]  
       }
     })
+  })
+
+  it("Landing on the homepage you can see user sidebar with all user basic information", () => {
 
     cy.get('.username')
       .contains('Peach Perfect')
@@ -42,6 +43,18 @@ describe('Testing homepage', () => {
       .get('.section-line').should('have.length', 2)
 
     cy.get('.hours-bar').contains('8.2 Hours')
+  })
+
+  it("Should display user upcoming jobs on the user profile sidebar", () => {
+    
+    cy.get('.job-event-main-detail')
+      .contains('cook')
+      .get('.job-event-main-detail')
+      .contains('2021/03/01')
+      .get('.job-event-name')
+      .contains('Help students to have a dinner')
+
+    cy.get('img:last').should('be.visible')
   })
 })
 
