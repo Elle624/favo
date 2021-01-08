@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import sortGlyphicon from "../../Assets/desc-sort-button.png";
+// import sortGlyphicon from "../../Assets/desc-sort-button.png";
 import './Navigation.scss';
+import descSortButton from "../../Assets/desc-sort-button.png";
+import asceSortButton from "../../Assets/asce-sort-button.png";
 
 
 
-const Navigation = ({ searchByKeyWord, categories, filterByCategory, sortByDate}) => {
-  const [keyWord, setKeyWord] = useState('');
+const Navigation = ({ isSorted, searchByKeyWord, categories, filterByCategory, sortByDate}) => {
+  const [keyWord, setKeyWord] = useState(''); 
 
   const searchPostings = (e) => {
     e.preventDefault();
@@ -23,13 +25,12 @@ const Navigation = ({ searchByKeyWord, categories, filterByCategory, sortByDate}
       <label htmlFor="search-input"class="label-input-search"></label>
       <input id="search-input" name="search-input" class="input-button-sort" type="text" value={keyWord} placeholder="i.e Boulder..." onChange={(e) => setKeyWord(e.target.value)}></input>
       <button class="button-search" type="submit" onClick={(searchPostings)}>search</button>
-
       <div class="container-button-sort"> 
         <button 
           onClick={sortPostings}
           className ="button-sort"
           value="sort"
-          type="submit">sort<span aria-hidden="true" class="glyphicon"><img src={sortGlyphicon}/></span>
+          type="submit">sort<span aria-hidden="true" class="glyphicon"><img className="sort-icon" src={isSorted ? asceSortButton : descSortButton} alt="sort-icon"/></span>
         </button> 
       </div>
       <article className="container-button-filter">
