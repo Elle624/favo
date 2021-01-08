@@ -41,4 +41,21 @@ describe("Testing Postings component", () => {
 
     cy.get(".posting-wrapper").should("have.css", "flex-direction", "row");
   });
+
+  it("Search Input should load and function on homepage postings", () => {
+    cy.get(".input-button-sort").should(
+      "have.attr",
+      "placeholder",
+      "i.e Boulder..."
+    );
+
+    cy.get(".button-search").contains("search");
+
+    cy.get(".input-button-sort").type("Something");
+    cy.get(".button-search").click();
+
+    cy.get(".posting-detail").should("contain", "Something Crazy");
+
+    cy.get(".posting-detail").should("not.contain", "Food Devlivery");
+  });
 });
