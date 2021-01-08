@@ -36,6 +36,7 @@ const PostingView = ({ match, getUserInfo }) => {
   const postPositionToUser = () => {
     const newUpcomingJob = {
       id: `1-${chosenJob.id}`,
+      eventId,
       eventName: chosenPosting.name,
       positionName: chosenJob.name,
       date: chosenPosting.date,
