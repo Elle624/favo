@@ -17,6 +17,16 @@ describe("Testing Postings component", () => {
   });
 
   it("Landing on the homepage you can see all event postings", () => {
-    cy.get(".posting-title").contains("Organization");
+    cy.get(".posting-title")
+      .should("contain", "Organization")
+      .and("contain", "Event")
+      .and("contain", "Date")
+      .and("contain", "Open Position");
+
+    cy.get(".posting-detail")
+      .should("contain", "Something Crazy")
+      .and("contain", "Something Else, LLC")
+      .and("contain", 3)
+      .and("contain", "2021/02/01");
   });
 });

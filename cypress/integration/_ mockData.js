@@ -19,13 +19,13 @@ const _mockData = {
     {
       id: "event-1",
       date: "2021/02/01",
-      name: "Color Run",
-      organization: "The Color Run, LLC.",
-      location: "123 Cassette Dr., Denver, CO, 80204",
+      name: "Something Crazy",
+      organization: "Something Else, LLC",
+      location: "123 Something Dr., Somewhere, CO, 00000",
       description:
-        "The Color Run is an event series and five kilometer paint race, inspired by the Hindu festival of Holi, that is owned and operated by The Color Run LLC, a for-profit company.",
+        "Something crazy happening somewhere in the somewhere of somewhere CO. Come do something with someone.",
       duration: 10,
-      category: "Sports",
+      category: "Something",
       openJobs: [
         {
           id: "posting-1",
