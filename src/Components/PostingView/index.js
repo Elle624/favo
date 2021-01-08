@@ -17,8 +17,8 @@ const PostingView = ({ match, getUserInfo }) => {
         setUserInfo(data[0]);
         setChosenPosting(data[1]);
         const signedUpEvent = data[0].upcomingJobs.find(
-            (job) => job.eventName === data[1].name
-          );
+          (job) => job.eventName === data[1].name
+        );
         if (signedUpEvent) {
           setHasSignedUp(true);
         }
@@ -28,7 +28,7 @@ const PostingView = ({ match, getUserInfo }) => {
 
   const substractOpenPosition = () => {
     apiCalls.patchEventPosting(eventId, { jobId: chosenJob.id }).then(() => {
-      postPositionToUser(); 
+      postPositionToUser();
       setHasSignedUp(true);
     });
   };
@@ -36,6 +36,7 @@ const PostingView = ({ match, getUserInfo }) => {
   const postPositionToUser = () => {
     const newUpcomingJob = {
       id: `1-${chosenJob.id}`,
+      eventId,
       eventName: chosenPosting.name,
       positionName: chosenJob.name,
       date: chosenPosting.date,

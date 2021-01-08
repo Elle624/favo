@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "./User.scss";
 import starImage from "../../Assets/star.png";
 import userToggleButtonRight from "../../Assets/right-chevron.png";
@@ -50,13 +51,15 @@ const User = ({ info }) => {
         <div className="upcoming-job-cards-wrapper">
           {upcomingJobs.map((job) => {
             return (
-              <section key={job.id} className="upcoming-job-card">
-                <div className="event-info-wrapper">
-                  <h3 className="job-event-main-detail">{job.positionName}</h3>
-                  <h3 className="job-event-main-detail">{job.date}</h3>
-                </div>
-                <h4 className="job-event-name">{job.eventName}</h4>
-              </section>
+              <Link to={`/postings/${job.eventId}`}>
+                <section key={job.id} className="upcoming-job-card">
+                  <div className="event-info-wrapper">
+                    <h3 className="job-event-main-detail">{job.positionName}</h3>
+                    <h3 className="job-event-main-detail">{job.date}</h3>
+                  </div>
+                  <h4 className="job-event-name">{job.eventName}</h4>
+                </section>
+              </Link>
             );
           })}
         </div>
