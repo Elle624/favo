@@ -1,0 +1,110 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+.navigation-bar {
+  display: flex;
+  width: auto;
+  height: 2em;
+  margin: 2em 0em 0em 2em;
+}
+
+.input-button-sort {
+  height: 1.5em;
+	@include main-page-input-settings;
+	
+	& + .input-button-sort {
+		transform: translateY(-50%);
+		transition: all .15s ease;
+  }
+
+	&:hover {
+    @include input-hover-effect;
+    background-color: $main-white;
+	}
+	
+	&:focus {
+    background-color: $main-white;
+		@include input-focus-effect;
+	}
+}
+
+.button-search {
+  background-color: $main-grey;
+  font-size: 1em;
+  padding: 1px 6px;
+	color: $main-black;
+	height: 1.75em;
+	border: 1px solid $main-grey;
+	box-shadow: none;
+  outline: none;
+  margin: 0 0.5em;
+
+  &:hover {
+    @include input-hover-effect;
+  }
+  
+  &:focus {
+    color: $main-white;
+    background-color: $main-blue;
+		@include input-focus-effect;
+	}
+}
+
+.sort-icon {
+  width: 1em;
+}
+
+.glyphicon {
+  height: 1em;
+  margin: 0 0.2em;
+}
+
+.button-sort {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $main-grey;
+  font-size: 1em;
+  padding: 1px 6px;
+	color: $main-black;
+	height: 1.75em;
+	border: 1px solid $main-grey;
+	box-shadow: none;
+  outline: none;
+  margin: 0 0.5em;
+
+  &:hover {
+    background-color: $main-white;
+    @include input-hover-effect;
+  }
+
+  &:focus {
+    background-color: $main-white;
+		@include input-focus-effect;
+	}
+}
+
+.filter-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $main-grey;
+  font-size: 1em;
+  padding: 1px 6px;
+	color: $main-black;
+	height: 1.75em;
+	border: 1px solid $main-grey;
+	box-shadow: none;
+  outline: none;
+  margin: 0 0.5em;
+
+  &:hover {
+    @include input-hover-effect;
+  }
+
+  &:focus {
+    background-color: $main-blue;
+    color: $main-white;
+		@include input-focus-effect;
+	}
+}

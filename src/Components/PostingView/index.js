@@ -56,6 +56,7 @@ const PostingView = ({ match, getUserInfo }) => {
       location,
       description,
       duration,
+      category,
       openJobs,
     } = chosenPosting;
 
@@ -121,6 +122,12 @@ const PostingView = ({ match, getUserInfo }) => {
               </strong>
               <p>{organization}</p>
             </div>
+            <div className="posting-category-wrapper">
+              <strong>
+                <p className="posting-info-title">Category</p>
+              </strong>
+              <p>{category}</p>
+            </div>
             <div className="posting-location-wrapper">
               <strong>
                 <p className="posting-info-title">Location</p>
@@ -133,6 +140,7 @@ const PostingView = ({ match, getUserInfo }) => {
               </strong>
               <p>{duration}</p>
             </div>
+            
           </div>
         </div>
       </section>

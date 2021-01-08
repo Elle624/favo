@@ -61,6 +61,7 @@ const App = () => {
         path="/"
         render={() => (
           <Postings
+            isSorted={isSorted}
             postings={queriedPostings.length ? queriedPostings : postings}
             searchByKeyWord={searchPostings}
             sortPostingsByDate={sortPostingsByDate}

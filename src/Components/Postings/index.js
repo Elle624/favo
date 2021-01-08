@@ -3,7 +3,7 @@ import './Postings.scss';
 import PostingCard from '../PostingCard';
 import Navigation from "../Navigation";
 
-const Postings = ({ postings, searchByKeyWord, filterByCategory, sortPostingsByDate }) => {
+const Postings = ({ isSorted, postings, searchByKeyWord, filterByCategory, sortPostingsByDate }) => {
   const [categories, setCategories] = useState([]);
 
   const getCategories = () => {
@@ -28,6 +28,7 @@ const Postings = ({ postings, searchByKeyWord, filterByCategory, sortPostingsByD
       </div>
       <div>
         <Navigation 
+          isSorted={isSorted}
           searchByKeyWord={searchByKeyWord} 
           categories={categories}
           filterByCategory={filterByCategory}
