@@ -109,6 +109,10 @@
   width: 3em;
   border-radius: 0 85% 85% 0;
   border: none;
+  outline: none;
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .user-open {
