@@ -3,7 +3,7 @@ import './Postings.scss';
 import PostingCard from '../PostingCard';
 import Navigation from "../Navigation";
 
-const Postings = ({ postings, searchByKeyWord, filterByCategory }) => {
+const Postings = ({ postings, searchByKeyWord, filterByCategory, sortPostingsByDate }) => {
   const [categories, setCategories] = useState([]);
 
   const getCategories = () => {
@@ -15,7 +15,6 @@ const Postings = ({ postings, searchByKeyWord, filterByCategory }) => {
     }, []);
     setCategories(categories);
   } 
-
   const postingCards = postings.map(posting => (
     <PostingCard posting={posting} key={posting.id} />
   ))
@@ -32,6 +31,7 @@ const Postings = ({ postings, searchByKeyWord, filterByCategory }) => {
           searchByKeyWord={searchByKeyWord} 
           categories={categories}
           filterByCategory={filterByCategory}
+          sortByDate={sortPostingsByDate}
         />
       </div>
       <section className="postings-wrapper">

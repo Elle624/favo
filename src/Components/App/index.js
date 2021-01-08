@@ -11,6 +11,7 @@ const App = () => {
   const [postings, setPostings] = useState([]);
   const [error, setError] = useState("");
   const [queriedPostings, setQueriedPostings] = useState([]);
+  const [isSorted, setIsSorted] = useState(false);
 
   const getInfo = () => {
     Promise.all([apiCalls.getUser(), apiCalls.getPostings()])
@@ -29,6 +30,18 @@ const App = () => {
         posting.organization.toLowerCase().includes(keyWord)
     );
     setQueriedPostings(queriedPostings);
+  };
+
+  const sortPostingsByDate = () => {
+    if(!isSorted) {
+      postings.sort((a, b) => {
+        return (a.date > b.date) ? -1 : 1;
+      })
+    } else {
+      postings.reverse();
+    } 
+    setIsSorted((prevSortState) => !prevSortState);
+    setPostings(postings);
   };
 
   const filterPostings = (category) => {
@@ -50,6 +63,7 @@ const App = () => {
           <Postings
             postings={queriedPostings.length ? queriedPostings : postings}
             searchByKeyWord={searchPostings}
+            sortPostingsByDate={sortPostingsByDate}
             filterByCategory={filterPostings}
           />
         )}
