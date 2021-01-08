@@ -58,4 +58,13 @@ describe("Testing Postings component", () => {
 
     cy.get(".posting-detail").should("not.contain", "Food Devlivery");
   });
+
+  it("Sort button should load and function on homepage", () => {
+    cy.get(".button-sort").contains("sort");
+
+    cy.get(".button-sort").click();
+
+    cy.get(".posting-wrapper:first").contains("Food Delivery");
+    cy.get(".posting-wrapper:last").contains("Something Crazy");
+  });
 });
