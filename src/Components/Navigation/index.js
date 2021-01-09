@@ -1,50 +1,82 @@
 import React, { useState } from "react";
-import sortGlyphicon from "../../Assets/sort-button.png";
+import "./Navigation.scss";
+import descSortButton from "../../Assets/desc-sort-button.png";
+import asceSortButton from "../../Assets/asce-sort-button.png";
 
-
-
-
-const Navigation = ({ searchByKeyWord, categories, filterByCategory, sortByDate}) => {
-  const [keyWord, setKeyWord] = useState('');
+const Navigation = ({
+  isSorted,
+  searchByKeyWord,
+  categories,
+  filterByCategory,
+  sortByDate,
+}) => {
+  const [keyWord, setKeyWord] = useState("");
 
   const searchPostings = (e) => {
     e.preventDefault();
-    searchByKeyWord(keyWord)
-    setKeyWord('');
-  }
+    searchByKeyWord(keyWord);
+    setKeyWord("");
+  };
 
   const sortPostings = (e) => {
     e.preventDefault();
     sortByDate();
-  }
-  
-  return(
+  };
+
+  return (
     <section className="navigation-bar">
-      <input class="input-button-sort" type="text" value={keyWord} placeholder="i.e Boulder..." onChange={(e) => setKeyWord(e.target.value)}></input>
-      <input class="button-search" type="submit" value="search" onClick={(searchPostings)}></input>
-      <div class="container-button-sort"> 
-        <button 
+      <label htmlFor="search-input" className="label-input-search"></label>
+      <input
+        id="search-input"
+        name="search-input"
+        className="input-button-sort"
+        type="text"
+        value={keyWord}
+        placeholder="i.e Boulder..."
+        onChange={(e) => setKeyWord(e.target.value)}
+      ></input>
+      <button className="button-search" type="submit" onClick={searchPostings}>
+        search
+      </button>
+      <div className="container-button-sort">
+        <button
           onClick={sortPostings}
-          className ="button-sort"
+          className="button-sort"
           value="sort"
-          type="submit">Sort<span aria-hidden="true" class="glyphicon"><img src={sortGlyphicon}/></span>
-        </button> 
+          type="submit"
+        >
+          sort
+          <span aria-hidden="true" className="glyphicon">
+            <img
+              className="sort-icon"
+              src={isSorted ? asceSortButton : descSortButton}
+              alt="sort-icon"
+            />
+          </span>
+        </button>
       </div>
       <article className="container-button-filter">
-        <select className="filter-box" name="category" onChange={(e) => filterByCategory(e.target.value)}>
-          <option className="filter-item" defaultValue>-- select category --</option>
-          {categories.map(category => (
-            <option 
+        <select
+          className="filter-box"
+          name="category"
+          onChange={(e) => filterByCategory(e.target.value)}
+        >
+          <option className="filter-item" defaultValue>
+            -- select category --
+          </option>
+          {categories.map((category) => (
+            <option
               className="filter-item"
-              value={category} 
+              value={category}
               key={`1-${category}`}
-            >{category}</option>
+            >
+              {category}
+            </option>
           ))}
-          </select>
+        </select>
       </article>
     </section>
-  )
+  );
+};
 
-}
-
-export default Navigation
+export default Navigation;

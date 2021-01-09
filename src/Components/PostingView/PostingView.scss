@@ -4,14 +4,19 @@
   display: flex;
   flex-direction: column;
   padding: 2em;
-  height: 85vh;
-  margin: 2em 2em 2em 2em;
+  height: auto;
+  min-height: 800px;
+  min-width: 600px;
+  margin: 2em;
+  clear: both;
+  height: auto;
 }
 
 .posting-info-wrapper {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  height: auto;
 }
 
 .posting-left-info-wrapper {
@@ -21,6 +26,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 
 .event-title {
@@ -29,8 +35,12 @@
 }
 
 .back-button-img {
-  height: 50px;
-  width: 50px;
+  height: 40px;
+  width: 40px;
+  &:hover {
+    cursor: point;
+    transform: scale(1.05);
+  }
 }
 
 .event-description {
@@ -48,7 +58,9 @@
 }
 
 .posting-position-cards-wrapper {
-  height: 100%;
+  height: 14em;
+  min-height: 5em;
+  min-width: 5em;
   overflow: scroll;
   padding: 1em;
 }
@@ -62,6 +74,7 @@
 }
 
 .posting-organization-wrapper,
+.posting-category-wrapper,
 .posting-location-wrapper {
   margin: 1em 0em;
 }
@@ -69,23 +82,23 @@
 .posting-positions-card {
   width: 70%;
   background-color: $main-white;
-  border: 2px solid $main-orange;
+  border: 2px solid $main-blue;
   margin: 1em 1em 1em 0em;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   padding: 0.5em 2em;
   &:hover {
-    box-shadow: 1px 1px 3px 0px #ffbf69;
+    box-shadow: 2px 2px 3px 0px #2ec4b6;
     cursor: point;
     transform: scale(1.03);
   }
   &:focus {
     border: 2px solid #2ec4b6;
-    box-shadow: 1px 1px 3px 0px #2ec4b6;
+    box-shadow: 2px 2px 3px 0px #2ec4b6;
     cursor: point;
-    transform: scale(1.03);
+    transform: scale(1.05);
     outline: none;
   }
 }
@@ -96,16 +109,47 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  margin-top: 1em;
+  position: absolute;
+  top: 38em;
+}
+
+.event-job-name {
+  margin: 0.5em 1em;
 }
 
 .submit-button {
   background-color: $main-blue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6em;
   color: $main-white;
   outline: none;
   border: none;
-  height: 2.5em;
-  width: 6em;
+  height: 2.9em;
+  width: 12em;
   &:hover {
     background-color: #298077;
   }
 }
+
+@media only screen and (max-width: 1080px) {
+  .posting-positions-card {
+    flex-wrap: wrap;
+    justify-content: center;
+    font-size: 0.65em;
+  }
+
+  .event-title {
+    font-size: 1.5em;
+  }
+
+  .event-description {
+    font-size: 0.7em;
+  }
+
+  div.posting-right-info-wrapper p {
+    font-size: 0.7em;
+  }
+} 

@@ -1,0 +1,33 @@
+@import "variables";
+
+@mixin main-page-input-settings {
+  background-color: $main-grey;
+	font-size: 1em;
+	color: $main-black;
+	border: 1px solid $main-grey;
+	box-shadow: none;
+	outline: none;
+}
+
+@mixin input-hover-effect {
+  box-shadow: 0px 0px 0px 2px rgba($color: $main-blue, $alpha: 0.6);
+  transition: all 0.25s ease;
+  border: 1px solid rgba($color: $main-blue, $alpha: 0.8);
+}
+
+@mixin input-focus-effect {
+  border: 1px solid $main-blue;
+  box-shadow: none;
+}
+
+@mixin sidebar-bar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  background-color: $main-white;
+  width: 17em;
+  margin: 2em 0 2em 2em;
+  padding: 2em;
+  clear: both;
+}

@@ -7,7 +7,7 @@ const PostingCard = ({ posting }) => {
 
   return (
     <Link className="posting-card" to={`/postings/${id}`}>
-      <section key={id} className="posting-wrapper">
+      <section key={id} className="posting-wrapper-cards">
         <div className="vertical">
           <div className="posting-data">
             <p className="posting-title left">Organization</p>
