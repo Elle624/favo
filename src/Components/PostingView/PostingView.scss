@@ -6,7 +6,8 @@
   padding: 2em;
   height: auto;
   min-height: 800px;
-  margin: 2em 2em 2em 2em;
+  min-width: 600px;
+  margin: 2em;
   clear: both;
   height: auto;
 }
@@ -25,7 +26,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  height: 80%;
+  height: 100%;
 }
 
 .event-title {
@@ -34,8 +35,12 @@
 }
 
 .back-button-img {
-  height: 50px;
-  width: 50px;
+  height: 40px;
+  width: 40px;
+  &:hover {
+    cursor: point;
+    transform: scale(1.05);
+  }
 }
 
 .event-description {
@@ -53,7 +58,7 @@
 }
 
 .posting-position-cards-wrapper {
-  height: auto;
+  height: 14em;
   min-height: 5em;
   min-width: 5em;
   overflow: scroll;
@@ -105,15 +110,21 @@
   justify-content: flex-end;
   align-items: center;
   margin-top: 1em;
+  position: absolute;
+  top: 38em;
 }
 
 .submit-button {
   background-color: $main-blue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6em;
   color: $main-white;
   outline: none;
   border: none;
-  height: 2.5em;
-  width: 6em;
+  height: 2.9em;
+  width: 12em;
   &:hover {
     background-color: #298077;
   }
@@ -126,15 +137,15 @@
     font-size: 0.65em;
   }
 
-  .postings-title {
-    font-size: 1.2em;
-  }
-
   .event-title {
     font-size: 1.5em;
   }
 
   .event-description {
+    font-size: 0.7em;
+  }
+
+  div.posting-right-info-wrapper p {
     font-size: 0.7em;
   }
 } 

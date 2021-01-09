@@ -110,7 +110,7 @@ const PostingView = ({ match, getUserInfo }) => {
                 disabled={hasSignedUp ? true : false}
                 className="submit-button"
               >
-                SUBMIT
+                Let me help!
               </button>
             </div>
           </div>
@@ -139,8 +139,7 @@ const PostingView = ({ match, getUserInfo }) => {
                 <p className="posting-info-title">Duration</p>
               </strong>
               <p>{duration}</p>
-            </div>
-            
+            </div>   
           </div>
         </div>
       </section>
