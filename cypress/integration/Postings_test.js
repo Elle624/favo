@@ -81,5 +81,11 @@ describe("Testing Postings component", () => {
     cy.get(".posting-detail").should("not.contain", "Food Devlivery");
   });
 
-  
+  it("should direct to a new URL when a posting card is clicked", () => {
+    cy.get(".posting-wrapper")
+      .contains("Something Crazy")
+      .click()
+      .url()
+      .should("include", "/postings/event-1");
+  });
 });
