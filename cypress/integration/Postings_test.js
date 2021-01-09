@@ -67,4 +67,13 @@ describe("Testing Postings component", () => {
     cy.get(".posting-wrapper:first").contains("Food Delivery");
     cy.get(".posting-wrapper:last").contains("Something Crazy");
   });
+
+  it("Filter postings by categories on should load and function on", () => {
+    cy.get(".filter-item").contains("-- select category --");
+
+    cy.get(".filter-box").select("Something");
+
+    cy.get(".posting-wrapper").should("contain", "Something Crazy");
+    cy.get(".posting-detail").should("not.contain", "Food Devlivery");
+  });
 });
