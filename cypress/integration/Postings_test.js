@@ -35,15 +35,15 @@ describe("Testing Postings component", () => {
   });
 
   it("Posting card CSS", () => {
-    cy.get(".posting-wrapper").should(
+    cy.get(".posting-wrapper-cards").should(
       "have.css",
       "border",
-      "1.11111px solid rgb(255, 191, 105)"
+      "1px solid rgb(255, 191, 105)"
     );
 
-    cy.get(".posting-wrapper").should("have.css", "display", "flex");
+    cy.get(".posting-wrapper-cards").should("have.css", "display", "flex");
 
-    cy.get(".posting-wrapper").should("have.css", "flex-direction", "row");
+    cy.get(".posting-wrapper-cards").should("have.css", "flex-direction", "row");
   });
 
   it("Search Input should load and function on homepage postings", () => {
@@ -68,8 +68,8 @@ describe("Testing Postings component", () => {
 
     cy.get(".button-sort").click();
 
-    cy.get(".posting-wrapper:first").contains("Food Delivery");
-    cy.get(".posting-wrapper:last").contains("Something Crazy");
+    cy.get(".posting-wrapper-cards:first").contains("Food Delivery");
+    cy.get(".posting-wrapper-cards:last").contains("Something Crazy");
   });
 
   it("Filter postings by categories on should load and function on", () => {
@@ -77,12 +77,12 @@ describe("Testing Postings component", () => {
 
     cy.get(".filter-box").select("Something");
 
-    cy.get(".posting-wrapper").should("contain", "Something Crazy");
+    cy.get(".posting-wrapper-cards").should("contain", "Something Crazy");
     cy.get(".posting-detail").should("not.contain", "Food Devlivery");
   });
 
   it("should direct to a new URL when a posting card is clicked", () => {
-    cy.get(".posting-wrapper")
+    cy.get(".posting-wrapper-cards")
       .contains("Something Crazy")
       .click()
       .url()
