@@ -8,9 +8,9 @@ const PostingView = ({ match, getUserInfo }) => {
   const eventId = match.params.id;
   const [chosenPosting, setChosenPosting] = useState(null);
   const [chosenJob, setChosenJob] = useState(null);
-  const [hasSignedUp, setHasSignedUp] = useState(false);
+  const [signedUpJobName, setSignedUpJobName] = useState('');
   const [userInfo, setUserInfo] = useState(null);
-
+  
   const getDetails = () => {
     Promise.all([apiCalls.getUser(), apiCalls.getSinglePosting(eventId)]).then(
       (data) => {
@@ -20,7 +20,7 @@ const PostingView = ({ match, getUserInfo }) => {
           (job) => job.eventName === data[1].name
         );
         if (signedUpEvent) {
-          setHasSignedUp(true);
+          setSignedUpJobName(signedUpEvent.positionName);
         }
       }
     );
@@ -29,7 +29,7 @@ const PostingView = ({ match, getUserInfo }) => {
   const substractOpenPosition = () => {
     apiCalls.patchEventPosting(eventId, { jobId: chosenJob.id }).then(() => {
       postPositionToUser();
-      setHasSignedUp(true);
+      setSignedUpJobName(true);
     });
   };
 
@@ -98,8 +98,13 @@ const PostingView = ({ match, getUserInfo }) => {
                   onClick={() => setChosenJob(job)}
                   key={job.id}
                   className="posting-positions-card"
+                  style={{
+                            backgroundColor: signedUpJobName === job.name ? '#2ec4b6': "#initial",
+                            color: signedUpJobName === job.name ? 'white': "#initial",
+                            borderColor: signedUpJobName === job.name ? '#2ec4b6': "#initial"
+                          }}
                 >
-                  <h3 className="event-job-name">{job.name}</h3>
+                  <h3 className="event-job-name" >{job.name}</h3>
                   <p className="event-job-title">Open Spots: {job.numberOfSpots}</p>
                 </button>
               ))}
@@ -107,7 +112,7 @@ const PostingView = ({ match, getUserInfo }) => {
             <div className="submit-button-wrapper">
               <button
                 onClick={substractOpenPosition}
-                disabled={hasSignedUp ? true : false}
+                disabled={signedUpJobName ? true : false}
                 className="submit-button"
               >
                 Let me help!

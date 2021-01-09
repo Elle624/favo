@@ -82,23 +82,23 @@
 .posting-positions-card {
   width: 70%;
   background-color: $main-white;
-  border: 2px solid $main-orange;
+  border: 2px solid $main-blue;
   margin: 1em 1em 1em 0em;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   padding: 0.5em 2em;
   &:hover {
-    box-shadow: 1px 1px 3px 0px #ffbf69;
+    box-shadow: 2px 2px 3px 0px #2ec4b6;
     cursor: point;
     transform: scale(1.03);
   }
   &:focus {
     border: 2px solid #2ec4b6;
-    box-shadow: 1px 1px 3px 0px #2ec4b6;
+    box-shadow: 2px 2px 3px 0px #2ec4b6;
     cursor: point;
-    transform: scale(1.03);
+    transform: scale(1.05);
     outline: none;
   }
 }
@@ -112,6 +112,10 @@
   margin-top: 1em;
   position: absolute;
   top: 38em;
+}
+
+.event-job-name {
+  margin: 0.5em 1em;
 }
 
 .submit-button {
