@@ -19,3 +19,15 @@
   border: 1px solid $main-blue;
   box-shadow: none;
 }
+
+@mixin sidebar-bar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  background-color: $main-white;
+  width: 17em;
+  margin: 2em 0 2em 2em;
+  padding: 2em;
+  clear: both;
+}

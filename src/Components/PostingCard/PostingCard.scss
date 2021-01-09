@@ -1,14 +1,14 @@
 @import "../../styles/variables";
 
-.posting-wrapper {
-  height: 12em;
-  width: 18em;
+.posting-wrapper-cards {
+  height: 10em;
+  width: 16em;
   border: 1px solid $main-orange;
-  margin-right: 0.5em;
-  margin-bottom: 0.5em;
+  margin: 1em 1em;
   display: flex;
   flex-direction: row;
   justify-content: stretch;
+  flex: 0 1 24%;
   &:hover {
     box-shadow: 1px 1px 3px 0px #ffbf69;
   }
@@ -60,6 +60,6 @@ p {
 }
 
 .posting-detail {
-  font-size: 0.8em;
-  font-weight: 700;
+  font-size: 0.7em;
+  font-weight: 600;
 }

@@ -1,10 +1,17 @@
 @import "../../styles/variables";
 
+
+
 .App {
   display: flex;
   flex-direction: row;
   background-color: $main-grey;
-  height: 100%;
+  height: auto;
   width: 100%;
-  position: absolute;
+  // position: fixed;
+  // overflow: scroll;
+}
+
+#blockColorblindContent {
+  display: none;
 }
