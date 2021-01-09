@@ -16,7 +16,7 @@ describe("Testing the single event details page", () => {
     );
   })
 
-  it('should render event details correctly', () => {
+  it("should render event details correctly", () => {
     cy.get(".postings-container")
       .should("contain", "Something Crazy")
       .and("contain", "Description")
@@ -33,4 +33,13 @@ describe("Testing the single event details page", () => {
       .and("contain", "10")
   })
 
+  it("Single event page header", () => {
+    cy.get(".postings-title-wrapper")
+    .should("contain","Event Details")
+    .and(
+      "have.css",
+      "background-color",
+      "rgb(46, 196, 182)"
+      )
+  });
 })
