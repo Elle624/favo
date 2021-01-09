@@ -30,6 +30,10 @@ describe("Testing Postings component", () => {
       .and("contain", "2021/02/01");
   });
 
+  it("Should load title of page on homepage", () => {
+    cy.get(".postings-title").contains("Open Volunteer Positions");
+  });
+
   it("Posting card CSS", () => {
     cy.get(".posting-wrapper").should(
       "have.css",
@@ -76,4 +80,6 @@ describe("Testing Postings component", () => {
     cy.get(".posting-wrapper").should("contain", "Something Crazy");
     cy.get(".posting-detail").should("not.contain", "Food Devlivery");
   });
+
+  
 });
