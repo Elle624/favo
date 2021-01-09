@@ -115,9 +115,11 @@ describe("Testing the single event details page", () => {
     );
     
     cy.get(".submit-button").should("be.disabled")
+      .get(".posting-positions-card:first")
+      .should("have.css", "background-color", "rgb(46, 196, 182)")
+      .get(".upcoming-job-cards-wrapper").should("contain", "assisting with check-in")
     // cy.get(".event-job-title:first")
       //.should("contain", "Open Spots: 2")
   })
-
-
+  
 })
