@@ -115,7 +115,7 @@ const PostingView = ({ match, getUserInfo }) => {
                 disabled={signedUpJobName ? true : false}
                 className="submit-button"
               >
-                Let me help!
+                Sign me up!
               </button>
             </div>
           </div>
