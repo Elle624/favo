@@ -35,11 +35,34 @@ describe("Testing the single event details page", () => {
 
   it("Single event page header", () => {
     cy.get(".postings-title-wrapper")
-    .should("contain","Event Details")
-    .and(
-      "have.css",
-      "background-color",
-      "rgb(46, 196, 182)"
-      )
+      .should("contain","Event Details")
+      .and(
+        "have.css",
+        "background-color",
+        "rgb(46, 196, 182)"
+        )
   });
+
+  it("Return to home page button should display and function", () => {
+    cy.get(".back-button-img")
+      .should("be.visible")
+      .click();
+
+    // Should stub response, but it's not working yet
+
+    // cy.intercept(
+    //   {
+    //     method: "GET",
+    //     url: "http://localhost:3001/events/",
+    //   },
+    //   {
+    //     statusCode: 201,
+    //     body: _mockData.events,
+    //   }
+    // );
+
+    cy.url().should("include", "/")
+  })
+
+
 })
