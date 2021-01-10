@@ -57,6 +57,7 @@ const Navigation = ({
       </div>
       <article className="container-button-filter">
         <select
+          data-testid="select-input"
           className="filter-box"
           name="category"
           onChange={(e) => filterByCategory(e.target.value)}
