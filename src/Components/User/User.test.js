@@ -1,8 +1,10 @@
-import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import _mockData from '../../TestData/_mockData';
-import User from '../User';
 import { MemoryRouter } from 'react-router-dom';
+
+import User from '../User';
 
 describe("User Comonent", () => {
 
@@ -18,5 +20,16 @@ describe("User Comonent", () => {
     expect(screen.getByText("2021/03/01")).toBeInTheDocument();
     expect(screen.getByText("cook")).toBeInTheDocument();
     expect(screen.queryByText("Food Delivery")).not.toBeInTheDocument();
+  })
+
+  it.skip("User side bar should toggle by ckicking", () => {
+    render(<User info={_mockData.user}/>, { wrapper: MemoryRouter });
+
+    //const sideBarButton = screen.getByAltText("sidebar-icon");
+    const sideBarButton = document.querySelector('.user-toggle-button');
+    userEvent.click(sideBarButton);
+    //userEvent.click(sideBarButton);
+    //screen.debug()
+    expect(screen.queryByText("Peach Perfect")).toHaveStyle("display: none");
   })
 })
