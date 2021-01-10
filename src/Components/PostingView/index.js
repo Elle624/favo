@@ -12,18 +12,21 @@ const PostingView = ({ match, getUserInfo }) => {
   const [userInfo, setUserInfo] = useState(null);
   
   const getDetails = () => {
-    Promise.all([apiCalls.getUser(), apiCalls.getSinglePosting(eventId)]).then(
-      (data) => {
-        setUserInfo(data[0]);
-        setChosenPosting(data[1]);
-        const signedUpEvent = data[0].upcomingJobs.find(
-          (job) => job.eventName === data[1].name
-        );
-        if (signedUpEvent) {
-          setSignedUpJobName(signedUpEvent.positionName);
+    Promise.all([apiCalls.getUser(), apiCalls.getSinglePosting(eventId)])
+      .then(
+        (data) => {
+          if(data[0]) {
+            setUserInfo(data[0]);
+            setChosenPosting(data[1]);
+            const signedUpEvent = data[0].upcomingJobs.find(
+              (job) => job.eventName === data[1].name
+            );
+            if (signedUpEvent) {
+              setSignedUpJobName(signedUpEvent.positionName);
+            }
+          }
         }
-      }
-    );
+      );
   };
 
   const substractOpenPosition = () => {
