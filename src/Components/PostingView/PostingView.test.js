@@ -43,17 +43,33 @@ describe("PostingView Comonent", () => {
     await waitFor(() => expect(apiCalls.getUser).toHaveBeenCalledTimes(1))
   })
 
-  // it("should render correctly", async() => {
-  //   const history = createMemoryHistory();
-  //   render(
-  //     <Router history={history}>
-  //       <PostingView 
-  //         match={{params:_mockData.events[1].id}} 
-  //         getUserInfo={jest.fn()}
-  //       />
-  //     </Router>
-  //   )
+  it("should render correctly", async() => {
+    const history = createMemoryHistory();
+    render(
+      <Router history={history}>
+        <PostingView 
+          match={{params:_mockData.events[1].id}} 
+          getUserInfo={jest.fn()}
+        />
+      </Router>
+    )
 
-  //   await waitFor(() => expect(history.location.pathname).toBe("/postings/event-2"));
-  // })
+    await waitFor(() => expect(screen.getByText("Event Details")).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByText("Food Delivery")).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByText("Description")).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByText("Deliver food for a memorial hospital")).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByText("Open Positions")).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByText("driver")).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByText("cook")).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByText("Open Spots: 2")).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByText("Feb 05 2021")).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByText("Organization")).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByText("Individual")).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByText("Category")).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByText("Healthcare")).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByText("Location")).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByText("123 Goose Blv., Denver, CO, 80208")).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByText("Duration")).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByText(3)).toBeInTheDocument());
+  })
 })
