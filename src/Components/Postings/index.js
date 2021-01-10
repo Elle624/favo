@@ -22,7 +22,7 @@ const Postings = ({ isSorted, postings, searchByKeyWord, filterByCategory, sortP
   useEffect(() => getCategories(), [])
   
   return (
-    <section className="postings-container">
+    <section data-testid="postings-element" className="postings-container">
       <div className="postings-title-wrapper">
         <h1 className="postings-title">Open Volunteer Positions</h1>
       </div>

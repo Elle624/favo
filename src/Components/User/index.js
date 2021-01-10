@@ -18,7 +18,7 @@ const User = ({ info }) => {
   };
 
   return (
-    <div className="components-wrapper">
+    <section data-testid="user-sidebar-element" className="components-wrapper">
       <section className={userSidebarClass} id={id}>
         <div
           className="profile-picture"
@@ -72,7 +72,7 @@ const User = ({ info }) => {
             alt="sidebar-icon"/>
         </button>
       </section>
-    </div>
+    </section>
   );
 };
 

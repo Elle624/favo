@@ -70,7 +70,7 @@ const PostingView = ({ match, getUserInfo }) => {
       .join(" ");
 
     return (
-      <section className="postings-container">
+      <section data-testid="posting-view-element" className="postings-container">
         <div className="postings-title-wrapper">
           <h1 className="postings-title">Event Details</h1>
         </div>
