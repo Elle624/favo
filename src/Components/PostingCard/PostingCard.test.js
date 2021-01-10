@@ -1,9 +1,11 @@
 import React from 'react';
-import { screen, render } from '@testing-library/react';
+import { screen, render, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event'
 import PostingCard from './index.js';
 import mockData from '../../TestData/_mockData';
 import '@testing-library/jest-dom';
-import { MemoryRouter } from 'react-router-dom';
+import { Router, MemoryRouter } from 'react-router-dom';
+import { createMemoryHistory } from 'history';
 
 describe("PostingCard", () => {
 
@@ -11,12 +13,10 @@ describe("PostingCard", () => {
     const postingData = mockData.events[0];
 
     render(
-      <MemoryRouter>
-        <PostingCard 
+      <PostingCard 
           posting={postingData}
           key={postingData.id}
-        />
-      </MemoryRouter>
+        />, {wrapper: MemoryRouter}
     )
     
     expect(screen.getByText("Event")).toBeInTheDocument();
@@ -27,5 +27,24 @@ describe("PostingCard", () => {
     expect(screen.getByText("Something Else, LLC")).toBeInTheDocument();
     expect(screen.getByText("Open Position")).toBeInTheDocument();
     expect(screen.getByText("3")).toBeInTheDocument();
+  })
+
+  it("It shouls redirect to the single event page on click", async() => {
+    const history = createMemoryHistory();
+    const postingData = mockData.events[0];
+
+    render(
+      <Router history={history}>
+        <PostingCard 
+          posting={postingData}
+          key={postingData.id}
+        />
+      </Router>
+    );
+    
+    const jobName = screen.getByText("Something Crazy");
+    userEvent.click(jobName);
+
+    await waitFor(() => expect(history.location.pathname).toBe("/postings/event-20"));
   })
 })
