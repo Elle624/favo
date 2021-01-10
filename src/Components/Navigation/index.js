@@ -24,7 +24,7 @@ const Navigation = ({
   };
 
   return (
-    <section className="navigation-bar">
+    <section data-testid="navigation-element" className="navigation-bar">
       <label htmlFor="search-input" className="label-input-search"></label>
       <input
         id="search-input"
