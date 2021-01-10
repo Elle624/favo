@@ -65,8 +65,11 @@ const User = ({ info }) => {
         </div>
       </section>
       <section className="user-toggle-button-wrap">
-        <button className="user-toggle-button">
-          <img className="glyph-icon-sidebar" src={userButtonClass} onClick={handleUserToggle} />
+        <button className="user-toggle-button" onClick={handleUserToggle}>
+          <img 
+            className="glyph-icon-sidebar" 
+            src={userButtonClass} 
+            alt="sidebar-icon"/>
         </button>
       </section>
     </div>
