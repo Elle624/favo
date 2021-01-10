@@ -1,5 +1,5 @@
 const _mockData = {
-  user: {
+  users:[{
     id: 1,
     name: "Peach Perfect",
     rating: 1.4,
@@ -14,7 +14,7 @@ const _mockData = {
         date: "2021/03/01",
       },
     ],
-  },
+  }],
   events: [
     {
       id: "event-20",

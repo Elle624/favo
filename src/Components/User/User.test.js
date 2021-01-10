@@ -4,7 +4,6 @@ import userEvent from '@testing-library/user-event';
 import _mockData from '../../TestData/_mockData';
 import { Router, MemoryRouter } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
-
 import User from '../User';
 
 describe("User Comonent", () => {
@@ -17,7 +16,7 @@ describe("User Comonent", () => {
   // })
 
   it("should render correctly", () => {    
-    render(<User info={_mockData.user}/>, { wrapper: MemoryRouter });
+    render(<User info={_mockData.users[0]}/>, { wrapper: MemoryRouter });
 
     expect(screen.getByText("Peach Perfect")).toBeInTheDocument();
     expect(screen.getAllByAltText("star-icon")).toHaveLength(5);
@@ -31,7 +30,7 @@ describe("User Comonent", () => {
   })
 
   it.skip("User side bar should toggle by ckicking", () => {
-    render(<User info={_mockData.user}/>, { wrapper: MemoryRouter });
+    render(<User info={_mockData.users[0]}/>, { wrapper: MemoryRouter });
 
     //const sideBarButton = screen.getByAltText("sidebar-icon");
     const sideBarButton = document.querySelector('.user-toggle-button');
@@ -43,7 +42,7 @@ describe("User Comonent", () => {
 
   it("should redirect to new url once click on up coming job", async() => {
     const history = createMemoryHistory();
-    render(<Router history={history}><User info={_mockData.user}/></Router>);
+    render(<Router history={history}><User info={_mockData.users[0]}/></Router>);
     
     const jobName = screen.getByText("cook");
     userEvent.click(jobName);
