@@ -8,12 +8,13 @@ import { createMemoryHistory } from 'history';
 import User from '../User';
 
 describe("User Comonent", () => {
-
-  it('should load correct url', async() => {
-    const history = createMemoryHistory();
-    render(<Router history={history}><User info={_mockData.user}/></Router>);
-    await waitFor(() => expect(history.location.pathname).toBe("/"));
-  })
+  
+  // Save for later incase we add a welcome page and name that '/'
+  // it('should load correct url', async() => {
+  //   const history = createMemoryHistory();
+  //   render(<Router history={history}><User info={_mockData.user}/></Router>);
+  //   await waitFor(() => expect(history.location.pathname).toBe("/"));
+  // })
 
   it("should render correctly", () => {    
     render(<User info={_mockData.user}/>, { wrapper: MemoryRouter });
