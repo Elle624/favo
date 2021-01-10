@@ -2,18 +2,18 @@ import _mockData from "./_ mockData";
 
 describe("Testing Postings component", () => {
   beforeEach(() => {
-    cy.visit("http://localhost:3000/");
+    // cy.visit("http://localhost:3000/");
 
-    cy.intercept(
-      {
-        method: "GET",
-        url: "http://localhost:3001/events",
-      },
-      {
-        statusCode: 201,
-        body: _mockData.events,
-      }
-    );
+    // cy.intercept(
+    //   {
+    //     method: "GET",
+    //     url: "http://localhost:3001/events",
+    //   },
+    //   {
+    //     statusCode: 200,
+    //     body: _mockData.events,
+    //   }
+    // );
   });
 
   it("Landing on the homepage you can see all event postings", () => {
@@ -81,9 +81,34 @@ describe("Testing Postings component", () => {
     cy.get(".posting-detail").should("not.contain", "Food Devlivery");
   });
 
-  it("should direct to a new URL when a posting card is clicked", () => {
-    cy.get(".posting-wrapper-cards")
-      .contains("Something Crazy")
+  it.only("should direct to a new URL when a posting card is clicked", () => {
+
+    cy.visit("http://localhost:3000/");
+
+    // cy.intercept(
+    //   {
+    //     method: "GET",
+    //     url: "http://localhost:3001/events/event-1",
+    //   },
+    //   {
+    //     statusCode: 200,
+    //     body: _mockData.events[0],
+    //   }
+    // );
+      
+
+    cy.intercept(
+      {
+        method: "GET",
+        url: "http://localhost:3001/events",
+      },
+      {
+        statusCode: 200,
+        body: _mockData.events,
+      }
+    );
+
+    cy.get(".posting-wrapper-cards:first")
       .click()
       .url()
       .should("include", "/postings/event-1");
