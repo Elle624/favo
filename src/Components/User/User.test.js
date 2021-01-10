@@ -1,12 +1,19 @@
 import '@testing-library/jest-dom';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import _mockData from '../../TestData/_mockData';
-import { MemoryRouter } from 'react-router-dom';
+import { Router, MemoryRouter } from 'react-router-dom';
+import { createMemoryHistory } from 'history';
 
 import User from '../User';
 
 describe("User Comonent", () => {
+
+  it('should load correct url', async() => {
+    const history = createMemoryHistory();
+    render(<Router history={history}><User info={_mockData.user}/></Router>);
+    await waitFor(() => expect(history.location.pathname).toBe("/"));
+  })
 
   it("should render correctly", () => {    
     render(<User info={_mockData.user}/>, { wrapper: MemoryRouter });
@@ -31,5 +38,15 @@ describe("User Comonent", () => {
     //userEvent.click(sideBarButton);
     //screen.debug()
     expect(screen.queryByText("Peach Perfect")).toHaveStyle("display: none");
+  })
+
+  it("should redirect to new url once click on up coming job", async() => {
+    const history = createMemoryHistory();
+    render(<Router history={history}><User info={_mockData.user}/></Router>);
+    
+    const jobName = screen.getByText("cook");
+    userEvent.click(jobName);
+
+    await waitFor(() => expect(history.location.pathname).toBe("/postings/event-20"));
   })
 })
