@@ -69,4 +69,60 @@ describe("App", () => {
 
     await act(() => Promise.resolve());
   })
+
+  it("When user click on an upcoming position he is redirected to a single event page", async () => {
+    // apiCalls.getSinglePosting.mockResolvedValue(_mockData.events[1]);
+    const history = createMemoryHistory();
+    // history.push = jest.fn();
+
+    render(
+      <Router history={history}>
+        <App />
+      </Router>
+    )
+    
+    const upcomingJob = await waitFor(() => screen.getByText("cook"));
+
+    fireEvent.click(upcomingJob)
+
+    await waitFor(() => expect(history.location.pathname).toBe("/postings/event-20"));
+    await waitFor(() => expect(apiCalls.getSinglePosting).toHaveBeenCalledTimes(1));
+    // screen.debug()
+    await waitFor(() => expect(screen.getByTestId('posting-view-element')).toBeInTheDocument());
+    // expect(history.push).toHaveBeenCalledWith('/postings/event-20')
+    // await waitFor(() => {
+    //   expect(history.location.pathname).toBe("/postings/event-20")
+    //   expect(history.push).toHaveBeenCalledWith('/postings/event-2')
+    //   expect(screen.getByTestId('posting-view-element')).toBeInTheDocument();
+    // });
+
+    // screen.debug()
+
+
+    // await waitFor(() => {
+      // expect(screen.getByTestId('posting-view-element')).toBeInTheDocument();
+    // });
+
+    await act(() => Promise.resolve());
+  })
+
+  it.only("When enters keyword in search it finds all events with this keyword", async () => {
+    render(
+      <MemoryRouter>
+        <App />
+      </MemoryRouter>
+    )
+    await waitFor(() => expect(apiCalls.getUser).toHaveBeenCalledTimes(1));
+    await waitFor(() => expect(apiCalls.getPostings).toHaveBeenCalledTimes(1));
+    await waitFor(() => expect(screen.getByTestId("navigation-element")).toBeInTheDocument());
+
+    const userInput = screen.getByPlaceholderText("i.e Boulder...");
+    userEvent.type(userInput, 'Food Delivery');
+
+    const searchbutton = screen.getByText("search");
+    fireEvent.click(searchbutton);
+
+    await waitFor(() => expect(screen.getByText("Food Delivery")).toBeInTheDocument())
+    await waitFor(() => expect(screen.queryByText("Something Else, LLC")).not.toBeInTheDocument())
+  })
 })
