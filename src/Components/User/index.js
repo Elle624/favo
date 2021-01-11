@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, render } from "react-router-dom";
 import "./User.scss";
 import starImage from "../../Assets/star.png";
 import userToggleButtonRight from "../../Assets/right-chevron.png";
@@ -12,16 +12,25 @@ const User = ({ info }) => {
 
   let userSidebarClass = userOpen ? "user-open" : "user-closed";
   let userButtonClass = userOpen ? userToggleButtonLeft : userToggleButtonRight;
-
-  const handleUserToggle = () => {
-    setUserOpen(!userOpen);
-  };
+  let userToggleButtonClass = userOpen
+    ? "user-toggle-button-open"
+    : "user-toggle-button-closed";
+  let userTransitionClass = userOpen
+    ? "user-open-transition"
+    : "user-close-transition";
 
   return (
-    <section data-testid="user-sidebar-element" className="components-wrapper">
+    <div className="components-wrapper">
       <section className={userSidebarClass} id={id}>
+        <section
+          className={`user-profile-heading-wrapper ${userTransitionClass}`}
+        >
+          <h1 className={`user-profile-heading ${userTransitionClass}`}>
+            User Profile
+          </h1>
+        </section>
         <div
-          className="profile-picture"
+          className={`profile-picture ${userTransitionClass}`}
           style={{
             backgroundImage: `url(${profilePicture})`,
             backgroundPosition: "center",
@@ -29,32 +38,39 @@ const User = ({ info }) => {
             backgroundRepeat: "no-reapeat",
           }}
         ></div>
-        <h3 className="username">{name}</h3>
-        <div className="rating-wrapper">
+        <h3 className={`username ${userTransitionClass}`}>{name}</h3>
+        <div className={`rating-wrapper ${userTransitionClass}`}>
           <img className="star-image" src={starImage} alt="star-icon" />
           <img className="star-image" src={starImage} alt="star-icon" />
           <img className="star-image" src={starImage} alt="star-icon" />
           <img className="star-image" src={starImage} alt="star-icon" />
           <img className="star-image" src={starImage} alt="star-icon" />
         </div>
-        <div className="section-titles">
-          <p className="sidebar-titles">Total Hours Volunteered</p>
-          <hr className="section-line" />
+        <div className={`section-titles ${userTransitionClass}`}>
+          <p className={`sidebar-titles ${userTransitionClass}`}>
+            Total Hours Volunteered
+          </p>
+          <hr className={`section-line ${userTransitionClass}`} />
         </div>
-        <div className="hours-bar">
+        <div className={`hours-bar ${userTransitionClass}`}>
           <p>{volunteeredHours} Hours</p>
         </div>
-        <div className="section-titles">
+        <div className={`section-titles ${userTransitionClass}`}>
           <p className="sidebar-titles">My Upcoming Jobs</p>
-          <hr className="section-line" />
+          <hr className={`section-line ${userTransitionClass}`} />
         </div>
-        <div className="upcoming-job-cards-wrapper">
+        <div className={`upcoming-job-cards-wrapper ${userTransitionClass}`}>
           {upcomingJobs.map((job) => {
             return (
-              <Link to={`/postings/${job.eventId}`} className="upcoming-job-link-wrapper" key={job.id} data-testid={`upcoming-${job.id}`}>
-                <section className="upcoming-job-card">
+              <Link
+                to={`/postings/${job.eventId}`}
+                className={`upcoming-job-link-wrapper ${userTransitionClass}`}
+              >
+                <section key={job.id} className="upcoming-job-card">
                   <div className="event-info-wrapper">
-                    <h3 className="job-event-main-detail">{job.positionName}</h3>
+                    <h3 className="job-event-main-detail">
+                      {job.positionName}
+                    </h3>
                     <h3 className="job-event-main-detail">{job.date}</h3>
                   </div>
                   <h4 className="job-event-name">{job.eventName}</h4>
@@ -64,15 +80,15 @@ const User = ({ info }) => {
           })}
         </div>
       </section>
-      <section className="user-toggle-button-wrap">
-        <button className="user-toggle-button" onClick={handleUserToggle}>
-          <img 
-            className="glyph-icon-sidebar" 
-            src={userButtonClass} 
-            alt="sidebar-icon"/>
-        </button>
-      </section>
-    </section>
+      <button className={userToggleButtonClass}>
+        <img
+          className="glyph-icon-sidebar"
+          src={userButtonClass}
+          onClick={() => setUserOpen(!userOpen)}
+        />
+      </button>
+      <div className="user-background-transition"></div>
+    </div>
   );
 };
 

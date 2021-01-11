@@ -1,15 +1,13 @@
 @import "../../styles/variables";
 
-.postings-container {
+.postings-container-main {
   display: flex;
   flex-direction: column;
   padding: 2em;
   height: auto;
-  min-height: 800px;
-  min-width: 600px;
   margin: 2em;
   clear: both;
-  height: auto;
+  height: 85vh;
 }
 
 .posting-info-wrapper {
@@ -152,4 +150,4 @@
   div.posting-right-info-wrapper p {
     font-size: 0.7em;
   }
-} 
+}

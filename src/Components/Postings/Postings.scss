@@ -1,7 +1,9 @@
 @import "../../styles/variables";
 
-.postings-container {
+.postings-container-main {
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
   background-color: $main-white;
   margin: 2em 2em 2em 2em;
@@ -13,22 +15,32 @@
 .postings-title-wrapper {
   background-color: $main-blue;
   height: 3em;
+  width: 100%;
   margin: 1em 0;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
 .postings-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   color: $main-white;
+  width: 100%;
 }
 
 .postings-wrapper {
+  height: 100%;
+  width: 100%;
   display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
   flex-wrap: wrap;
-  margin: 1em;
+  margin: 1em auto auto;
   padding: 0.8em;
-  align-content: center;
-  justify-content: center;
-  overflow: auto;
+  overflow: scroll;
 }
