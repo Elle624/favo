@@ -90,7 +90,7 @@ describe("App", () => {
     await act(() => Promise.resolve());
   })
 
-  it("should redirect user to a single event detail page, and sign up for one job", async() => {
+  it("should redirect user to a single event detail page, then sign up for one job, and return to home page", async() => {
     apiCalls.getSinglePosting.mockResolvedValue(_mockData.events[1]);
     apiCalls.patchEventPosting.mockResolvedValue("event-2", {jobId: "posting-4"});
     apiCalls.postJobPosting.mockResolvedValue("event-2", _mockData.postJobBody);
