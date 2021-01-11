@@ -1,5 +1,5 @@
 import React from 'react';
-import { screen, render, fireEvent, act, waitFor, getByText, waitForElement, getByTestId } from '@testing-library/react';
+import { screen, render, fireEvent, act, waitFor, getByText, waitForElement, simulate } from '@testing-library/react';
 import App from './index.js';
 import mockData from '../../TestData/_mockData';
 import '@testing-library/jest-dom';
@@ -86,6 +86,7 @@ describe("App", () => {
     await waitFor(() => expect(history.location.pathname).toBe("/postings/event-20"));
     await waitFor(() => expect(apiCalls.getSinglePosting).toHaveBeenCalledTimes(2));
     await waitFor(() => expect(screen.getByTestId('posting-view-element')).toBeInTheDocument());
+    
     await act(() => Promise.resolve());
   })
 
@@ -102,9 +103,8 @@ describe("App", () => {
         </Router>
       )
       
-      const mockEvent = await waitFor(() => screen.getAllByTestId("posting-card-element"));
-      userEvent.click(mockEvent[1])
-      
+    const mockEvent = await waitFor(() => screen.getAllByTestId("posting-card-element"));
+    userEvent.click(mockEvent[1])
     
     await waitFor(() => expect(screen.getByTestId('posting-view-element')).toBeInTheDocument());
     await waitFor(() => screen.getByText('driver').click());
@@ -159,4 +159,22 @@ describe("App", () => {
     expect(allEventCards[1].href === 'http://localhost/postings/event-20')
   })
 
+  it("When user chooses a category the page displays the events of that category only", async() => {
+    render(
+      <MemoryRouter>
+        <App />
+      </MemoryRouter>
+    )
+    await waitFor(() => expect(apiCalls.getUser).toHaveBeenCalledTimes(1));
+    await waitFor(() => expect(apiCalls.getPostings).toHaveBeenCalledTimes(1));
+    await waitFor(() => expect(screen.getByTestId("navigation-element")).toBeInTheDocument());
+
+    const filteredCategory = screen.getByTestId("select-input");
+    fireEvent.change(filteredCategory, {
+      target: { value: "Healthcare" },
+    });
+
+    await waitFor(() => expect(screen.getByText("Individual")).toBeInTheDocument())
+    await waitFor(() => expect(screen.queryByText("Something Else, LLC")).not.toBeInTheDocument())
+  })
 })
