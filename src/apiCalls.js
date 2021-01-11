@@ -32,22 +32,22 @@ const updateData = (path, action, data) => {
 export const apiCalls = {
 
   getUser: () => {
-    return getData("http://localhost:3001/users/1");
+    return getData("https://ivonlunteer-api-dev.herokuapp.com/users/1");
   },
 
   getPostings: () => {
-    return getData("http://localhost:3001/events");
+    return getData("https://ivonlunteer-api-dev.herokuapp.com/events");
   },
 
   getSinglePosting: (id) => {
-    return getData(`http://localhost:3001/events/${id}`);
+    return getData(`https://ivonlunteer-api-dev.herokuapp.com/events/${id}`);
   },
 
   postJobPosting: (data) => {
-    return updateData(`http://localhost:3001/users/1`, "POST", data);
+    return updateData(`https://ivonlunteer-api-dev.herokuapp.com/users/1`, "POST", data);
   },
 
   patchEventPosting: (eventId, data) => {
-    return updateData(`http://localhost:3001/events/${eventId}`, "PATCH", data);
+    return updateData(`https://ivonlunteer-api-dev.herokuapp.com/events/${eventId}`, "PATCH", data);
   }
 };
