@@ -33,6 +33,7 @@ const PostingView = ({ match, getUserInfo }) => {
     apiCalls.patchEventPosting(eventId, { jobId: chosenJob.id }).then(() => {
       postPositionToUser();
       setSignedUpJobName(true);
+      getDetails();
     });
   };
 
@@ -49,7 +50,7 @@ const PostingView = ({ match, getUserInfo }) => {
     });
   };
 
-  useEffect(() => getDetails(), [userInfo]);
+  useEffect(() => getDetails(), []);
 
   if (chosenPosting) {
     const {
