@@ -6,8 +6,8 @@ const PostingCard = ({ posting }) => {
   const { id, date, name, organization, openJobs } = posting;
 
   return (
-    <Link className="posting-card" to={`/postings/${id}`}>
-      <section key={id} className="posting-wrapper-cards">
+    <Link data-testid="posting-card-element" className="posting-card" to={`/postings/${id}`}>
+      <section data-testid="posting-card-container" key={id} className="posting-wrapper-cards">
         <div className="vertical">
           <div className="posting-data">
             <p className="posting-title left">Organization</p>
