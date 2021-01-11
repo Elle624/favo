@@ -104,7 +104,33 @@ const _mockData = {
         numberOfSpots: 3,
       },
     ]
-  }
+  },
+
+  updatedUser: [
+    {
+      id: 1,
+      name: "Peach Perfect",
+      rating: 1.4,
+      profilePicture: "https://randomuser.me/api/portraits/men/52.jpg",
+      volunteeredHours: 8.2,
+      upcomingJobs: [
+        {
+          id: "1-posting-30",
+          eventId: "event-20",
+          eventName: "Something Crazy",
+          positionName: "cook",
+          date: "2021/03/01"
+        },
+        {
+          id: "1-posting-4",
+          eventId: "event-2",
+          eventName: "Food Delivery",
+          name: "driver",
+          date: "2021/02/05"
+        },
+      ]
+    }
+  ]
 };
 
 export default _mockData;
