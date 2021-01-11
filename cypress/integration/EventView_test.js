@@ -1,38 +1,25 @@
 import _mockData from "./_ mockData";
 
 describe("Testing the single event details page", () => {
-  beforeEach(() => {
-    cy.visit('http://localhost:3000/postings/event-1');
-    
-    cy.intercept(
-      {
-        method: "GET",
-        url: "http://localhost:3001/events/event-1",
-      },
-      {
-        statusCode: 201,
-        body: _mockData.events[0],
-      }
-    );
-  })
 
-  afterEach(() => {
- 
+  beforeEach(() => {
+    cy.visit("http://localhost:3000/postings/event-1");
+    cy.request("GET", "https://ivolunteer-api-test.herokuapp.com/events/event-1");
   })
 
   it("should render event details correctly", () => {
     cy.get(".postings-container")
-      .should("contain", "Something Crazy")
+      .should("contain", "Color Run")
       .and("contain", "Description")
-      .and("contain", "Something crazy happening somewhere in the somewhere of somewhere CO. Come do something with someone.")
+      .and("contain", "The Color Run is an event series and five kilometer paint race, inspired by the Hindu festival of Holi, that is owned and operated by The Color Run LLC, a for-profit company.")
       .and("contain", "Open Positions")
       .and("contain", "Feb 01 2021")
       .and("contain", "Organization")
-      .and("contain", "Something Else, LLC")
+      .and("contain", "The Color Run, LLC.")
       .and("contain", "Category")
-      .and("contain", "Something")
+      .and("contain", "Sports")
       .and("contain", "Location")
-      .and("contain", "123 Something Dr., Somewhere, CO, 00000")
+      .and("contain", "123 Cassette Dr., Denver, CO, 80204")
       .and("contain", "Duration")
       .and("contain", "10")
   })
@@ -52,23 +39,19 @@ describe("Testing the single event details page", () => {
       .should("be.visible")
       .click();
 
-    // Should stub response, but it's not working yet
-
-    // cy.intercept(
-    //   {
-    //     method: "GET",
-    //     url: "http://localhost:3001/events/",
-    //   },
-    //   {
-    //     statusCode: 201,
-    //     body: _mockData.events,
-    //   }
-    // );
-
     cy.url().should("include", "/")
   })
 
-  it.only("Should display upcoming jobs and able to sign up", () => {
+  it("Should display upcoming jobs and able to sign up", () => {
+    cy.request("PATCH", "https://ivolunteer-api-test.herokuapp.com/events/event-1", {jobId: "posting-1"});
+    cy.request("POST", "https://ivolunteer-api-test.herokuapp.com/users/1", { 
+      id: "1-posting-1",
+      eventId: "event-1",
+      eventName: "Color Run",
+      positionName: "assisting with check-in",
+      date: "2021/02/01"
+    });
+
     cy.get(".posting-position-cards-wrapper")
       .should("contain", "assisting with check-in")
       .and("contain", "Open Spots: 3")
@@ -78,41 +61,14 @@ describe("Testing the single event details page", () => {
       .and("contain", "Open Spots: 6");
 
     cy.get(".posting-positions-card:first")
-    .focus()
-    .should("have.css", "box-shadow", "rgb(46, 196, 182) 2px 2px 3px 0px");
+      .click()
+      .should("have.css", "box-shadow", "rgb(46, 196, 182) 2px 2px 3px 0px");
 
     cy.get(".posting-positions-card:first")
-    .click()
-    .get(".submit-button")
-    .should("contain", "Sign me up!")
-    .click();
-
-    cy.intercept(
-      {
-        method: "PATCH",
-        url: "http://localhost:3001/events/event-1",
-      },
-      {
-        statusCode: 201,
-        body: {jobId: "posting-1"},
-      }
-    )
-    cy.intercept(
-      {
-        method: "POST",
-        url: "http://localhost:3001/users/1",
-      },
-      {
-        statusCode: 201,
-        body: {
-          id: "1-posting-1",
-          eventId: "event-1",
-          eventName: "Something Crazy",
-          positionName: "assisting with check-in",
-          date: "2021/02/01"
-        },
-      }
-    )
+      .click()
+      .get(".submit-button")
+      .should("contain", "Sign me up!")
+      .click();
     
     cy.get(".submit-button")
       .should("be.disabled")
