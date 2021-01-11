@@ -1,5 +1,5 @@
 import React from 'react';
-import { screen, render, fireEvent, act, waitFor, getByText, waitForElement, getByTestId } from '@testing-library/react';
+import { screen, render, fireEvent, act, waitFor, getByText, waitForElement, simulate } from '@testing-library/react';
 import App from './index.js';
 import mockData from '../../TestData/_mockData';
 import '@testing-library/jest-dom';
@@ -146,5 +146,24 @@ describe("App", () => {
     fireEvent.click(sortButton);
     expect(allEventCards[0].href === 'http://localhost/postings/event-2')
     expect(allEventCards[1].href === 'http://localhost/postings/event-20')
+  })
+
+  it("When user chooses a category the page displays the events of that category only", async() => {
+    render(
+      <MemoryRouter>
+        <App />
+      </MemoryRouter>
+    )
+    await waitFor(() => expect(apiCalls.getUser).toHaveBeenCalledTimes(1));
+    await waitFor(() => expect(apiCalls.getPostings).toHaveBeenCalledTimes(1));
+    await waitFor(() => expect(screen.getByTestId("navigation-element")).toBeInTheDocument());
+
+    const filteredCategory = screen.getByTestId("select-input");
+    fireEvent.change(filteredCategory, {
+      target: { value: "Healthcare" },
+    });
+
+    await waitFor(() => expect(screen.getByText("Individual")).toBeInTheDocument())
+    await waitFor(() => expect(screen.queryByText("Something Else, LLC")).not.toBeInTheDocument())
   })
 })
