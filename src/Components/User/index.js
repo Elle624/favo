@@ -51,7 +51,7 @@ const User = ({ info }) => {
         <div className="upcoming-job-cards-wrapper">
           {upcomingJobs.map((job) => {
             return (
-              <Link to={`/postings/${job.eventId}`} className="upcoming-job-link-wrapper" key={job.id}>
+              <Link to={`/postings/${job.eventId}`} className="upcoming-job-link-wrapper" key={job.id} data-testid={`upcoming-${job.id}`}>
                 <section className="upcoming-job-card">
                   <div className="event-info-wrapper">
                     <h3 className="job-event-main-detail">{job.positionName}</h3>

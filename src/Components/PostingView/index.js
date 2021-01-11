@@ -11,11 +11,11 @@ const PostingView = ({ match, getUserInfo }) => {
   const [signedUpJobName, setSignedUpJobName] = useState('');
   const [userInfo, setUserInfo] = useState(null);
   
-  const getDetails = () => {
+  const getDetails = () => {    
     Promise.all([apiCalls.getUser(), apiCalls.getSinglePosting(eventId)])
       .then(
-        (data) => {
-          if(data[0]) {
+        (data) => {          
+          if(data[0]) {            
             setUserInfo(data[0]);
             setChosenPosting(data[1]);
             const signedUpEvent = data[0].upcomingJobs.find(
@@ -76,7 +76,7 @@ const PostingView = ({ match, getUserInfo }) => {
         </div>
         <div className="back-button-wrap">
           <Link to="/">
-            <img src={backButton} className="back-button-img" />
+            <img src={backButton} className="back-button-img" alt="return-home-button"/>
           </Link>
         </div>
         <div className="posting-info-wrapper">
