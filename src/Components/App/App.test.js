@@ -13,8 +13,8 @@ jest.mock('../../apiCalls');
 describe("App", () => {
 
   beforeEach(() => {
-    apiCalls.getUser.mockResolvedValueOnce(_mockData.users[0]);
-    apiCalls.getPostings.mockResolvedValueOnce(_mockData.events);
+    apiCalls.getUser.mockResolvedValue(_mockData.users[0]);
+    apiCalls.getPostings.mockResolvedValue(_mockData.events);
     apiCalls.getSinglePosting.mockResolvedValue(_mockData.events[1]);
     apiCalls.patchEventPosting.mockResolvedValueOnce("event-2", {jobId: "posting-4"});
     apiCalls.postJobPosting.mockResolvedValueOnce("event-2", _mockData.postJobBody);
@@ -71,10 +71,7 @@ describe("App", () => {
   })
 
   it("When user click on an upcoming position he is redirected to a single event page", async() => {
-    // apiCalls.getSinglePosting.mockResolvedValue(_mockData.events[1]);
     const history = createMemoryHistory();
-    // history.push = jest.fn();
-
     render(
       <Router history={history}>
         <App />
@@ -86,23 +83,8 @@ describe("App", () => {
     fireEvent.click(upcomingJob)
 
     await waitFor(() => expect(history.location.pathname).toBe("/postings/event-20"));
-    await waitFor(() => expect(apiCalls.getSinglePosting).toHaveBeenCalledTimes(1));
-    // screen.debug()
-    // await waitFor(() => expect(screen.getByTestId('posting-view-element')).toBeInTheDocument());
-    // expect(history.push).toHaveBeenCalledWith('/postings/event-20')
-    // await waitFor(() => {
-    //   expect(history.location.pathname).toBe("/postings/event-20")
-    //   expect(history.push).toHaveBeenCalledWith('/postings/event-2')
-    //   expect(screen.getByTestId('posting-view-element')).toBeInTheDocument();
-    // });
-
-    // screen.debug()
-
-
-    // await waitFor(() => {
-      // expect(screen.getByTestId('posting-view-element')).toBeInTheDocument();
-    // });
-
+    await waitFor(() => expect(apiCalls.getSinglePosting).toHaveBeenCalledTimes(2));
+    await waitFor(() => expect(screen.getByTestId('posting-view-element')).toBeInTheDocument());
     await act(() => Promise.resolve());
   })
 
@@ -147,4 +129,5 @@ describe("App", () => {
     expect(allEventCards[0].href === 'http://localhost/postings/event-2')
     expect(allEventCards[1].href === 'http://localhost/postings/event-20')
   })
+
 })
