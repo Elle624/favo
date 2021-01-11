@@ -4,7 +4,7 @@ describe("Testing Postings component", () => {
 
   beforeEach(() => {
     cy.visit("http://localhost:3000/");
-    cy.intercept("https://ivolunteer-api-test.herokuapp.com/events");
+    cy.request("GET", "https://ivolunteer-api-test.herokuapp.com/events");
   });
 
   it("Landing on the homepage you can see all event postings", () => {
@@ -86,5 +86,5 @@ describe("Testing Postings component", () => {
       .url()
       .should("include", "/postings/event-1");
   });
-  
+
 });

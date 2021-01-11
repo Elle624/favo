@@ -3,7 +3,7 @@ import _mockData from "./_ mockData";
 describe("Testing homepage", () => {
   beforeEach(() => {
     cy.visit("http://localhost:3000/");
-    cy.intercept("https://ivolunteer-api-test.herokuapp.com/users/1");
+    cy.intercept("GET", "https://ivolunteer-api-test.herokuapp.com/users/1");
   });
 
   it("Landing on the homepage you can see user sidebar with all user basic information", () => {
