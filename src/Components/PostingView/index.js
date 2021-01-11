@@ -11,11 +11,11 @@ const PostingView = ({ match, getUserInfo }) => {
   const [signedUpJobName, setSignedUpJobName] = useState('');
   const [userInfo, setUserInfo] = useState(null);
   
-  const getDetails = () => {    
+  const getDetails = () => {
     Promise.all([apiCalls.getUser(), apiCalls.getSinglePosting(eventId)])
       .then(
-        (data) => {          
-          if(data[0]) {            
+        (data) => {
+          if(data[0]) {
             setUserInfo(data[0]);
             setChosenPosting(data[1]);
             const signedUpEvent = data[0].upcomingJobs.find(
@@ -32,7 +32,7 @@ const PostingView = ({ match, getUserInfo }) => {
   const substractOpenPosition = () => {
     apiCalls.patchEventPosting(eventId, { jobId: chosenJob.id }).then(() => {
       postPositionToUser();
-      setSignedUpJobName(true);
+      setSignedUpJobName(chosenJob.name);
       getDetails();
     });
   };
@@ -103,10 +103,10 @@ const PostingView = ({ match, getUserInfo }) => {
                   key={job.id}
                   className="posting-positions-card"
                   style={{
-                            backgroundColor: signedUpJobName === job.name ? '#2ec4b6': "#initial",
-                            color: signedUpJobName === job.name ? 'white': "#initial",
-                            borderColor: signedUpJobName === job.name ? '#2ec4b6': "#initial"
-                          }}
+                    backgroundColor: signedUpJobName === job.name ? '#2ec4b6': "#initial",
+                    color: signedUpJobName === job.name ? 'white': "#initial",
+                    borderColor: signedUpJobName === job.name ? '#2ec4b6': "#initial"
+                  }}
                 >
                   <h3 className="event-job-name" >{job.name}</h3>
                   <p className="event-job-title">Open Spots: {job.numberOfSpots}</p>
