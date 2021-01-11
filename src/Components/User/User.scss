@@ -117,7 +117,6 @@
   border-radius: 0 85% 85% 0;
   border: none;
   outline: none;
-  animation: 
   &:hover {
     cursor: pointer;
   }
@@ -132,6 +131,7 @@
   outline: none;
   position: fixed;
   top: 50%;
+  transition: 1500ms;
   &:hover {
     cursor: pointer;
   }
@@ -151,9 +151,16 @@
 }
 
 .user-closed {
-  transform: translateX(-500px);
-  opacity: 0;
   height: 100%;
+  width: 0px;
   transition: 1500ms;
 }
 
+.user-close-transition {
+  opacity: 0;
+}
+
+.user-open-transition {
+  transition-delay: 1000ms;
+  opacity: 1;
+}

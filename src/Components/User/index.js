@@ -15,15 +15,22 @@ const User = ({ info }) => {
   let userToggleButtonClass = userOpen
     ? "user-toggle-button-open"
     : "user-toggle-button-closed";
+  let userTransitionClass = userOpen
+    ? "user-open-transition"
+    : "user-close-transition";
 
   return (
     <div className="components-wrapper">
       <section className={userSidebarClass} id={id}>
-        <section className="user-profile-heading-wrapper">
-          <h1 className="user-profile-heading">User Profile</h1>
+        <section
+          className={`user-profile-heading-wrapper ${userTransitionClass}`}
+        >
+          <h1 className={`user-profile-heading ${userTransitionClass}`}>
+            User Profile
+          </h1>
         </section>
         <div
-          className="profile-picture"
+          className={`profile-picture ${userTransitionClass}`}
           style={{
             backgroundImage: `url(${profilePicture})`,
             backgroundPosition: "center",
@@ -31,31 +38,33 @@ const User = ({ info }) => {
             backgroundRepeat: "no-reapeat",
           }}
         ></div>
-        <h3 className="username">{name}</h3>
-        <div className="rating-wrapper">
+        <h3 className={`username ${userTransitionClass}`}>{name}</h3>
+        <div className={`rating-wrapper ${userTransitionClass}`}>
           <img className="star-image" src={starImage} alt="star-icon" />
           <img className="star-image" src={starImage} alt="star-icon" />
           <img className="star-image" src={starImage} alt="star-icon" />
           <img className="star-image" src={starImage} alt="star-icon" />
           <img className="star-image" src={starImage} alt="star-icon" />
         </div>
-        <div className="section-titles">
-          <p className="sidebar-titles">Total Hours Volunteered</p>
-          <hr className="section-line" />
+        <div className={`section-titles ${userTransitionClass}`}>
+          <p className={`sidebar-titles ${userTransitionClass}`}>
+            Total Hours Volunteered
+          </p>
+          <hr className={`section-line ${userTransitionClass}`} />
         </div>
-        <div className="hours-bar">
+        <div className={`hours-bar ${userTransitionClass}`}>
           <p>{volunteeredHours} Hours</p>
         </div>
-        <div className="section-titles">
+        <div className={`section-titles ${userTransitionClass}`}>
           <p className="sidebar-titles">My Upcoming Jobs</p>
-          <hr className="section-line" />
+          <hr className={`section-line ${userTransitionClass}`} />
         </div>
-        <div className="upcoming-job-cards-wrapper">
+        <div className={`upcoming-job-cards-wrapper ${userTransitionClass}`}>
           {upcomingJobs.map((job) => {
             return (
               <Link
                 to={`/postings/${job.eventId}`}
-                className="upcoming-job-link-wrapper"
+                className={`upcoming-job-link-wrapper ${userTransitionClass}`}
               >
                 <section key={job.id} className="upcoming-job-card">
                   <div className="event-info-wrapper">
@@ -78,6 +87,7 @@ const User = ({ info }) => {
           onClick={() => setUserOpen(!userOpen)}
         />
       </button>
+      <div className="user-background-transition"></div>
     </div>
   );
 };
