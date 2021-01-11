@@ -153,3 +153,15 @@
     font-size: 0.7em;
   }
 } 
+
+.sign-up-event-message-wrapper {
+  width: 70%;
+  text-align: center;
+  font-size: 1.5em;
+}
+
+.sign-up-event-message {
+  color: $main-orange;
+  -webkit-text-stroke: 0.2px rgb(226, 148, 3);
+  font-weight: 800;
+}
