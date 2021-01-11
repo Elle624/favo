@@ -18,7 +18,7 @@ const User = ({ info }) => {
   };
 
   return (
-    <div className="components-wrapper">
+    <section data-testid="user-sidebar-element" className="components-wrapper">
       <section className={userSidebarClass} id={id}>
         <div
           className="profile-picture"
@@ -51,8 +51,8 @@ const User = ({ info }) => {
         <div className="upcoming-job-cards-wrapper">
           {upcomingJobs.map((job) => {
             return (
-              <Link to={`/postings/${job.eventId}`} className="upcoming-job-link-wrapper">
-                <section key={job.id} className="upcoming-job-card">
+              <Link to={`/postings/${job.eventId}`} className="upcoming-job-link-wrapper" key={job.id} data-testid={`upcoming-${job.id}`}>
+                <section className="upcoming-job-card">
                   <div className="event-info-wrapper">
                     <h3 className="job-event-main-detail">{job.positionName}</h3>
                     <h3 className="job-event-main-detail">{job.date}</h3>
@@ -65,11 +65,14 @@ const User = ({ info }) => {
         </div>
       </section>
       <section className="user-toggle-button-wrap">
-        <button className="user-toggle-button">
-          <img className="glyph-icon-sidebar" src={userButtonClass} onClick={handleUserToggle} />
+        <button className="user-toggle-button" onClick={handleUserToggle}>
+          <img 
+            className="glyph-icon-sidebar" 
+            src={userButtonClass} 
+            alt="sidebar-icon"/>
         </button>
       </section>
-    </div>
+    </section>
   );
 };
 

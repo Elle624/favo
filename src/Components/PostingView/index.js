@@ -11,19 +11,22 @@ const PostingView = ({ match, getUserInfo }) => {
   const [signedUpJobName, setSignedUpJobName] = useState('');
   const [userInfo, setUserInfo] = useState(null);
   
-  const getDetails = () => {
-    Promise.all([apiCalls.getUser(), apiCalls.getSinglePosting(eventId)]).then(
-      (data) => {
-        setUserInfo(data[0]);
-        setChosenPosting(data[1]);
-        const signedUpEvent = data[0].upcomingJobs.find(
-          (job) => job.eventName === data[1].name
-        );
-        if (signedUpEvent) {
-          setSignedUpJobName(signedUpEvent.positionName);
+  const getDetails = () => {    
+    Promise.all([apiCalls.getUser(), apiCalls.getSinglePosting(eventId)])
+      .then(
+        (data) => {          
+          if(data[0]) {            
+            setUserInfo(data[0]);
+            setChosenPosting(data[1]);
+            const signedUpEvent = data[0].upcomingJobs.find(
+              (job) => job.eventName === data[1].name
+            );
+            if (signedUpEvent) {
+              setSignedUpJobName(signedUpEvent.positionName);
+            }
+          }
         }
-      }
-    );
+      );
   };
 
   const substractOpenPosition = () => {
@@ -68,13 +71,13 @@ const PostingView = ({ match, getUserInfo }) => {
       .join(" ");
 
     return (
-      <section className="postings-container">
+      <section data-testid="posting-view-element" className="postings-container">
         <div className="postings-title-wrapper">
           <h1 className="postings-title">Event Details</h1>
         </div>
         <div className="back-button-wrap">
           <Link to="/">
-            <img src={backButton} className="back-button-img" />
+            <img src={backButton} className="back-button-img" alt="return-home-button"/>
           </Link>
         </div>
         <div className="posting-info-wrapper">
