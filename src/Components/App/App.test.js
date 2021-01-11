@@ -33,6 +33,12 @@ describe("App", () => {
     await act(() => Promise.resolve());
   })
 
+  it('should render correct url', async() => {
+    const history = createMemoryHistory();
+    render(<Router history={history}><App /></Router>);
+    await waitFor(() => expect(history.location.pathname).toBe("/"));
+  })
+
   it("Should render User sidebar on load", async() => {
     render(
       <MemoryRouter>
