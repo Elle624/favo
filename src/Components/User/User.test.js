@@ -7,13 +7,6 @@ import { createMemoryHistory } from 'history';
 import User from '../User';
 
 describe("User Comonent", () => {
-  
-  // Save for later incase we add a welcome page and name that '/'
-  // it('should load correct url', async() => {
-  //   const history = createMemoryHistory();
-  //   render(<Router history={history}><User info={_mockData.user}/></Router>);
-  //   await waitFor(() => expect(history.location.pathname).toBe("/"));
-  // })
 
   it("should render correctly", () => {    
     render(<User info={_mockData.users[0]}/>, { wrapper: MemoryRouter });
@@ -27,17 +20,6 @@ describe("User Comonent", () => {
     expect(screen.getByText("2021/03/01")).toBeInTheDocument();
     expect(screen.getByText("cook")).toBeInTheDocument();
     expect(screen.queryByText("Food Delivery")).not.toBeInTheDocument();
-  })
-
-  it.skip("User side bar should toggle by ckicking", () => {
-    render(<User info={_mockData.users[0]}/>, { wrapper: MemoryRouter });
-
-    //const sideBarButton = screen.getByAltText("sidebar-icon");
-    const sideBarButton = document.querySelector('.user-toggle-button');
-    userEvent.click(sideBarButton);
-    //userEvent.click(sideBarButton);
-    //screen.debug()
-    expect(screen.queryByText("Peach Perfect")).toHaveStyle("display: none");
   })
 
   it("should redirect to new url once click on up coming job", async() => {
