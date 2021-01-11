@@ -1,10 +1,7 @@
-import _mockData from "./_ mockData";
-
 describe("Testing Postings component", () => {
 
   beforeEach(() => {
     cy.visit("http://localhost:3000/");
-    cy.request("GET", "https://ivolunteer-api-test.herokuapp.com/events");
   });
 
   it("Landing on the homepage you can see all event postings", () => {
@@ -31,7 +28,7 @@ describe("Testing Postings component", () => {
       .should(
         "have.css",
         "border",
-        "1px solid rgb(255, 191, 105)"
+        "1.11111px solid rgb(255, 191, 105)"
       );
 
     cy.get(".posting-wrapper-cards")

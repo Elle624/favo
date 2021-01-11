@@ -1,10 +1,9 @@
-import _mockData from "./_ mockData";
+import { apiCalls } from "../../src/apiCalls";
 
 describe("Testing the single event details page", () => {
 
   beforeEach(() => {
     cy.visit("http://localhost:3000/postings/event-1");
-    cy.request("GET", "https://ivolunteer-api-test.herokuapp.com/events/event-1");
   })
 
   it("should render event details correctly", () => {
@@ -43,14 +42,14 @@ describe("Testing the single event details page", () => {
   })
 
   it("Should display upcoming jobs and able to sign up", () => {
-    cy.request("PATCH", "https://ivolunteer-api-test.herokuapp.com/events/event-1", {jobId: "posting-1"});
-    cy.request("POST", "https://ivolunteer-api-test.herokuapp.com/users/1", { 
-      id: "1-posting-1",
-      eventId: "event-1",
-      eventName: "Color Run",
-      positionName: "assisting with check-in",
-      date: "2021/02/01"
-    });
+    // cy.request("PATCH", "https://ivolunteer-api-test.herokuapp.com/events/event-1", {jobId: "posting-1"});
+    // cy.request("POST", "https://ivolunteer-api-test.herokuapp.com/users/1", { 
+    //   id: "1-posting-1",
+    //   eventId: "event-1",
+    //   eventName: "Color Run",
+    //   positionName: "assisting with check-in",
+    //   date: "2021/02/01"
+    // });
 
     cy.get(".posting-position-cards-wrapper")
       .should("contain", "assisting with check-in")
@@ -79,6 +78,9 @@ describe("Testing the single event details page", () => {
     
     cy.get(".event-job-title:first")
       .should("contain", "Open Spots: 2")
+
+    apiCalls.cancelSignedUpJob("event-1", {jobId: "1-posting-1",
+    eventId: "event-1"})
   })
 
 })
