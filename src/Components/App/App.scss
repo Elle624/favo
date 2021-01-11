@@ -1,15 +1,12 @@
 @import "../../styles/variables";
 
-
-
 .App {
   display: flex;
   flex-direction: row;
   background-color: $main-grey;
   height: auto;
   width: 100%;
-  // position: fixed;
-  // overflow: scroll;
+  font-family: "Source Sans Pro", sans-serif;
 }
 
 #blockColorblindContent {

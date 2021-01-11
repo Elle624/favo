@@ -5,6 +5,20 @@
   @include sidebar-bar;
 }
 
+.user-profile-heading-wrapper {
+  background-color: $main-blue;
+  height: 3em;
+  width: 85%;
+  margin: 1em 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.user-profile-heading {
+  color: $main-white;
+}
+
 .profile-picture {
   border: 5px solid $main-orange;
   border-radius: 50%;
@@ -94,17 +108,33 @@
   flex-direction: row;
   align-items: center;
   height: 80%;
-  position: sticky;
-  top: 0;
 }
 
-.user-toggle-button {
+.user-toggle-button-open {
   background-color: $main-white;
   height: 4em;
   width: 3em;
   border-radius: 0 85% 85% 0;
   border: none;
   outline: none;
+  animation: 
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.user-toggle-button-closed {
+  background-color: $main-white;
+  height: 4em;
+  width: 3em;
+  border-radius: 0 85% 85% 0;
+  border: none;
+  outline: none;
+  position: fixed;
+  top: 50%;
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .glyph-icon-sidebar {
@@ -116,8 +146,14 @@
 
 .user-open {
   @include sidebar-bar;
+  opacity: 100;
+  transition: 1500ms;
 }
 
 .user-closed {
-  display: none;
+  transform: translateX(-500px);
+  opacity: 0;
+  height: 100%;
+  transition: 1500ms;
 }
+

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, render } from "react-router-dom";
 import "./User.scss";
 import starImage from "../../Assets/star.png";
 import userToggleButtonRight from "../../Assets/right-chevron.png";
@@ -12,14 +12,16 @@ const User = ({ info }) => {
 
   let userSidebarClass = userOpen ? "user-open" : "user-closed";
   let userButtonClass = userOpen ? userToggleButtonLeft : userToggleButtonRight;
-
-  const handleUserToggle = () => {
-    setUserOpen(!userOpen);
-  };
+  let userToggleButtonClass = userOpen
+    ? "user-toggle-button-open"
+    : "user-toggle-button-closed";
 
   return (
     <div className="components-wrapper">
       <section className={userSidebarClass} id={id}>
+        <section className="user-profile-heading-wrapper">
+          <h1 className="user-profile-heading">User Profile</h1>
+        </section>
         <div
           className="profile-picture"
           style={{
@@ -51,10 +53,15 @@ const User = ({ info }) => {
         <div className="upcoming-job-cards-wrapper">
           {upcomingJobs.map((job) => {
             return (
-              <Link to={`/postings/${job.eventId}`} className="upcoming-job-link-wrapper">
+              <Link
+                to={`/postings/${job.eventId}`}
+                className="upcoming-job-link-wrapper"
+              >
                 <section key={job.id} className="upcoming-job-card">
                   <div className="event-info-wrapper">
-                    <h3 className="job-event-main-detail">{job.positionName}</h3>
+                    <h3 className="job-event-main-detail">
+                      {job.positionName}
+                    </h3>
                     <h3 className="job-event-main-detail">{job.date}</h3>
                   </div>
                   <h4 className="job-event-name">{job.eventName}</h4>
@@ -64,11 +71,13 @@ const User = ({ info }) => {
           })}
         </div>
       </section>
-      <section className="user-toggle-button-wrap">
-        <button className="user-toggle-button">
-          <img className="glyph-icon-sidebar" src={userButtonClass} onClick={handleUserToggle} />
-        </button>
-      </section>
+      <button className={userToggleButtonClass}>
+        <img
+          className="glyph-icon-sidebar"
+          src={userButtonClass}
+          onClick={() => setUserOpen(!userOpen)}
+        />
+      </button>
     </div>
   );
 };
