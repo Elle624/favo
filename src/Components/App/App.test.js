@@ -15,10 +15,11 @@ describe("App", () => {
   beforeEach(() => {
     apiCalls.getUser.mockResolvedValue(_mockData.users[0]);
     apiCalls.getPostings.mockResolvedValue(_mockData.events);
-    apiCalls.getSinglePosting.mockResolvedValue(_mockData.events[1]);
-    apiCalls.patchEventPosting.mockResolvedValueOnce("event-2", {jobId: "posting-4"});
-    apiCalls.postJobPosting.mockResolvedValueOnce("event-2", _mockData.postJobBody);
   })
+
+  afterEach(() => {
+    jest.resetAllMocks();
+  });
 
   it("App should be rendered on load and display loading before all data is fetched", async() => {
     render(
@@ -71,6 +72,7 @@ describe("App", () => {
   })
 
   it("When user click on an upcoming position he is redirected to a single event page", async() => {
+    apiCalls.getSinglePosting.mockResolvedValue(_mockData.events[0]);
     const history = createMemoryHistory();
     render(
       <Router history={history}>
@@ -79,13 +81,40 @@ describe("App", () => {
     )
     
     const upcomingJob = await waitFor(() => screen.getByText("cook"));
-
     fireEvent.click(upcomingJob)
 
     await waitFor(() => expect(history.location.pathname).toBe("/postings/event-20"));
     await waitFor(() => expect(apiCalls.getSinglePosting).toHaveBeenCalledTimes(2));
     await waitFor(() => expect(screen.getByTestId('posting-view-element')).toBeInTheDocument());
     await act(() => Promise.resolve());
+  })
+
+  it("should redirect user to a single event detail page, and sign up for one job", async() => {
+    apiCalls.getSinglePosting.mockResolvedValue(_mockData.events[1]);
+    apiCalls.patchEventPosting.mockResolvedValue("event-2", {jobId: "posting-4"});
+    apiCalls.postJobPosting.mockResolvedValue("event-2", _mockData.postJobBody);
+    apiCalls.getUser.mockResolvedValue(_mockData.updatedUser[0]);
+
+    const history = createMemoryHistory();
+    render(
+      <Router history={history}>
+          <App />
+        </Router>
+      )
+      
+      const mockEvent = await waitFor(() => screen.getAllByTestId("posting-card-element"));
+      userEvent.click(mockEvent[1])
+      
+    
+    await waitFor(() => expect(screen.getByTestId('posting-view-element')).toBeInTheDocument());
+    await waitFor(() => screen.getByText('driver').click());
+    await waitFor(() => screen.getByText("Sign me up!").click());
+
+    await waitFor(() => expect(screen.getByTestId('upcoming-1-posting-4')).toBeInTheDocument());
+    await waitFor(() => screen.getByAltText('return-home-button').click())
+
+    await waitFor(() => expect(screen.queryByTestId('posting-view-element')).not.toBeInTheDocument());
+    await waitFor(() => expect(history.location.pathname).toBe("/"));
   })
 
   it("When enters keyword in search it finds all events with this keyword", async() => {
