@@ -67,6 +67,7 @@ const User = ({ info }) => {
                 data-testid={`upcoming-${job.id}`}
                 to={`/postings/${job.eventId}`}
                 className={`upcoming-job-link-wrapper ${userTransitionClass}`}
+                key={job.id}
               >
                 <section key={job.id} className="upcoming-job-card">
                   <div className="event-info-wrapper">
