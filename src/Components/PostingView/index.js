@@ -76,7 +76,7 @@ const PostingView = ({ match, getUserInfo }) => {
           <h1 className="postings-title">Event Details</h1>
         </div>
         <div className="back-button-wrap">
-          <Link to="/">
+          <Link to="/postings">
             <img src={backButton} className="back-button-img" alt="return-home-button"/>
           </Link>
         </div>
