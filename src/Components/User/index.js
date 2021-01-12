@@ -59,7 +59,7 @@ const User = ({ info }) => {
           <p className="sidebar-titles">My Upcoming Jobs</p>
           <hr className={`section-line ${userTransitionClass}`} />
         </div>
-        <div>
+        <div
           className={`upcoming-job-cards-wrapper ${userTransitionClass}`}>
           {upcomingJobs.map((job) => {
             return (

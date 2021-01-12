@@ -32,3 +32,9 @@
   padding: 2em;
   clear: both;
 }
+
+@mixin mobile-buttons {
+  background-color: $main-grey;
+  padding: 1px 3.5px;
+  color: $main-black;
+}
