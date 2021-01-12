@@ -1,15 +1,15 @@
 @import "../../styles/variables";
 
-.postings-container {
+.postings-container-single {
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
   padding: 2em;
-  height: auto;
-  min-height: 800px;
-  min-width: 600px;
-  margin: 2em;
-  clear: both;
-  height: auto;
+  background-color: $main-white;
+  margin: 3em;
+  width: 100%;
+  height: 85vh;
 }
 
 .posting-info-wrapper {
@@ -17,6 +17,7 @@
   flex-direction: row;
   justify-content: space-between;
   height: auto;
+  width: 100%;
 }
 
 .posting-left-info-wrapper {
@@ -26,17 +27,19 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
   height: 100%;
 }
 
 .event-title {
   font-size: 2em;
-  margin: 1em 0;
+  margin: 0.5em 0;
 }
 
 .back-button-img {
   height: 40px;
   width: 40px;
+  margin: 0.5em 0;
   &:hover {
     cursor: point;
     transform: scale(1.05);
@@ -44,7 +47,7 @@
 }
 
 .event-description {
-  margin: 2em 0;
+  margin: 0;
 }
 
 .posting-right-info-wrapper {
@@ -59,10 +62,8 @@
 
 .posting-position-cards-wrapper {
   height: 14em;
-  min-height: 5em;
-  min-width: 5em;
   overflow: scroll;
-  padding: 1em;
+  padding: 0;
 }
 
 .section-line {
@@ -103,6 +104,10 @@
   }
 }
 
+.posting-position-cards-wrapper {
+  padding: 1em;
+}
+
 .submit-button-wrapper {
   width: 100%;
   height: 2em;
@@ -110,8 +115,6 @@
   justify-content: flex-end;
   align-items: center;
   margin-top: 1em;
-  position: absolute;
-  top: 38em;
 }
 
 .event-job-name {
@@ -152,4 +155,74 @@
   div.posting-right-info-wrapper p {
     font-size: 0.7em;
   }
-} 
+}
+
+.sign-up-event-message-wrapper {
+  width: 70%;
+  text-align: center;
+  font-size: 1.5em;
+}
+
+.sign-up-event-message {
+  color: $main-orange;
+  -webkit-text-stroke: 0.2px rgb(226, 148, 3);
+  font-weight: 800;
+}
+
+@media only screen and (max-width: 500px) {
+  .postings-container-single {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #ffffff;
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+  }
+
+  .posting-info-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 85vh;
+    width: 100vw;
+  }
+
+  .posting-position-cards-wrapper {
+    height: 15vh;
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: scroll;
+  }
+
+  .back-button-img {
+    height: 25px;
+    width: 25px;
+    margin: 0.5em 0;
+    &:hover {
+      cursor: point;
+      transform: scale(1.05);
+    }
+  }
+
+  .submit-button-wrapper {
+    width: 100%;
+    height: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1em;
+  }
+
+  .submit-button {
+    height: 5vh;
+    width: 50vw;
+    &:hover {
+      background-color: #298077;
+    }
+  }
+}

@@ -7,6 +7,7 @@ import ErrorPage from "../ErrorPage";
 import User from "../User";
 import Postings from "../Postings";
 import PostingView from "../PostingView";
+import Loading from "../Loading";
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -35,21 +36,23 @@ const App = () => {
   };
 
   const sortPostingsByDate = () => {
-    if(!isSorted) {
+    if (!isSorted) {
       postings.sort((a, b) => {
-        return (a.date > b.date) ? -1 : 1;
-      })
+        return a.date > b.date ? -1 : 1;
+      });
     } else {
       postings.reverse();
-    } 
+    }
     setIsSorted((prevSortState) => !prevSortState);
     setPostings(postings);
   };
 
   const filterPostings = (category) => {
-    const filteredPostings = postings.filter(posting => posting.category === category);
+    const filteredPostings = postings.filter(
+      (posting) => posting.category === category
+    );
     setQueriedPostings(filteredPostings);
-  }
+  };
 
   useEffect(() => getInfo(), []);
 
@@ -68,8 +71,8 @@ const App = () => {
   
       {!user &&
         <Route 
-          path="/postings" 
-          render={() => (<p>LOADIN'...</p>)}
+          exact path="/postings" 
+          component={Loading}
        />}
 
       {user && 
@@ -92,11 +95,14 @@ const App = () => {
               filterByCategory={filterPostings}
             />
           )}
-      />}
+        />
+      } 
 
-      <Route 
-        path="/postings/:id" 
-        render={({ match }) => <PostingView match={match} getUserInfo={getInfo}/>} 
+      <Route
+        path="/postings/:id"
+        render={({ match }) => (
+          <PostingView match={match} getUserInfo={getInfo} />
+        )}
       />
     </main>
   );

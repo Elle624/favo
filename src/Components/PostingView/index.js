@@ -3,30 +3,30 @@ import { apiCalls } from "../../apiCalls";
 import "./PostingView.scss";
 import backButton from "../../Assets/back-button.png";
 import { Link } from "react-router-dom";
+import Loading from "../Loading";
 
 const PostingView = ({ match, getUserInfo }) => {
   const eventId = match.params.id;
   const [chosenPosting, setChosenPosting] = useState(null);
   const [chosenJob, setChosenJob] = useState(null);
-  const [signedUpJobName, setSignedUpJobName] = useState('');
+  const [signedUpJobName, setSignedUpJobName] = useState("");
   const [userInfo, setUserInfo] = useState(null);
-  
+
   const getDetails = () => {
-    Promise.all([apiCalls.getUser(), apiCalls.getSinglePosting(eventId)])
-      .then(
-        (data) => {
-          if(data[0]) {
-            setUserInfo(data[0]);
-            setChosenPosting(data[1]);
-            const signedUpEvent = data[0].upcomingJobs.find(
-              (job) => job.eventName === data[1].name
-            );
-            if (signedUpEvent) {
-              setSignedUpJobName(signedUpEvent.positionName);
-            }
+    Promise.all([apiCalls.getUser(), apiCalls.getSinglePosting(eventId)]).then(
+      (data) => {
+        if (data[0]) {
+          setUserInfo(data[0]);
+          setChosenPosting(data[1]);
+          const signedUpEvent = data[0].upcomingJobs.find(
+            (job) => job.eventName === data[1].name
+          );
+          if (signedUpEvent) {
+            setSignedUpJobName(signedUpEvent.positionName);
           }
         }
-      );
+      }
+    );
   };
 
   const substractOpenPosition = () => {
@@ -71,17 +71,24 @@ const PostingView = ({ match, getUserInfo }) => {
       .join(" ");
 
     return (
-      <section data-testid="posting-view-element" className="postings-container">
+      <section
+        data-testid="posting-view-element"
+        className="postings-container-single"
+      >
         <div className="postings-title-wrapper">
           <h1 className="postings-title">Event Details</h1>
         </div>
-        <div className="back-button-wrap">
-          <Link to="/postings">
-            <img src={backButton} className="back-button-img" alt="return-home-button"/>
-          </Link>
-        </div>
         <div className="posting-info-wrapper">
           <div className="posting-left-info-wrapper">
+            <div className="back-button-wrap">
+              <Link to="/postings">
+                <img
+                  src={backButton}
+                  className="back-button-img"
+                  alt="return-home-button"
+                />
+              </Link>
+            </div>
             <h3 className="event-title">{name}</h3>
             <div className="section-titles">
               <strong>
@@ -103,13 +110,17 @@ const PostingView = ({ match, getUserInfo }) => {
                   key={job.id}
                   className="posting-positions-card"
                   style={{
-                    backgroundColor: signedUpJobName === job.name ? '#2ec4b6': "#initial",
-                    color: signedUpJobName === job.name ? 'white': "#initial",
-                    borderColor: signedUpJobName === job.name ? '#2ec4b6': "#initial"
+                    backgroundColor:
+                      signedUpJobName === job.name ? "#2ec4b6" : "#initial",
+                    color: signedUpJobName === job.name ? "white" : "#initial",
+                    borderColor:
+                      signedUpJobName === job.name ? "#2ec4b6" : "#initial",
                   }}
                 >
-                  <h3 className="event-job-name" >{job.name}</h3>
-                  <p className="event-job-title">Open Spots: {job.numberOfSpots}</p>
+                  <h3 className="event-job-name">{job.name}</h3>
+                  <p className="event-job-title">
+                    Open Spots: {job.numberOfSpots}
+                  </p>
                 </button>
               ))}
             </div>
@@ -117,10 +128,19 @@ const PostingView = ({ match, getUserInfo }) => {
               <button
                 onClick={substractOpenPosition}
                 disabled={signedUpJobName ? true : false}
+                style={{ display: signedUpJobName ? "none" : "block" }}
                 className="submit-button"
               >
                 Sign me up!
               </button>
+            </div>
+            <div className="sign-up-event-message-wrapper">
+              <p
+                style={{ display: signedUpJobName ? "inline-block" : "none" }}
+                className="sign-up-event-message"
+              >
+                You have already signed up for this event!
+              </p>
             </div>
           </div>
           <div className="posting-right-info-wrapper">
@@ -148,13 +168,13 @@ const PostingView = ({ match, getUserInfo }) => {
                 <p className="posting-info-title">Duration</p>
               </strong>
               <p>{duration}</p>
-            </div>   
+            </div>
           </div>
         </div>
       </section>
     );
   }
-  return null;
+  return <Loading />;
 };
 
 export default PostingView;
