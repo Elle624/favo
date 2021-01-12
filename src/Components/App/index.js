@@ -3,6 +3,7 @@ import { Route } from "react-router-dom";
 import "./App.scss";
 import { apiCalls } from "../../apiCalls";
 import WelcomePage from "../WelcomePage";
+import ErrorPage from "../ErrorPage";
 import User from "../User";
 import Postings from "../Postings";
 import PostingView from "../PostingView";
@@ -61,11 +62,11 @@ const App = () => {
 
       {error && 
         <Route 
-          path="/postings" 
-          render={() => ({error})}
+          path="/error" 
+          component={ErrorPage}
         />}
   
-      {!user && 
+      {!user &&
         <Route 
           path="/postings" 
           render={() => (<p>LOADIN'...</p>)}
