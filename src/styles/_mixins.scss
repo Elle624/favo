@@ -2,11 +2,11 @@
 
 @mixin main-page-input-settings {
   background-color: $main-grey;
-	font-size: 1em;
-	color: $main-black;
-	border: 1px solid $main-grey;
-	box-shadow: none;
-	outline: none;
+  font-size: 1em;
+  color: $main-black;
+  border: 1px solid $main-grey;
+  box-shadow: none;
+  outline: none;
 }
 
 @mixin input-hover-effect {
@@ -26,8 +26,15 @@
   justify-content: space-around;
   align-items: center;
   background-color: $main-white;
-  width: 17em;
+  height: 85vh;
   margin: 2em 0 2em 2em;
+  width: 17em;
   padding: 2em;
   clear: both;
+}
+
+@mixin mobile-buttons {
+  background-color: $main-grey;
+  padding: 1px 3.5px;
+  color: $main-black;
 }
