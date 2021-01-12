@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, render } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./User.scss";
 import starImage from "../../Assets/star.png";
 import userToggleButtonRight from "../../Assets/right-chevron.png";
@@ -90,6 +90,7 @@ const User = ({ info }) => {
           className="glyph-icon-sidebar"
           src={userButtonClass}
           onClick={() => setUserOpen(!userOpen)}
+          alt="user-sidebar-button-chevron"
         />
       </button>
       <div className="user-background-transition"></div>
