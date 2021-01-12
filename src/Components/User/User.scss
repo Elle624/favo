@@ -201,6 +201,7 @@
     align-items: center;
     height: 100vh;
     width: 100vw;
+    position: absolute;
   }
 
   .user-open {
@@ -211,7 +212,7 @@
     background-color: $main-white;
     height: 80vh;
     margin: 2em 0 2em 2em;
-    width: 60vw;
+    width: 65vw;
   }
 
   .user-toggle-button-closed {
