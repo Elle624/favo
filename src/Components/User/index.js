@@ -20,7 +20,7 @@ const User = ({ info }) => {
     : "user-close-transition";
 
   return (
-    <div className="components-wrapper">
+    <div data-testid="user-sidebar-element" className="components-wrapper">
       <section className={userSidebarClass} id={id}>
         <section
           className={`user-profile-heading-wrapper ${userTransitionClass}`}
@@ -59,10 +59,12 @@ const User = ({ info }) => {
           <p className="sidebar-titles">My Upcoming Jobs</p>
           <hr className={`section-line ${userTransitionClass}`} />
         </div>
-        <div className={`upcoming-job-cards-wrapper ${userTransitionClass}`}>
+        <div>
+          className={`upcoming-job-cards-wrapper ${userTransitionClass}`}>
           {upcomingJobs.map((job) => {
             return (
               <Link
+                data-testid={`upcoming-${job.id}`}
                 to={`/postings/${job.eventId}`}
                 className={`upcoming-job-link-wrapper ${userTransitionClass}`}
               >
