@@ -3,6 +3,7 @@ import { apiCalls } from "../../apiCalls";
 import "./PostingView.scss";
 import backButton from "../../Assets/back-button.png";
 import { Link } from "react-router-dom";
+import Loading from "../Loading";
 
 const PostingView = ({ match, getUserInfo }) => {
   const eventId = match.params.id;
@@ -173,7 +174,7 @@ const PostingView = ({ match, getUserInfo }) => {
       </section>
     );
   }
-  return null;
+  return <Loading />;
 };
 
 export default PostingView;
