@@ -1,8 +1,8 @@
 import '@testing-library/jest-dom';
-import { render, screen, waitFor, act, fireEvent } from '@testing-library/react';
+import { render, screen, waitFor, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import _mockData from '../../TestData/_mockData';
-import { Router, MemoryRouter } from 'react-router-dom';
+import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 import PostingView from '../PostingView';
 import { apiCalls } from '../../apiCalls';
@@ -90,7 +90,7 @@ describe("PostingView Comonent", () => {
 
     await waitFor(() => userEvent.click(screen.getByAltText("return-home-button")));
     await waitFor(() => expect(history.location.pathname).toBe("/postings"));
-    
+
     await act(() => Promise.resolve());
   })
 })
