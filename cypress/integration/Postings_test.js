@@ -1,10 +1,10 @@
 describe("Testing Postings component", () => {
 
   beforeEach(() => {
-    cy.visit("http://localhost:3000/");
+    cy.visit("http://localhost:3000/postings");
   });
 
-  it("Landing on the homepage you can see all event postings", () => {
+  it("Landing on the postings you can see all event postings", () => {
     cy.get(".posting-title")
       .should("contain", "Organization")
       .and("contain", "Event")
@@ -18,7 +18,7 @@ describe("Testing Postings component", () => {
       .and("contain", "2021/02/01");
   });
 
-  it("Should load title of page on homepage", () => {
+  it("Should load title of page on postings", () => {
     cy.get(".postings-title")
       .contains("Open Volunteer Positions");
   });
@@ -36,7 +36,7 @@ describe("Testing Postings component", () => {
       .and("have.css", "flex-direction", "row");
   });
 
-  it("Search Input should load and function on homepage postings", () => {
+  it("Search Input should load and function on postings page", () => {
     cy.get(".input-button-sort")
       .should(
         "have.attr",
@@ -53,7 +53,7 @@ describe("Testing Postings component", () => {
       .and("not.contain", "Individual");
   });
 
-  it("Sort button should load and function on homepage", () => {
+  it("Sort button should load and function on postings page", () => {
     cy.get(".button-sort")
       .contains("sort")
       .click();
@@ -64,7 +64,7 @@ describe("Testing Postings component", () => {
       .contains("The Color Run");
   });
 
-  it("Filter postings by categories on should load and function on", () => {
+  it("Filter postings by categories on should load and function on postings page", () => {
     cy.get(".filter-item")
       .contains("-- select category --");
 

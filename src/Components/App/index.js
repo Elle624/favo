@@ -70,8 +70,8 @@ const App = () => {
   
       {!user && 
         <Route 
-          path="/postings" 
-          render={() => (<Loading/>)}
+          exact path="/postings" 
+          component={Loading}
        />}
 
       {user && 
