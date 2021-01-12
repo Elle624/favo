@@ -17,7 +17,7 @@ describe("PostingView Comonent", () => {
     apiCalls.postJobPosting.mockResolvedValueOnce("event-2", _mockData.postJobBody);
   })
 
-  it('should call getSinglePosting', async() => {
+  it('should call getSinglePosting and getUser', async() => {
     const history = createMemoryHistory();
      render(
       <Router history={history}>
@@ -29,21 +29,8 @@ describe("PostingView Comonent", () => {
     )
 
     await waitFor(() => expect(apiCalls.getSinglePosting).toHaveBeenCalledTimes(1));
-    await act(() => Promise.resolve());
-  })
-
-  it('should call getSinglePosting', async() => {
-    const history = createMemoryHistory();
-     render(
-      <Router history={history}>
-        <PostingView 
-          match={_mockData.eventId} 
-          getUserInfo={jest.fn()}
-        />
-      </Router>
-    )
-
     await waitFor(() => expect(apiCalls.getUser).toHaveBeenCalledTimes(1));
+
     await act(() => Promise.resolve());
   })
 
@@ -58,8 +45,8 @@ describe("PostingView Comonent", () => {
       </Router>
     )
 
-    await waitFor(() => expect(screen.getByText("Event Details")).toBeInTheDocument());
     await waitFor(() => expect(screen.getByText("Food Delivery")).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByAltText("return-home-button")).toBeInTheDocument());
     await waitFor(() => expect(screen.getByText("Description")).toBeInTheDocument());
     await waitFor(() => expect(screen.getByText("Deliver food for a memorial hospital")).toBeInTheDocument());
     await waitFor(() => expect(screen.getByText("Open Positions")).toBeInTheDocument());
@@ -80,7 +67,7 @@ describe("PostingView Comonent", () => {
     await act(() => Promise.resolve());
   })
 
-  it("should be able to sign up for one job per event", async() => {
+  it("should be able to sign up for one job per event and return to postings page", async() => {
     apiCalls.getSinglePosting.mockResolvedValue(_mockData.updatedEvent);
     const history = createMemoryHistory();
     render(
@@ -100,6 +87,10 @@ describe("PostingView Comonent", () => {
     await waitFor(() => screen.getByText("cook").click());
     await waitFor(() => screen.getByRole("button", {name: "Sign me up!"}).click());
     await waitFor(() => expect(screen.getByText("Open Spots: 3")).toBeInTheDocument());
+
+    await waitFor(() => userEvent.click(screen.getByAltText("return-home-button")));
+    await waitFor(() => expect(history.location.pathname).toBe("/postings"));
+    
     await act(() => Promise.resolve());
   })
 })
