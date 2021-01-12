@@ -19,28 +19,33 @@ describe("App", () => {
   afterEach(() => {
     jest.resetAllMocks();
   });
-
-  it("App should be rendered on load and display loading before all data is fetched", async() => {
-    render(
-      <MemoryRouter>
-        <App />
-      </MemoryRouter>
-    )
-
-    expect(screen.getByText("LOADIN\'...")).toBeInTheDocument()
-
-    await act(() => Promise.resolve());
-  })
-
+  
   it('should render correct url', async() => {
     const history = createMemoryHistory();
     render(<Router history={history}><App /></Router>);
     await waitFor(() => expect(history.location.pathname).toBe("/"));
   })
 
-  it("Should render User sidebar on load", async() => {
+  it("postings should be rendered on a spcific page load and display loading before all data is fetched, with correct url change", async() => {
+    const history = createMemoryHistory();
     render(
-      <MemoryRouter>
+      <Router history={history}>
+        <App />
+      </Router>
+    )
+
+    userEvent.click(screen.getByRole("img"));
+
+    expect(screen.getByText("LOADIN\'...")).toBeInTheDocument()
+    expect(history.location.pathname).toBe("/postings");
+
+    await act(() => Promise.resolve());
+  })
+
+
+  it("Should render user sidebar, postings, and navigation on postings page load", async() => {
+    render(
+      <MemoryRouter initialEntries={['/postings']}>
         <App />
       </MemoryRouter>
     )
@@ -48,28 +53,8 @@ describe("App", () => {
     await waitFor(() => expect(apiCalls.getUser).toHaveBeenCalledTimes(1));
     await waitFor(() => expect(screen.getByTestId("user-sidebar-element")).toBeInTheDocument());
 
-    await act(() => Promise.resolve());
-  })
-
-  it("Should render Postings component on load", async() => {
-    render(
-      <MemoryRouter>
-        <App />
-      </MemoryRouter>
-    )
-
     await waitFor(() => expect(apiCalls.getPostings).toHaveBeenCalledTimes(1));
     await waitFor(() => expect(screen.getByTestId("postings-element")).toBeInTheDocument());
-
-    await act(() => Promise.resolve());
-  })
-
-  it("Should render Navigation component on load of the homepage", async() => {
-    render(
-      <MemoryRouter>
-        <App />
-      </MemoryRouter>
-    )
 
     await waitFor(() => expect(screen.getByTestId("navigation-element")).toBeInTheDocument());
 
@@ -85,6 +70,8 @@ describe("App", () => {
       </Router>
     )
     
+    userEvent.click(screen.getByRole("img"));
+
     const upcomingJob = await waitFor(() => screen.getByText("cook"));
     fireEvent.click(upcomingJob)
 
@@ -104,10 +91,12 @@ describe("App", () => {
     const history = createMemoryHistory();
     render(
       <Router history={history}>
-          <App />
-        </Router>
-      )
-      
+        <App />
+      </Router>
+    )
+    
+    userEvent.click(screen.getByRole("img"));
+
     const mockEvent = await waitFor(() => screen.getAllByTestId("posting-card-element"));
     userEvent.click(mockEvent[1])
     
@@ -119,12 +108,12 @@ describe("App", () => {
     await waitFor(() => screen.getByAltText('return-home-button').click())
 
     await waitFor(() => expect(screen.queryByTestId('posting-view-element')).not.toBeInTheDocument());
-    await waitFor(() => expect(history.location.pathname).toBe("/"));
+    await waitFor(() => expect(history.location.pathname).toBe("/postings"));
   })
 
   it("When enters keyword in search it finds all events with this keyword", async() => {
     render(
-      <MemoryRouter>
+      <MemoryRouter initialEntries={['/postings']}>
         <App />
       </MemoryRouter>
     )
@@ -144,7 +133,7 @@ describe("App", () => {
 
   it("When user clicks on a sort button it shows events in desc order by date, by clicking again it shows in asce", async() => {
     render(
-      <MemoryRouter>
+      <MemoryRouter initialEntries={['/postings']}>
         <App />
       </MemoryRouter>
     )
@@ -166,7 +155,7 @@ describe("App", () => {
 
   it("When user chooses a category the page displays the events of that category only", async() => {
     render(
-      <MemoryRouter>
+      <MemoryRouter initialEntries={['/postings']}>
         <App />
       </MemoryRouter>
     )
