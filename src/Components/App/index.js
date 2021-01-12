@@ -5,6 +5,7 @@ import { apiCalls } from "../../apiCalls";
 import User from "../User";
 import Postings from "../Postings";
 import PostingView from "../PostingView";
+import Loading from "../Loading";
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -33,45 +34,51 @@ const App = () => {
   };
 
   const sortPostingsByDate = () => {
-    if(!isSorted) {
+    if (!isSorted) {
       postings.sort((a, b) => {
-        return (a.date > b.date) ? -1 : 1;
-      })
+        return a.date > b.date ? -1 : 1;
+      });
     } else {
       postings.reverse();
-    } 
+    }
     setIsSorted((prevSortState) => !prevSortState);
     setPostings(postings);
   };
 
   const filterPostings = (category) => {
-    const filteredPostings = postings.filter(posting => posting.category === category);
+    const filteredPostings = postings.filter(
+      (posting) => posting.category === category
+    );
     setQueriedPostings(filteredPostings);
-  }
+  };
 
   useEffect(() => getInfo(), []);
 
   return (
     <main className="App">
       {error && <p>{error}</p>}
-      {!user && <p>LOADIN'...</p>}
+      {!user && <Loading />}
       {user && <User info={user} />}
-      {postings.length && <Route
-        exact
-        path="/"
-        render={() => (
-          <Postings
-            isSorted={isSorted}
-            postings={queriedPostings.length ? queriedPostings : postings}
-            searchByKeyWord={searchPostings}
-            sortPostingsByDate={sortPostingsByDate}
-            filterByCategory={filterPostings}
-          />
+      {postings.length && (
+        <Route
+          exact
+          path="/"
+          render={() => (
+            <Postings
+              isSorted={isSorted}
+              postings={queriedPostings.length ? queriedPostings : postings}
+              searchByKeyWord={searchPostings}
+              sortPostingsByDate={sortPostingsByDate}
+              filterByCategory={filterPostings}
+            />
+          )}
+        />
+      )}
+      <Route
+        path="/postings/:id"
+        render={({ match }) => (
+          <PostingView match={match} getUserInfo={getInfo} />
         )}
-      />}
-      <Route 
-        path="/postings/:id" 
-        render={({ match }) => <PostingView match={match} getUserInfo={getInfo}/>} 
       />
     </main>
   );
