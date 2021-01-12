@@ -44,3 +44,23 @@
   padding: 0.8em;
   overflow: scroll;
 }
+
+@media screen and (max-width: 500px) {
+  .postings-container-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #ffffff;
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+  }
+
+  .postings-wrapper {
+    height: 65vh;
+    width: 100%;
+    margin: 5em;
+  }
+}
