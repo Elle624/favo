@@ -166,6 +166,35 @@
 }
 
 @media screen and (max-width: 500px) {
+  .user-profile-heading-wrapper {
+    height: 3.5vh;
+    width: 40vw;
+    margin: 0;
+  }
+
+  .profile-picture {
+    border: 5px solid #ffbf69;
+    border-radius: 50%;
+    height: 25vh;
+    width: 25vw;
+    margin-top: 2vh;
+  }
+
+  .username {
+    font-size: 15px;
+    margin: 1.5vh 0;
+  }
+
+  .star-image {
+    margin: 0.25em;
+    height: 20px;
+    width: 20px;
+  }
+
+  .rating-wrapper {
+    margin: 0em;
+  }
+
   .components-wrapper {
     display: flex;
     flex-direction: row;
@@ -177,12 +206,12 @@
   .user-open {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: flex-start;
     align-items: center;
     background-color: $main-white;
-    height: 85vh;
+    height: 80vh;
     margin: 2em 0 2em 2em;
-    width: 65vw;
+    width: 60vw;
   }
 
   .user-toggle-button-closed {
@@ -208,5 +237,32 @@
     &:hover {
       cursor: pointer;
     }
+  }
+
+  .upcoming-job-card {
+    border: 1px solid $main-orange;
+    padding: 0.5em 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 12px;
+    width: 50vw;
+    margin: 0.5em;
+    transition: all 0.3s ease-in-out;
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.005);
+      box-shadow: 1px 1px 3px 0px #ffbf69;
+    }
+  }
+
+  .upcoming-job-cards-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1em;
+    overflow: scroll;
+    height: 15em;
+    width: 20em;
   }
 }
