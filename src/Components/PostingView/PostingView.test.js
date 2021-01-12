@@ -97,9 +97,9 @@ describe("PostingView Comonent", () => {
     await waitFor(() => expect(screen.getByText("Open Spots: 1")).toBeInTheDocument());
     await waitFor(() => expect(screen.getByText("Sign me up!")).toHaveAttribute("disabled"));
 
-    await waitFor(() => screen.getByText("cook").click());
-    await waitFor(() => screen.getByRole("button", {name: "Sign me up!"}).click());
-    await waitFor(() => expect(screen.getByText("Open Spots: 3")).toBeInTheDocument());
+    await waitFor(() => expect(screen.queryByRole("button", {name: "Sign me up!"})).not.toBeInTheDocument());
+    await waitFor(() => expect(screen.getByText("You have already signed up for this event!")).toBeInTheDocument());
+
     await act(() => Promise.resolve());
   })
 })
