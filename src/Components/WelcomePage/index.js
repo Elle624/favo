@@ -7,8 +7,12 @@ const WelcomePage = () => {
   return(
     <section className="welcome-page-container">
       <div className="welcome-page-titles-wrapper">
-        <h1 className="welcome-page-title">Welcome to FaVo!</h1>
-        <h2 className="welcome-page-tagline">toBee or not toBee, it’s your choice…</h2>
+        <div className="blue-container">
+          <h1 className="welcome-page-title">Welcome to FaVo!</h1>
+        </div>
+        <div className="orange-container">
+          <h2 className="welcome-page-tagline">toBee or not toBee, it’s your choice…</h2>
+        </div>
       </div>
       <div className="welcome-page-homepage-wrapper">
         <p className="welcome-page-button-text">go to your profile</p>
