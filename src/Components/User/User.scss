@@ -156,6 +156,7 @@
   @include sidebar-bar;
   opacity: 100;
   transition: 1500ms;
+  z-index: 1;
 }
 
 .user-closed {
