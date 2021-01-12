@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Route } from "react-router-dom";
 import "./App.scss";
 import { apiCalls } from "../../apiCalls";
+import WelcomePage from "../WelcomePage";
 import User from "../User";
 import Postings from "../Postings";
 import PostingView from "../PostingView";
@@ -56,13 +57,34 @@ const App = () => {
 
   return (
     <main className="App">
-      {error && <p>{error}</p>}
-      {!user && <Loading />}
-      {user && <User info={user} />}
-      {postings.length && (
+       <Route 
+        exact path="/" 
+        component={WelcomePage} 
+      />
+
+      {error && 
+        <Route 
+          path="/postings" 
+          render={() => ({error})}
+        />}
+  
+      {!user && 
+        <Route 
+          path="/postings" 
+          render={() => (<Loading/>)}
+       />}
+
+      {user && 
+        <Route 
+          path="/postings"
+          render={() => (
+            <User info={user} />
+          )}
+        />}
+
+      {postings.length && 
         <Route
-          exact
-          path="/"
+          exact path="/postings"
           render={() => (
             <Postings
               isSorted={isSorted}
@@ -73,7 +95,8 @@ const App = () => {
             />
           )}
         />
-      )}
+      } 
+
       <Route
         path="/postings/:id"
         render={({ match }) => (

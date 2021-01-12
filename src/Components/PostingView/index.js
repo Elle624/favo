@@ -80,7 +80,7 @@ const PostingView = ({ match, getUserInfo }) => {
         <div className="posting-info-wrapper">
           <div className="posting-left-info-wrapper">
             <div className="back-button-wrap">
-              <Link to="/">
+              <Link to="/postings">
                 <img
                   src={backButton}
                   className="back-button-img"
@@ -134,9 +134,12 @@ const PostingView = ({ match, getUserInfo }) => {
               </button>
             </div>
             <div className="sign-up-event-message-wrapper">
-              <p 
-                style={{display: signedUpJobName ? 'inline-block': 'none'}} className="sign-up-event-message"
-              >You have already signed up for this event!</p>
+              <p
+                style={{ display: signedUpJobName ? "inline-block" : "none" }}
+                className="sign-up-event-message"
+              >
+                You have already signed up for this event!
+              </p>
             </div>
           </div>
           <div className="posting-right-info-wrapper">

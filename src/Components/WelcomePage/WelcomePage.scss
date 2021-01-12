@@ -1,0 +1,158 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+.welcome-page-container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  color: white;
+}
+
+.welcome-page-titles-wrapper {
+  position: relative;
+  margin-right: 6em;
+  margin-left: 0;
+  height: auto;
+}
+
+.blue-container {
+  height: auto;
+  width: 60vw;
+  padding: 2.5em;
+  padding-right: 1em;
+  background-color: $main-blue;
+  animation: 1s ease-out 0s 1 slideInFromLeft;
+
+}
+
+.orange-container {
+  position: absolute;
+  left: 2em;
+  top: 7.5em;
+  height: auto;
+  width: fit-content;
+  padding: 2.5em 1.5em;
+  background-color: $main-orange;
+  animation: 1s ease-out 0s 1 slideInFromRight;
+}
+
+.welcome-page-title {
+  margin: 0;
+  font-size: 4rem;
+}
+
+.welcome-page-tagline {
+  margin: 0;
+  font-size: 2.2rem;
+}
+
+.welcome-page-button-text {
+  font-style: italic;
+  color: $main-blue;
+  font-size: 1.2em;
+  opacity: 0;
+  margin: 1.5em;
+  transition: all 0.5s ease-out;
+}
+
+.welcome-page-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.welcome-page-homepage-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin: 1em;
+  height: 100%;
+  justify-content: center;
+  animation: 1s ease-out 0s 1 slideInFromLeft;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  &:hover p {
+    opacity: 1;
+    transition: all 0.2s ease-in;
+  }
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInFromRight {
+  0% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media only screen and (max-width: 1080px) {
+  .orange-container {
+    top: 6em;
+  }
+
+  .welcome-page-title {
+    font-size: 3em;
+  }
+
+  .welcome-page-tagline  {
+    font-size: 1.5em;
+  }
+}
+
+@media only screen and (max-width: 770px) {
+
+  .orange-container {
+    padding: 1.5em 1em;
+    top: 5em;
+  }
+
+  .blue-container {
+    height: auto;
+    width: 50vw;
+  }
+  
+  .welcome-page-title {
+    font-size: 5vw;
+  }
+
+  .welcome-page-tagline  {
+    font-size: 2.5vw;
+  }
+
+  .welcome-page-button-text {
+    font-size: 0.7em;
+    margin: 0.2em;
+  }
+
+  .welcome-page-button {
+    width: 50px;
+  }
+
+  .welcome-page-homepage-wrapper {
+    width: auto;
+    margin: 0;
+  }
+
+  .welcome-page-titles-wrapper  {
+    margin-right: 1.2em;
+  }
+}
