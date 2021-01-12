@@ -134,12 +134,9 @@ const PostingView = ({ match, getUserInfo }) => {
               </button>
             </div>
             <div className="sign-up-event-message-wrapper">
-              <p
-                style={{ display: signedUpJobName ? "inline-block" : "none" }}
-                className="sign-up-event-message"
-              >
-                You have signed up for this event!
-              </p>
+              <p 
+                style={{display: signedUpJobName ? 'inline-block': 'none'}} className="sign-up-event-message"
+              >You have already signed up for this event!</p>
             </div>
           </div>
           <div className="posting-right-info-wrapper">
