@@ -35,7 +35,7 @@ describe("App", () => {
   it('should render correct url', async() => {
     const history = createMemoryHistory();
     render(<Router history={history}><App /></Router>);
-    await waitFor(() => expect(history.location.pathname).toBe("/"));
+    await waitFor(() => expect(history.location.pathname).toBe("/postings"));
   })
 
   it("Should render User sidebar on load", async() => {
@@ -119,7 +119,7 @@ describe("App", () => {
     await waitFor(() => screen.getByAltText('return-home-button').click())
 
     await waitFor(() => expect(screen.queryByTestId('posting-view-element')).not.toBeInTheDocument());
-    await waitFor(() => expect(history.location.pathname).toBe("/"));
+    await waitFor(() => expect(history.location.pathname).toBe("/postings"));
   })
 
   it("When enters keyword in search it finds all events with this keyword", async() => {
