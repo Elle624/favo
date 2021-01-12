@@ -10,7 +10,7 @@ const getData = (path) => {
   });
 };
 
-const updateData = (path, action, data) => {
+const updateData = (path, action, data) => {  
   return fetch(path, {
     method: action,
     headers: {
