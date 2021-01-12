@@ -32,15 +32,13 @@ const Postings = ({
       <div className="postings-title-wrapper">
         <h1 className="postings-title">Open Volunteer Positions</h1>
       </div>
-      <div>
-        <Navigation
-          isSorted={isSorted}
-          searchByKeyWord={searchByKeyWord}
-          categories={categories}
-          filterByCategory={filterByCategory}
-          sortByDate={sortPostingsByDate}
-        />
-      </div>
+      <Navigation
+        isSorted={isSorted}
+        searchByKeyWord={searchByKeyWord}
+        categories={categories}
+        filterByCategory={filterByCategory}
+        sortByDate={sortPostingsByDate}
+      />
       <section className="postings-wrapper">{postingCards}</section>
     </section>
   );
