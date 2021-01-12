@@ -1,0 +1,64 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+.welcome-page-container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.welcome-page-titles-wrapper {
+  // font-size: 7vh;
+}
+
+.welcome-page-title {
+  font-size: 5rem;
+  animation: 1s ease-out 0s 1 slideInFromLeft;
+}
+
+.welcome-page-tagline {
+  font-size: 3rem;
+  animation: 1s ease-out 0s 1 slideInFromRight;
+}
+
+.welcome-page-homepage-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.welcome-page-button-text {
+  opacity: 0;
+  margin-bottom: 0.5em;
+}
+
+.welcome-page-button {
+  animation: 1s ease-out 0s 1 slideInFromLeft;
+
+  &:hover + .welcome-page-button-text {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInFromRight {
+  0% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
