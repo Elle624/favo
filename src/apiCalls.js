@@ -10,7 +10,7 @@ const getData = (path) => {
   });
 };
 
-const updateData = (path, action, data) => {
+const updateData = (path, action, data) => {  
   return fetch(path, {
     method: action,
     headers: {
@@ -29,25 +29,31 @@ const updateData = (path, action, data) => {
   });
 };
 
+const baseUrl = `https://ivolunteer-api-${process.env.NODE_ENV}.herokuapp.com`
+
 export const apiCalls = {
 
   getUser: () => {
-    return getData("https://ivonlunteer-api-dev.herokuapp.com/users/1");
+    return getData(`${baseUrl}/users/1`);
   },
 
   getPostings: () => {
-    return getData("https://ivonlunteer-api-dev.herokuapp.com/events");
+    return getData(`${baseUrl}/events`);
   },
 
   getSinglePosting: (id) => {
-    return getData(`https://ivonlunteer-api-dev.herokuapp.com/events/${id}`);
+    return getData(`${baseUrl}/events/${id}`);
   },
 
   postJobPosting: (data) => {
-    return updateData(`https://ivonlunteer-api-dev.herokuapp.com/users/1`, "POST", data);
+    return updateData(`${baseUrl}/users/1`, "POST", data);
   },
 
   patchEventPosting: (eventId, data) => {
-    return updateData(`https://ivonlunteer-api-dev.herokuapp.com/events/${eventId}`, "PATCH", data);
+    return updateData(`${baseUrl}/events/${eventId}`, "PATCH", data);
+  },
+
+  cancelSignedUpJob: (eventId, data) => {
+    return updateData(`${baseUrl}/events/${eventId}`, "DELETE", data)
   }
 };

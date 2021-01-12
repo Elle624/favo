@@ -1,7 +1,6 @@
 import React from 'react';
-import { screen, render, fireEvent, act, waitFor, getByText, waitForElement, simulate } from '@testing-library/react';
+import { screen, render, fireEvent, act, waitFor } from '@testing-library/react';
 import App from './index.js';
-import mockData from '../../TestData/_mockData';
 import '@testing-library/jest-dom';
 import { MemoryRouter, Router } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
@@ -90,7 +89,7 @@ describe("App", () => {
     fireEvent.click(upcomingJob)
 
     await waitFor(() => expect(history.location.pathname).toBe("/postings/event-20"));
-    await waitFor(() => expect(apiCalls.getSinglePosting).toHaveBeenCalledTimes(2));
+    await waitFor(() => expect(apiCalls.getSinglePosting).toHaveBeenCalledTimes(1));
     await waitFor(() => expect(screen.getByTestId('posting-view-element')).toBeInTheDocument());
     
     await act(() => Promise.resolve());
