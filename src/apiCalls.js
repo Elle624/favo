@@ -29,7 +29,7 @@ const updateData = (path, action, data) => {
   });
 };
 
-const baseUrl = `https://ivolunteer-api-${process.env.NODE_ENV}.herokuapp.com`
+const baseUrl = 'https://ivolunteer-api-development.herokuapp.com'
 
 export const apiCalls = {
 
