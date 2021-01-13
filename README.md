@@ -27,7 +27,7 @@
 Favo is an idea for the "Stretch" project of the MOD 3 at Turing School where we have to show our ability to learn a new technology in a short period of time.
 Favo is aimed to build community making volunteering a fun experience, where people can contribute time, resources, or skills to help each other.
 
-* Strech technology - Cypress
+* Stretch technology - Cypress
 
 ## Goals
 
