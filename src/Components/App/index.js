@@ -3,6 +3,7 @@ import { Route } from "react-router-dom";
 import "./App.scss";
 import { apiCalls } from "../../apiCalls";
 import WelcomePage from "../WelcomePage";
+import ErrorPage from "../ErrorPage";
 import User from "../User";
 import Postings from "../Postings";
 import PostingView from "../PostingView";
@@ -11,7 +12,7 @@ import Loading from "../Loading";
 const App = () => {
   const [user, setUser] = useState(null);
   const [postings, setPostings] = useState([]);
-  const [error, setError] = useState("");
+  const [error, setError] = useState("a");
   const [queriedPostings, setQueriedPostings] = useState([]);
   const [isSorted, setIsSorted] = useState(false);
 
@@ -65,10 +66,10 @@ const App = () => {
       {error && 
         <Route 
           path="/postings" 
-          render={() => ({error})}
+          component={ErrorPage}
         />}
   
-      {!user && 
+      {!user &&
         <Route 
           exact path="/postings" 
           component={Loading}
@@ -103,6 +104,12 @@ const App = () => {
           <PostingView match={match} getUserInfo={getInfo} />
         )}
       />
+
+{error && 
+        <Route 
+          path="/error" 
+          component={ErrorPage}
+        />}
     </main>
   );
 };
