@@ -1,6 +1,6 @@
 # Favo - Turing Mod 3 Group Project
 
-### [Favo]()
+### [Favo](https://favo.vercel.app/)
 ### [Favo - Repo](https://github.com/Elle624/favo)
 ### [Favo - API](https://github.com/Elle624/favo-api)
 
