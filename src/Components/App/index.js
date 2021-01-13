@@ -12,7 +12,7 @@ import Loading from "../Loading";
 const App = () => {
   const [user, setUser] = useState(null);
   const [postings, setPostings] = useState([]);
-  const [error, setError] = useState("a");
+  const [error, setError] = useState("");
   const [queriedPostings, setQueriedPostings] = useState([]);
   const [isSorted, setIsSorted] = useState(false);
 
