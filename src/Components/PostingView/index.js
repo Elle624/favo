@@ -5,20 +5,17 @@ import backButton from '../../Assets/back-button.png';
 import { Link } from 'react-router-dom';
 import Loading from '../Loading';
 
-const PostingView = ({ match, getUserInfo }) => {
+const PostingView = ({ match, setUser }) => {
   const eventId = match.params.id;
   const [chosenPosting, setChosenPosting] = useState(null);
   const [chosenJob, setChosenJob] = useState(null);
   const [signedUpJobName, setSignedUpJobName] = useState('');
-  const [userInfo, setUserInfo] = useState(null);
-  let isMounted = false;
 
   const getDetails = () => {
-    isMounted = true;
     Promise.all([apiCalls.getUser(), apiCalls.getSinglePosting(eventId)]).then(
       (data) => {
-        if (isMounted && data[0]) {
-          setUserInfo(data[0]);
+        if (data[0]) {
+          setUser(data[0]);
           setChosenPosting(data[1]);
           const signedUpEvent = data[0].upcomingJobs.find(
             (job) => job.eventName === data[1].name
@@ -48,14 +45,14 @@ const PostingView = ({ match, getUserInfo }) => {
       date: chosenPosting.date
     };
     apiCalls.postJobPosting(newUpcomingJob).then(() => {
-      getUserInfo();
+      setUser((prevInfo) => ({
+        ...prevInfo,
+        upcomingJobs: [...prevInfo.upcomingJobs, newUpcomingJob]
+      }));
     });
   };
 
-  useEffect(() => {
-    getDetails();
-    return () => (isMounted = false);
-  }, [userInfo]);
+  useEffect(() => getDetails(), [eventId]);
 
   if (chosenPosting) {
     const {
