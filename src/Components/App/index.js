@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from "react";
-import { Route } from "react-router-dom";
-import "./App.scss";
-import { apiCalls } from "../../apiCalls";
-import WelcomePage from "../WelcomePage";
-import ErrorPage from "../ErrorPage";
-import User from "../User";
-import Postings from "../Postings";
-import PostingView from "../PostingView";
-import Loading from "../Loading";
+import React, { useState, useEffect } from 'react';
+import { Route } from 'react-router-dom';
+import './App.scss';
+import { apiCalls } from '../../apiCalls';
+import WelcomePage from '../WelcomePage';
+import ErrorPage from '../ErrorPage';
+import User from '../User';
+import Postings from '../Postings';
+import PostingView from '../PostingView';
+import Loading from '../Loading';
 
 const App = () => {
   const [user, setUser] = useState(null);
   const [postings, setPostings] = useState([]);
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const [queriedPostings, setQueriedPostings] = useState([]);
   const [isSorted, setIsSorted] = useState(false);
 
@@ -57,35 +57,19 @@ const App = () => {
   useEffect(() => getInfo(), []);
 
   return (
-    <main className="App">
-       <Route 
-        exact path="/" 
-        component={WelcomePage} 
-      />
+    <main className='App'>
+      <Route exact path='/' component={WelcomePage} />
 
-      {error && 
-        <Route 
-          path="/postings" 
-          component={ErrorPage}
-        />}
-  
-      {!user &&
-        <Route 
-          exact path="/postings" 
-          component={Loading}
-       />}
+      {error && <Route path='/postings' component={ErrorPage} />}
 
-      {user && 
-        <Route 
-          path="/postings"
-          render={() => (
-            <User info={user} />
-          )}
-        />}
+      {!user && <Route exact path='/postings' component={Loading} />}
 
-      {postings.length && 
+      {user && <Route path='/postings' render={() => <User info={user} />} />}
+
+      {postings.length && (
         <Route
-          exact path="/postings"
+          exact
+          path='/postings'
           render={() => (
             <Postings
               isSorted={isSorted}
@@ -96,20 +80,12 @@ const App = () => {
             />
           )}
         />
-      } 
+      )}
 
       <Route
-        path="/postings/:id"
-        render={({ match }) => (
-          <PostingView match={match} getUserInfo={getInfo} />
-        )}
+        path='/postings/:id'
+        render={({ match }) => <PostingView match={match} setUser={setUser} />}
       />
-
-{error && 
-        <Route 
-          path="/error" 
-          component={ErrorPage}
-        />}
     </main>
   );
 };
