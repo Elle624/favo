@@ -86,8 +86,6 @@ const App = () => {
         path='/postings/:id'
         render={({ match }) => <PostingView match={match} setUser={setUser} />}
       />
-
-      {error && <Route path='/error' component={ErrorPage} />}
     </main>
   );
 };
