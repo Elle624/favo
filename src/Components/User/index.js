@@ -29,18 +29,14 @@ const User = ({ info }) => {
           className={`user-profile-heading-wrapper ${userTransitionClass}`}
         >
           <h1 className={`user-profile-heading ${userTransitionClass}`}>
-            User Profile
+            My Profile
           </h1>
         </section>
         <div
-          className={`profile-picture ${userTransitionClass}`}
-          style={{
-            backgroundImage: `url(${profilePicture})`,
-            backgroundPosition: "center",
-            backgroundSize: "cover",
-            backgroundRepeat: "no-reapeat",
-          }}
-        ></div>
+          className={`profile-picture-wrapper ${userTransitionClass}`}
+        >
+          <img className="profile-user-image" src={profilePicture}/>
+        </div>
         <h3 className={`username ${userTransitionClass}`}>{name}</h3>
         <div className={`rating-wrapper ${userTransitionClass}`}>
           <img className="star-image" src={starImage} alt="star-icon" />
@@ -55,10 +51,7 @@ const User = ({ info }) => {
           </p>
           <hr className={`section-line ${userTransitionClass}`} />
         </div>
-        {/* <div className={`hours-bar ${userTransitionClass}`}>
-          <p>{volunteeredHours} Hours</p>
-        </div> */}
-        <div className={`section-line ${userTransitionClass} progress-ring-wrapper`}>
+        <div className={userTransitionClass}>
           <ProgressRing 
             volunteeredHours={volunteeredHours}
             completedJobs={completedJobs}
