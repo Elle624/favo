@@ -9,33 +9,23 @@
   align-items: center;
 }
 
-.progress-ring-svg {
-  width: 10em;
-  height: 10em;
-}
-
 .donut_single {
   position: relative;
-}
-
-.progress-ring__circle { 
-  stroke: $main-blue;
-  stroke-width: 3px;
-  fill:transparent;
-  transform: scale(4);
-  stroke-linecap: round;
-
+  width: auto;
 }
 
 .progress-ring-text {
   color:$main-black;
   position: absolute;
-  top: 133px;
-  left: 118px;
+  top: 107px;
+  left: 93px;
   font-weight: 700;
   font-size: 1em;
 }
 
 .progress-ring {
   overflow: hidden;
+  margin: 0;
+  width: 230px;
+  height: 230px;
 }

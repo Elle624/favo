@@ -22,8 +22,6 @@ const ProgressRing = ({ volunteeredHours, completedJobs }) => {
     <section className="donut_single">
       <Chart
         className="progress-ring"
-        width={'280px'}
-        height={'280px'}
         chartType="PieChart"
         loader={<div>Loading Chart</div>}
         data={postingsHoursChartData}
@@ -34,7 +32,7 @@ const ProgressRing = ({ volunteeredHours, completedJobs }) => {
         }}
         rootProps={{ 'data-testid': 'progress-ring' }}
       />
-      <text className="progress-ring-text" id="percentage">{volunteeredHours}hr</text>
+      <p className="progress-ring-text" id="percentage">{volunteeredHours}hr</p>
     </section>
   )
 }
