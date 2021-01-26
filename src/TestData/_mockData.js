@@ -14,6 +14,32 @@ const _mockData = {
           positionName: "cook",
           date: "2021/03/01"
         }
+      ],
+      completedJobs: [
+        {
+          id: '1-posting-97',
+          eventId: 'event-97',
+          eventName: 'Completed event 97',
+          positionName: 'one job',
+          date: '2020/04/01',
+          duration: 6
+        },
+        {
+          id: '1-posting-98',
+          eventId: 'event-98',
+          eventName: 'Completed event 98',
+          positionName: 'one job',
+          date: '2020/06/15',
+          duration: 2.2
+        },
+        {
+          id: '1-posting-99',
+          eventId: 'event-99',
+          eventName: 'Completed event 99',
+          positionName: 'second job',
+          date: '2020/11/24',
+          duration: 2
+        }
       ]
     }
   ],
@@ -128,6 +154,32 @@ const _mockData = {
           name: "driver",
           date: "2021/02/05"
         },
+      ],
+      completedJobs: [
+        {
+          id: '1-posting-97',
+          eventId: 'event-97',
+          eventName: 'Completed event 97',
+          positionName: 'one job',
+          date: '2020/04/01',
+          duration: 6
+        },
+        {
+          id: '1-posting-98',
+          eventId: 'event-98',
+          eventName: 'Completed event 98',
+          positionName: 'one job',
+          date: '2020/06/15',
+          duration: 2.2
+        },
+        {
+          id: '1-posting-99',
+          eventId: 'event-99',
+          eventName: 'Completed event 99',
+          positionName: 'second job',
+          date: '2020/11/24',
+          duration: 2
+        }
       ]
     }
   ]

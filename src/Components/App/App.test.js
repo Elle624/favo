@@ -103,12 +103,12 @@ describe("App", () => {
   });
 
   it("should redirect user to a single event detail page, then sign up for one job, and return to home page", async () => {
+    apiCalls.getUser.mockResolvedValue(_mockData.updatedUser[0]);
     apiCalls.getSinglePosting.mockResolvedValue(_mockData.events[1]);
     apiCalls.patchEventPosting.mockResolvedValue("event-2", {
       jobId: "posting-4",
     });
     apiCalls.postJobPosting.mockResolvedValue("event-2", _mockData.postJobBody);
-    apiCalls.getUser.mockResolvedValue(_mockData.updatedUser[0]);
 
     const history = createMemoryHistory();
     render(

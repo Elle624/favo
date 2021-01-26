@@ -4,7 +4,7 @@ import "./ProgressRing.scss";
 import { Chart } from "react-google-charts";
 
 const ProgressRing = ({ volunteeredHours, completedJobs }) => {
-
+// console.log(completedJobs)
   const completedJobDuplicateChecker = completedJobs.reduce((cleanArrayOfJobs, job) => {
     if(!cleanArrayOfJobs[job.positionName]) {
       cleanArrayOfJobs[job.positionName] = job.duration;
@@ -32,7 +32,7 @@ const ProgressRing = ({ volunteeredHours, completedJobs }) => {
         }}
         rootProps={{ 'data-testid': 'progress-ring' }}
       />
-      <p className="progress-ring-text" id="percentage">{volunteeredHours}hr</p>
+      <p className="progress-ring-text" id="percentage">{volunteeredHours} hr</p>
     </section>
   )
 }
