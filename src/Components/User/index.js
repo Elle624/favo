@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import ProgressRing from "../ProgressRing";
 import "./User.scss";
 import starImage from "../../Assets/star.png";
 import userToggleButtonRight from "../../Assets/right-chevron.png";
 import userToggleButtonLeft from "../../Assets/left-chevron.png";
 
 const User = ({ info }) => {
-  const { id, name, profilePicture, volunteeredHours, upcomingJobs } = info;
-
+  const { id, name, profilePicture, volunteeredHours, upcomingJobs, completedJobs } = info;
   const [userOpen, setUserOpen] = useState(true);
 
   let userSidebarClass = userOpen ? "user-open" : "user-closed";
@@ -55,8 +55,14 @@ const User = ({ info }) => {
           </p>
           <hr className={`section-line ${userTransitionClass}`} />
         </div>
-        <div className={`hours-bar ${userTransitionClass}`}>
+        {/* <div className={`hours-bar ${userTransitionClass}`}>
           <p>{volunteeredHours} Hours</p>
+        </div> */}
+        <div className={`section-line ${userTransitionClass} progress-ring-wrapper`}>
+          <ProgressRing 
+            volunteeredHours={volunteeredHours}
+            completedJobs={completedJobs}
+          />
         </div>
         <div className={`section-titles ${userTransitionClass}`}>
           <p className="sidebar-titles">My Upcoming Jobs</p>

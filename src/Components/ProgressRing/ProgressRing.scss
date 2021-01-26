@@ -1,0 +1,41 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+
+.progress-ring-container {
+  width: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.progress-ring-svg {
+  width: 10em;
+  height: 10em;
+}
+
+.donut_single {
+  position: relative;
+}
+
+.progress-ring__circle { 
+  stroke: $main-blue;
+  stroke-width: 3px;
+  fill:transparent;
+  transform: scale(4);
+  stroke-linecap: round;
+
+}
+
+.progress-ring-text {
+  color:$main-black;
+  position: absolute;
+  top: 133px;
+  left: 118px;
+  font-weight: 700;
+  font-size: 1em;
+}
+
+.progress-ring {
+  overflow: hidden;
+}
