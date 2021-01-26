@@ -5,10 +5,18 @@ import { Chart } from "react-google-charts";
 
 const ProgressRing = ({ volunteeredHours, completedJobs }) => {
 
-  let postingsHours = completedJobs.reduce((completedJobsData, job) => {
-    completedJobsData.push([job.positionName, job.duration]);
-    return completedJobsData;
-  }, [['Task', 'Hours per posting']])
+  const completedJobDuplicateChecker = completedJobs.reduce((cleanArrayOfJobs, job) => {
+    if(!cleanArrayOfJobs[job.positionName]) {
+      cleanArrayOfJobs[job.positionName] = job.duration;
+    } else {
+      cleanArrayOfJobs[job.positionName] += job.duration;
+    }
+    return cleanArrayOfJobs;
+  }, {})
+
+  const createJobsDataForChart = Object.entries(completedJobDuplicateChecker);
+
+  let postingsHoursChartData = [['Task', 'Hours per posting'], ...createJobsDataForChart];
 
   return (
     <section className="donut_single">
@@ -18,7 +26,7 @@ const ProgressRing = ({ volunteeredHours, completedJobs }) => {
         height={'280px'}
         chartType="PieChart"
         loader={<div>Loading Chart</div>}
-        data={postingsHours}
+        data={postingsHoursChartData}
         options={{
           pieHole: 0.7,
           legend: 'none',
