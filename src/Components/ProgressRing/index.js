@@ -4,7 +4,7 @@ import "./ProgressRing.scss";
 import { Chart } from "react-google-charts";
 
 const ProgressRing = ({ volunteeredHours, completedJobs }) => {
-// console.log(completedJobs)
+
   const completedJobDuplicateChecker = completedJobs.reduce((cleanArrayOfJobs, job) => {
     if(!cleanArrayOfJobs[job.positionName]) {
       cleanArrayOfJobs[job.positionName] = job.duration;
