@@ -7,10 +7,10 @@ describe("Testing homepage", () => {
   it("Landing on the homepage you can see user sidebar with all user basic information", () => {
     cy.get(".username").contains("Katy Terance");
 
-    cy.get(".profile-picture").should(
-      "have.css",
-      "background-image",
-      'url("https://randomuser.me/api/portraits/women/27.jpg")'
+    cy.get(".profile-user-image").should(
+      "have.attr",
+      "src",
+      "https://randomuser.me/api/portraits/women/27.jpg"
     );
 
     cy.get(".star-image").should("have.length", 5);
@@ -22,7 +22,7 @@ describe("Testing homepage", () => {
       .get(".section-line")
       .should("have.length", 2);
 
-    cy.get(".hours-bar").contains("10.2 Hours");
+    cy.get(".progress-ring-text").contains("10.2 hr");
   });
 
   it("Should display user upcoming jobs on the user profile sidebar", () => {

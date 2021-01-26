@@ -14,7 +14,7 @@ describe("User Comonent", () => {
     expect(screen.getByText("Peach Perfect")).toBeInTheDocument();
     expect(screen.getAllByAltText("star-icon")).toHaveLength(5);
     expect(screen.getByText("Total Hours Volunteered")).toBeInTheDocument();
-    expect(screen.getByText("8.2 Hours")).toBeInTheDocument();
+    expect(screen.getByText("8.2 hr")).toBeInTheDocument();
     expect(screen.getByText("My Upcoming Jobs")).toBeInTheDocument();
     expect(screen.getByText("Something Crazy")).toBeInTheDocument();
     expect(screen.getByText("2021/03/01")).toBeInTheDocument();
