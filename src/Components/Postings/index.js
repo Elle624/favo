@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import "./Postings.scss";
-import PostingCard from "../PostingCard";
-import Navigation from "../Navigation";
+import React, { useState, useEffect } from 'react';
+import './Postings.scss';
+import PostingCard from '../PostingCard';
+import Navigation from '../Navigation';
 
 const Postings = ({
   isSorted,
@@ -9,6 +9,7 @@ const Postings = ({
   searchByKeyWord,
   filterByCategory,
   sortPostingsByDate,
+  resetNavigationQueries
 }) => {
   const [categories, setCategories] = useState([]);
 
@@ -28,9 +29,9 @@ const Postings = ({
   useEffect(() => getCategories(), []);
 
   return (
-    <section data-testid="postings-element" className="postings-container-main">
-      <div className="postings-title-wrapper">
-        <h1 className="postings-title">Open Volunteer Positions</h1>
+    <section data-testid='postings-element' className='postings-container-main'>
+      <div className='postings-title-wrapper'>
+        <h1 className='postings-title'>Open Volunteer Positions</h1>
       </div>
       <Navigation
         isSorted={isSorted}
@@ -38,8 +39,9 @@ const Postings = ({
         categories={categories}
         filterByCategory={filterByCategory}
         sortByDate={sortPostingsByDate}
+        resetNavigationQueries={resetNavigationQueries}
       />
-      <section className="postings-wrapper">{postingCards}</section>
+      <section className='postings-wrapper'>{postingCards}</section>
     </section>
   );
 };

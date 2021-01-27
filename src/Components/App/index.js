@@ -54,6 +54,11 @@ const App = () => {
     setQueriedPostings(filteredPostings);
   };
 
+  const resetNavigationQueries = () => {
+    setQueriedPostings([]);
+    setIsSorted(false);
+  };
+
   useEffect(() => getInfo(), []);
 
   return (
@@ -77,6 +82,7 @@ const App = () => {
               searchByKeyWord={searchPostings}
               sortPostingsByDate={sortPostingsByDate}
               filterByCategory={filterPostings}
+              resetNavigationQueries={resetNavigationQueries}
             />
           )}
         />
