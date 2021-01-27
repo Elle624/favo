@@ -36,13 +36,15 @@ const App = () => {
   };
 
   const sortPostingsByDate = () => {
+    let selectedPostings = queriedPostings.length ? queriedPostings : postings;
     if (!isSorted) {
-      postings.sort((a, b) => {
+      selectedPostings.sort((a, b) => {
         return a.date > b.date ? -1 : 1;
       });
     } else {
-      postings.reverse();
+      selectedPostings.reverse();
     }
+
     setIsSorted((prevSortState) => !prevSortState);
     setPostings(postings);
   };
