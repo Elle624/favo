@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import './Navigation.scss';
-import descSortButton from '../../Assets/desc-sort-button.png';
-import asceSortButton from '../../Assets/asce-sort-button.png';
+import React, { useState } from "react";
+import "./Navigation.scss";
+import descSortButton from "../../Assets/desc-sort-button.png";
+import asceSortButton from "../../Assets/asce-sort-button.png";
 
 const Navigation = ({
   isSorted,
@@ -11,14 +11,14 @@ const Navigation = ({
   sortByDate,
   resetNavigationQueries
 }) => {
-  const [keyWord, setKeyWord] = useState('');
-  const [selectedFilter, setSelectedFilter] = useState('');
+  const [keyWord, setKeyWord] = useState("");
+  const [selectedFilter, setSelectedFilter] = useState("");
   const [isReset, setReset] = useState(false);
 
   const searchPostings = (e) => {
     e.preventDefault();
     searchByKeyWord(keyWord);
-    setKeyWord('');
+    setKeyWord("");
     setReset(true);
   };
 
@@ -34,7 +34,7 @@ const Navigation = ({
   };
 
   const resetNavigation = () => {
-    setSelectedFilter('-- select category --');
+    setSelectedFilter("-- select category --");
     resetNavigationQueries();
     setReset(false);
   };
@@ -96,7 +96,7 @@ const Navigation = ({
       <button
         className='button-reset'
         type='submit'
-        style={{ display: isReset ? 'block' : 'none' }}
+        style={{ display: isReset ? "block" : "none" }}
         onClick={resetNavigation}
       >
         reset
