@@ -12,6 +12,7 @@ const Navigation = ({
   resetNavigationQueries
 }) => {
   const [keyWord, setKeyWord] = useState('');
+  const [selectedFilter, setSelectedFilter] = useState('');
   const [isReset, setReset] = useState(false);
 
   const searchPostings = (e) => {
@@ -27,11 +28,13 @@ const Navigation = ({
   };
 
   const filterPostings = (e) => {
+    setSelectedFilter(e.target.value);
     filterByCategory(e.target.value);
     setReset(true);
   };
 
   const resetNavigation = () => {
+    setSelectedFilter('-- select category --');
     resetNavigationQueries();
     setReset(false);
   };
@@ -74,6 +77,7 @@ const Navigation = ({
           className='filter-box'
           name='category'
           onChange={filterPostings}
+          value={selectedFilter}
         >
           <option className='filter-item' defaultValue>
             -- select category --
