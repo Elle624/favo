@@ -90,7 +90,7 @@ const Navigation = ({
         </select>
       </article>
       <button
-        className='button-search'
+        className='button-reset'
         type='submit'
         style={{ display: isReset ? 'block' : 'none' }}
         onClick={resetNavigation}
