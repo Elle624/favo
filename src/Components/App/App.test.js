@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  screen,
-  render,
-  fireEvent,
-  act,
-  waitFor,
-} from "@testing-library/react";
+import { screen, render, act, waitFor } from "@testing-library/react";
 import App from "./index.js";
 import "@testing-library/jest-dom";
 import { MemoryRouter, Router } from "react-router-dom";
@@ -87,7 +81,7 @@ describe("App", () => {
     userEvent.click(screen.getByRole("img"));
 
     const upcomingJob = await waitFor(() => screen.getByText("cook"));
-    fireEvent.click(upcomingJob);
+    userEvent.click(upcomingJob);
 
     await waitFor(() =>
       expect(history.location.pathname).toBe("/postings/event-20")
@@ -106,7 +100,7 @@ describe("App", () => {
     apiCalls.getUser.mockResolvedValue(_mockData.updatedUser[0]);
     apiCalls.getSinglePosting.mockResolvedValue(_mockData.events[1]);
     apiCalls.patchEventPosting.mockResolvedValue("event-2", {
-      jobId: "posting-4",
+      jobId: "posting-4"
     });
     apiCalls.postJobPosting.mockResolvedValue("event-2", _mockData.postJobBody);
 
@@ -159,7 +153,7 @@ describe("App", () => {
     userEvent.type(userInput, "Food Delivery");
 
     const searchbutton = screen.getByText("search");
-    fireEvent.click(searchbutton);
+    userEvent.click(searchbutton);
 
     await waitFor(() =>
       expect(screen.getByText("Food Delivery")).toBeInTheDocument()
@@ -182,7 +176,7 @@ describe("App", () => {
     );
 
     const sortButton = screen.getByText("sort");
-    fireEvent.click(sortButton);
+    userEvent.click(sortButton);
 
     const allEventCards = await waitFor(() =>
       screen.getAllByTestId("posting-card-element")
@@ -190,7 +184,7 @@ describe("App", () => {
     expect(allEventCards[0].href === "http://localhost/postings/event-20");
     expect(allEventCards[1].href === "http://localhost/postings/event-2");
 
-    fireEvent.click(sortButton);
+    userEvent.click(sortButton);
     expect(allEventCards[0].href === "http://localhost/postings/event-2");
     expect(allEventCards[1].href === "http://localhost/postings/event-20");
   });
@@ -208,9 +202,7 @@ describe("App", () => {
     );
 
     const filteredCategory = screen.getByTestId("select-input");
-    fireEvent.change(filteredCategory, {
-      target: { value: "Healthcare" },
-    });
+    userEvent.selectOptions(filteredCategory, [screen.getByText("Healthcare")]);
 
     await waitFor(() =>
       expect(screen.getByText("Individual")).toBeInTheDocument()
@@ -218,5 +210,23 @@ describe("App", () => {
     await waitFor(() =>
       expect(screen.queryByText("Something Else, LLC")).not.toBeInTheDocument()
     );
+  });
+
+  it("When user click reset button, all queries should be cleared out", async () => {
+    render(
+      <MemoryRouter initialEntries={["/postings"]}>
+        <App />
+      </MemoryRouter>
+    );
+    await waitFor(() => expect(apiCalls.getUser).toHaveBeenCalledTimes(1));
+    await waitFor(() => expect(apiCalls.getPostings).toHaveBeenCalledTimes(1));
+
+    const filteredCategory = screen.getByTestId("select-input");
+    userEvent.selectOptions(filteredCategory, [screen.getByText("Healthcare")]);
+
+    expect(filteredCategory).toHaveValue("Healthcare");
+    userEvent.click(screen.getByText("reset"));
+
+    expect(filteredCategory).toHaveValue("-- select category --");
   });
 });
