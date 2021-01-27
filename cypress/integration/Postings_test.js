@@ -1,5 +1,4 @@
 describe("Testing Postings component", () => {
-
   beforeEach(() => {
     cy.visit("http://localhost:3000/postings");
   });
@@ -19,8 +18,7 @@ describe("Testing Postings component", () => {
   });
 
   it("Should load title of page on postings", () => {
-    cy.get(".postings-title")
-      .contains("Open Volunteer Positions");
+    cy.get(".postings-title").contains("Open Volunteer Positions");
   });
 
   it("Posting card CSS", () => {
@@ -38,16 +36,12 @@ describe("Testing Postings component", () => {
 
   it("Search Input should load and function on postings page", () => {
     cy.get(".input-button-sort")
-      .should(
-        "have.attr",
-        "placeholder",
-        "i.e Boulder..."
-      )
+      .should("have.attr", "placeholder", "i.e Boulder...")
       .type("Color")
       .get(".button-search")
       .contains("search")
       .click();
-      
+
     cy.get(".posting-detail")
       .should("contain", "Color Run")
       .and("not.contain", "Individual");
@@ -64,17 +58,35 @@ describe("Testing Postings component", () => {
       .contains("The Color Run");
   });
 
-  it("Filter postings by categories on should load and function on postings page", () => {
+  it("Filter postings by categories should load and function on postings page", () => {
     cy.get(".filter-item")
       .contains("-- select category --");
 
     cy.get(".filter-box")
-      .select("Animal");
+      .select("Animal")
+      .should("have.value", "Animal")
+      .should("not.have.value", "Healthcare")
 
     cy.get(".posting-wrapper-cards")
       .should("contain", "Dumb friends")
       .get(".posting-detail")
       .should("not.contain", "Food Devlivery");
+  });
+
+  it("Reset button should load and function after query occured on postings page", () => {
+    cy.get(".filter-box")
+      .select("Animal")
+      .should("have.value", "Animal")
+
+    cy.get(".button-reset")
+      .click();
+    
+    cy.get(".filter-box")
+      .should("not.have.value", "Animal")
+      .should("have.value", "-- select category --")
+
+    cy.get(".button-reset")
+      .should("have.css", "display", "none")
   });
 
   it("should direct to a new URL when a posting card is clicked", () => {
@@ -83,5 +95,4 @@ describe("Testing Postings component", () => {
       .url()
       .should("include", "/postings/event-1");
   });
-
 });

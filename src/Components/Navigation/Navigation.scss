@@ -1,5 +1,5 @@
-@import "../../styles/variables";
-@import "../../styles/mixins";
+@import '../../styles/variables';
+@import '../../styles/mixins';
 
 .navigation-bar {
   display: flex;
@@ -29,7 +29,8 @@
   }
 }
 
-.button-search {
+.button-search,
+.button-reset {
   background-color: $main-grey;
   font-size: 1em;
   padding: 1px 6px;
@@ -49,6 +50,10 @@
     background-color: $main-blue;
     @include input-focus-effect;
   }
+}
+
+.button-reset {
+  width: 3.5em;
 }
 
 .sort-icon {

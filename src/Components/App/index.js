@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { Route } from 'react-router-dom';
-import './App.scss';
-import { apiCalls } from '../../apiCalls';
-import WelcomePage from '../WelcomePage';
-import ErrorPage from '../ErrorPage';
-import User from '../User';
-import Postings from '../Postings';
-import PostingView from '../PostingView';
-import Loading from '../Loading';
+import React, { useState, useEffect } from "react";
+import { Route } from "react-router-dom";
+import "./App.scss";
+import { apiCalls } from "../../apiCalls";
+import WelcomePage from "../WelcomePage";
+import ErrorPage from "../ErrorPage";
+import User from "../User";
+import Postings from "../Postings";
+import PostingView from "../PostingView";
+import Loading from "../Loading";
 
 const App = () => {
   const [user, setUser] = useState(null);
   const [postings, setPostings] = useState([]);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [queriedPostings, setQueriedPostings] = useState([]);
   const [isSorted, setIsSorted] = useState(false);
 
@@ -36,13 +36,15 @@ const App = () => {
   };
 
   const sortPostingsByDate = () => {
+    let selectedPostings = queriedPostings.length ? queriedPostings : postings;
     if (!isSorted) {
-      postings.sort((a, b) => {
+      selectedPostings.sort((a, b) => {
         return a.date > b.date ? -1 : 1;
       });
     } else {
-      postings.reverse();
+      selectedPostings.reverse();
     }
+
     setIsSorted((prevSortState) => !prevSortState);
     setPostings(postings);
   };
@@ -52,6 +54,11 @@ const App = () => {
       (posting) => posting.category === category
     );
     setQueriedPostings(filteredPostings);
+  };
+
+  const resetNavigationQueries = () => {
+    setQueriedPostings([]);
+    setIsSorted(false);
   };
 
   useEffect(() => getInfo(), []);
@@ -77,6 +84,7 @@ const App = () => {
               searchByKeyWord={searchPostings}
               sortPostingsByDate={sortPostingsByDate}
               filterByCategory={filterPostings}
+              resetNavigationQueries={resetNavigationQueries}
             />
           )}
         />
