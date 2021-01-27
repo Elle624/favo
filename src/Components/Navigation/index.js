@@ -8,7 +8,8 @@ const Navigation = ({
   searchByKeyWord,
   categories,
   filterByCategory,
-  sortByDate
+  sortByDate,
+  resetNavigationQueries
 }) => {
   const [keyWord, setKeyWord] = useState('');
   const [isReset, setReset] = useState(false);
@@ -28,6 +29,11 @@ const Navigation = ({
   const filterPostings = (e) => {
     filterByCategory(e.target.value);
     setReset(true);
+  };
+
+  const resetNavigation = () => {
+    resetNavigationQueries();
+    setReset(false);
   };
 
   return (
@@ -87,6 +93,7 @@ const Navigation = ({
         className='button-search'
         type='submit'
         style={{ display: isReset ? 'block' : 'none' }}
+        onClick={resetNavigation}
       >
         reset
       </button>
