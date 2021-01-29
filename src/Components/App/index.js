@@ -73,7 +73,7 @@ const App = () => {
 
       {user && <Route path='/postings' render={() => <User info={user} />} />}
 
-      {postings.length && (
+      {!!postings.length && (
         <Route
           exact
           path='/postings'
