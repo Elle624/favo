@@ -129,9 +129,8 @@
   border-radius: 0 85% 85% 0;
   border: none;
   outline: none;
-  position: fixed;
   top: 50%;
-  transition: 1500ms;
+  // transition: 500ms;
   &:hover {
     cursor: pointer;
   }
@@ -154,7 +153,7 @@
 .user-closed {
   height: 85%;
   width: 0px;
-  transition: 1500ms;
+  transition: 750ms;
 }
 
 .user-close-transition {
@@ -191,7 +190,7 @@ h3.username {
     height: 15px;
     width: 15px;
   }
- 
+
   .rating-wrapper {
     margin: 0em;
   }
@@ -301,5 +300,4 @@ h3.username {
   background-color: $main-orange;
   position: relative;
   clip-path: polygon(25% 5%, 75% 5%, 100% 50%, 75% 95%, 25% 95%, 0% 50%);
-
 }
