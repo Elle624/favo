@@ -1,8 +1,8 @@
 # Favo - Turing Mod 3 Group Project
 
 ### [Favo](https://favo.vercel.app/)
-### [Favo - Repo](https://github.com/Elle624/favo)
-### [Favo - API](https://github.com/Elle624/favo-api)
+### [Favo - Repo](https://github.com/yiranli624/favo)
+### [Favo - API](https://github.com/yiranli624/favo-api)
 
 ### [Link To Our Project Description](https://frontend.turing.io/projects/module-3/stretch.html)
 
